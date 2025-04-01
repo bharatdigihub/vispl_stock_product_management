@@ -29,40 +29,34 @@ class UserController extends Controller
     // Show the form for creating a new user
     public function create()
     {
-        \Log::info('UserController@create method triggered');
 
         $roles = Role::all(); // Fetch all roles
         $permissions = Permission::all(); // Fetch all permissions
+        $routes = [
+            'store' => route('users.store'), // Pass the store route explicitly
+        ];
 
-        return Inertia::render('Users/Create', compact('roles', 'permissions'));
+        return Inertia::render('Users/Create', compact('roles', 'permissions', 'routes')); // Pass routes to the view
     }
 
     // Store a newly created user in the database
     public function store(Request $request)
     {
-        if (auth()->user()->type !== 'superadmin') {
-            return redirect()->route('dashboard')->with('error', 'You are not authorized to perform this action.');
-        }
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8',
-            'role' => 'required|string|exists:roles,name',
-            'permissions' => 'array|exists:permissions,name',
+            'role' => 'required|exists:roles,id',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password_hash' => bcrypt($request->password),
         ]);
 
-        $user->assignRole($request->role);
-
-        if ($request->has('permissions')) {
-            $user->syncPermissions($request->permissions);
-        }
+        // Assign role to user
+        $user->roles()->attach($request->role);
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -70,7 +64,10 @@ class UserController extends Controller
     // Show the form for editing a user
     public function edit(User $user)
     {
-        return Inertia::render('Users/Edit', compact('user'));
+        $roles = Role::all();
+        $userRole = $user->roles->pluck('id')->first();
+
+        return Inertia::render('Users/Edit', compact('user', 'roles', 'userRole'));
     }
 
     // Update the specified user in the database
@@ -79,12 +76,16 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'role' => 'required|exists:roles,id',
         ]);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
+
+        // Update user role
+        $user->roles()->sync([$request->role]);
 
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }

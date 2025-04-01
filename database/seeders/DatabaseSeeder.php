@@ -12,7 +12,10 @@ class RolePermissionSeeder extends Seeder
 {
     public function run()
     {
-        $superAdmin = Role::create(['name' => 'super-admin']);
+        $superAdmin = Role::create([
+            'name' => 'super-admin',
+            'guard_name' => 'web', // Include guard_name
+        ]);
         $permissions = ['manage users', 'assign roles', 'update permissions'];
 
         foreach ($permissions as $permission) {
@@ -42,13 +45,15 @@ class DatabaseSeeder extends Seeder
 
         // Add a dummy superadmin user
         User::firstOrCreate(
-            ['email' => 'dummy.superadmin@example.com'],
+            ['email' => 'superadmin1@example.com'],
             [
                 'name' => 'Dummy Super Admin',
-                'password' => Hash::make('dummyadmin123'),
+                'password' => Hash::make('superadmin'),
                 'type' => 'superadmin',
             ]
         );
+
+        $this->call(AdminUserSeeder::class); // Call the AdminUserSeeder
     }
 }
 

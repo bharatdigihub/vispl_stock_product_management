@@ -3,19 +3,17 @@ import axios from 'axios';
 import { Link } from "@inertiajs/react";
 
 const Header = () => {
-    const [permissions, setPermissions] = useState(['manage users']);
+    const [permissions, setPermissions] = useState([]);
 
     useEffect(() => {
         fetchPermissions();
     }, []);
-    console.log(permissions,'permissions');
 
     const fetchPermissions = async () => {
         try {
             const response = await axios.get('/api/user/permissions');
             setPermissions(response.data); // Set permissions from API response
-       console.log(response.data,'userdat');
-     } catch (error) {
+        } catch (error) {
             console.error('Failed to fetch permissions:', error);
         }
     };

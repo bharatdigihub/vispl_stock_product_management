@@ -21,7 +21,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Dashboard route (requires authentication)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('/Dashboard/Dashboard'); // Ensure this matches the frontend component
     })->name('dashboard');
 
     // User management routes (restricted to superadmin)
@@ -49,6 +49,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/permissions/{permission}/edit', [PermissionController::class, 'edit'])->name('permissions.edit'); // Edit permission form
         Route::patch('/permissions/{permission}', [PermissionController::class, 'update'])->name('permissions.update'); // Update permission
         Route::delete('/permissions/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy'); // Delete permission
+
+        // Menu routes
+        Route::get('/menus', [\App\Http\Controllers\MenuController::class, 'index'])->name('menus.index'); // List menus
+        Route::get('/menus/create', [\App\Http\Controllers\MenuController::class, 'create'])->name('menus.create'); // Add menu form
+        Route::post('/menus', [\App\Http\Controllers\MenuController::class, 'store'])->name('menus.store'); // Store menu
+        Route::get('/menus/{menu}/edit', [\App\Http\Controllers\MenuController::class, 'edit'])->name('menus.edit'); // Edit menu form
+        Route::patch('/menus/{menu}', [\App\Http\Controllers\MenuController::class, 'update'])->name('menus.update'); // Update menu
+        Route::delete('/menus/{menu}', [\App\Http\Controllers\MenuController::class, 'destroy'])->name('menus.destroy'); // Delete menu
     });
 
     // Profile routes
@@ -72,3 +80,4 @@ Route::get('/test-log', function () {
 Route::middleware(['superadmin'])->get('/test-superadmin', function () {
     return 'SuperAdmin middleware is working!';
 });
+

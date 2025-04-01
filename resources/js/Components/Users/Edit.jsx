@@ -1,26 +1,24 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
-import Header from "../Header"; // Import Header component
-import Footer from "../Footer"; // Import Footer component
+import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
 
-const CreateUser = () => {
-    const { data, setData, post, errors } = useForm({
-        name: "",
-        email: "",
-        password: "",
-        role: "",
+const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
+    const { data, setData, patch, errors } = useForm({
+        name: user.name,
+        email: user.email,
+        role: userRole || "", // Pre-select the user's current role
+        permissions: userPermissions || [], // Pre-select the user's current permissions
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post("/users");
+        patch(routes.update); // Use the update route passed from the backend
     };
 
     return (
-        <>
-            <Header /> {/* Include Header */}
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-                <h1 className="text-2xl font-bold mb-4">Create User</h1>
+        <GlobalLayout> {/* Wrap with GlobalLayout */}
+            <form onSubmit={handleSubmit}>
+                <h1 className="text-2xl font-bold mb-4">Edit User</h1>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Name</label>
                     <input
@@ -42,16 +40,6 @@ const CreateUser = () => {
                     {errors.email && <div className="text-red-500">{errors.email}</div>}
                 </div>
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Password</label>
-                    <input
-                        type="password"
-                        value={data.password}
-                        onChange={(e) => setData("password", e.target.value)}
-                        className="w-full border px-4 py-2"
-                    />
-                    {errors.password && <div className="text-red-500">{errors.password}</div>}
-                </div>
-                <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Role</label>
                     <select
                         value={data.role}
@@ -59,20 +47,44 @@ const CreateUser = () => {
                         className="w-full border px-4 py-2"
                     >
                         <option value="">Select Role</option>
-                        {/* Add role options dynamically */}
+                        {roles.map((role) => (
+                            <option key={role.id} value={role.name}>
+                                {role.name}
+                            </option>
+                        ))}
                     </select>
                     {errors.role && <div className="text-red-500">{errors.role}</div>}
+                </div>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium mb-1">Permissions</label>
+                    <select
+                        multiple
+                        value={data.permissions}
+                        onChange={(e) =>
+                            setData(
+                                "permissions",
+                                Array.from(e.target.selectedOptions, (option) => option.value)
+                            )
+                        }
+                        className="w-full border px-4 py-2"
+                    >
+                        {permissions.map((permission) => (
+                            <option key={permission.id} value={permission.name}>
+                                {permission.name}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.permissions && <div className="text-red-500">{errors.permissions}</div>}
                 </div>
                 <button
                     type="submit"
                     className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700"
                 >
-                    Create
+                    Update
                 </button>
             </form>
-            <Footer /> {/* Include Footer */}
-        </>
+        </GlobalLayout>
     );
 };
 
-export default CreateUser;
+export default EditUser;

@@ -42,7 +42,7 @@ const Login = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700 font-semibold mb-2">Password</label>
+                        <label className="block text-gray-700 font-semibold mb-2">Passwords</label>
                         <input
                             type="password"
                             value={password}

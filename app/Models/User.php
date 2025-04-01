@@ -20,8 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'type', // Ensure this attribute exists
+        'password_hash',
     ];
 
     /**
@@ -45,5 +44,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
     }
 }
