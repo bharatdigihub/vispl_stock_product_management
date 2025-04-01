@@ -22,9 +22,14 @@
         "vite": "^6.0.11"
     },
     "dependencies": {
+        "@coreui/coreui": "^5.2.0",
+        "@coreui/icons": "^3.0.1",
+        "@coreui/icons-react": "^2.3.0",
+        "@coreui/react": "^5.5.0",
         "@inertiajs/react": "^2.0.5",
         "@vitejs/plugin-react": "^4.3.4",
         "react-router-dom": "^7.4.0",
+        "simplebar-react": "^3.3.0",
         "ziggy": "^2.4.0",
         "ziggy-js": "^1.8.2"
     }

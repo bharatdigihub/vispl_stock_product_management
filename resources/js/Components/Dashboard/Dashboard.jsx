@@ -1,11 +1,16 @@
 import React from "react";
-import GlobalLayout from '../../Layouts/GlobalLayout'; // Corrected the import path
+import GlobalLayout from '../../Layouts/GlobalLayout';
+import { CCard, CCardBody, CCardHeader } from '@coreui/react';
+import { useTheme } from '../../Contexts/ThemeContext';
 
 const Dashboard = () => {
+    const { theme } = useTheme();
     return (
-        <GlobalLayout> {/* Wrap with GlobalLayout */}
-            <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-            <p>Welcome to the admin!</p>
+        <GlobalLayout>
+            <CCard className={`${theme.background} ${theme.text}`}>
+                <CCardHeader>Dashboard</CCardHeader>
+                <CCardBody>Welcome to the dashboard!</CCardBody>
+            </CCard>
         </GlobalLayout>
     );
 };

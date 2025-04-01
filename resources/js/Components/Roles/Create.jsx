@@ -16,24 +16,24 @@ const RoleCreate = ({ modules }) => {
     return (
         <GlobalLayout>
             <form onSubmit={handleSubmit}>
-                <h1 className="text-2xl font-bold mb-4">Add Role</h1>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Role Name</label>
+                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add Role</h1>
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role Name</label>
                     <input
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        className="w-full border px-4 py-2"
+                        className="tw-w-full tw-border tw-px-4 tw-py-2"
                     />
-                    {errors.name && <div className="text-red-500">{errors.name}</div>}
+                    {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Permissions</label>
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Permissions</label>
                     {modules.map((module) => (
-                        <div key={module.id} className="mb-4">
-                            <h3 className="font-bold">{module.name}</h3>
+                        <div key={module.id} className="tw-mb-4">
+                            <h3 className="tw-font-bold">{module.name}</h3>
                             {module.permissions.map((permission) => (
-                                <label key={permission.id} className="block">
+                                <label key={permission.id} className="tw-block">
                                     <input
                                         type="checkbox"
                                         value={permission.id}
@@ -53,7 +53,7 @@ const RoleCreate = ({ modules }) => {
                 </div>
                 <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700"
+                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
                 >
                     Create
                 </button>

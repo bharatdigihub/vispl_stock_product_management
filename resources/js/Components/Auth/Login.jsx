@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useTheme } from '../../Contexts/ThemeContext';
 
 const Login = () => {
+    const { theme } = useTheme();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -11,7 +13,7 @@ const Login = () => {
         try {
             const response = await axios.post('/login', { email, password });
             if (response.status === 200) {
-                window.location.href = '/dashboard'; // Redirect to dashboard on success
+                window.location.href = '/dashboard';
             } else {
                 setError('Invalid email or password.');
             }
@@ -21,45 +23,52 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500">
-            <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
-                <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Welcome Back</h2>
+        <div className={`tw-flex tw-items-center tw-justify-center tw-min-h-screen ${theme.background}`}>
+            <div className={`tw-bg-white tw-shadow-lg tw-rounded-2xl tw-p-8 tw-w-full tw-max-w-lg ${theme.header}`}>
+                <h2 className={`tw-text-3xl tw-font-bold tw-mb-6 tw-text-center ${theme.text}`}>Welcome Back</h2>
                 {error && (
-                    <p className="text-red-500 mb-4 text-center bg-red-100 p-2 rounded">
+                    <p className="tw-text-red-500 tw-mb-4 tw-text-center tw-bg-red-100 tw-p-2 tw-rounded">
                         {error}
                     </p>
                 )}
-                <form onSubmit={handleLogin} className="space-y-6">
+                <form onSubmit={handleLogin} className="tw-space-y-6">
                     <div>
-                        <label className="block text-gray-700 font-semibold mb-2">Email</label>
+                        <label className={`tw-block tw-font-semibold tw-mb-2 ${theme.text}`}>Email</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="tw-w-full tw-border tw-border-gray-300 tw-px-4 tw-py-2 tw-rounded-lg tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-indigo-500 tw-focus:border-transparent"
                             placeholder="Enter your email"
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700 font-semibold mb-2">Passwords</label>
+                        <label className={`tw-block tw-font-semibold tw-mb-2 ${theme.text}`}>Password</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="tw-w-full tw-border tw-border-gray-300 tw-px-4 tw-py-2 tw-rounded-lg tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-indigo-500 tw-focus:border-transparent"
                             placeholder="Enter your password"
                             required
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+                        className={`tw-w-full tw-bg-indigo-500 tw-text-white tw-py-3 tw-rounded-lg tw-transition tw-duration-300 hover:tw-bg-indigo-600`}
                     >
                         Login
                     </button>
                 </form>
-               
+                <div className="tw-mt-6 tw-text-center">
+                    <p className={`tw-text-sm ${theme.text}`}>
+                        Don't have an account?{' '}
+                        <a href="/register" className="tw-text-indigo-500 hover:tw-underline">
+                            Sign up
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react';
 import { Link } from '@inertiajs/react';
 import { createContext, useContext, useState } from 'react';
+import { useTheme } from '../Contexts/ThemeContext';
 
 const DropDownContext = createContext();
 
@@ -38,10 +39,11 @@ const Trigger = ({ children }) => {
 const Content = ({
     align = 'right',
     width = '48',
-    contentClasses = 'py-1 bg-white',
+    contentClasses = 'py-1',
     children,
 }) => {
     const { open, setOpen } = useContext(DropDownContext);
+    const { theme } = useTheme();
 
     let alignmentClasses = 'origin-top';
 
@@ -56,6 +58,9 @@ const Content = ({
     if (width === '48') {
         widthClasses = 'w-48';
     }
+
+    const themeClasses =
+        theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
 
     return (
         <>
@@ -73,10 +78,7 @@ const Content = ({
                     onClick={() => setOpen(false)}
                 >
                     <div
-                        className={
-                            `rounded-md ring-1 ring-black ring-opacity-5 ` +
-                            contentClasses
-                        }
+                        className={`rounded-md ring-1 ring-black ring-opacity-5 ${contentClasses} ${themeClasses}`}
                     >
                         {children}
                     </div>

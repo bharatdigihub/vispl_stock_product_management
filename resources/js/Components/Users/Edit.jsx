@@ -18,33 +18,33 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
             <form onSubmit={handleSubmit}>
-                <h1 className="text-2xl font-bold mb-4">Edit User</h1>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Name</label>
+                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit User</h1>
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Name</label>
                     <input
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        className="w-full border px-4 py-2"
+                        className="tw-w-full tw-border tw-px-4 tw-py-2"
                     />
-                    {errors.name && <div className="text-red-500">{errors.name}</div>}
+                    {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Email</label>
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Email</label>
                     <input
                         type="email"
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
-                        className="w-full border px-4 py-2"
+                        className="tw-w-full tw-border tw-px-4 tw-py-2"
                     />
-                    {errors.email && <div className="text-red-500">{errors.email}</div>}
+                    {errors.email && <div className="tw-text-red-500">{errors.email}</div>}
                 </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Role</label>
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role</label>
                     <select
                         value={data.role}
                         onChange={(e) => setData("role", e.target.value)}
-                        className="w-full border px-4 py-2"
+                        className="tw-w-full tw-border tw-px-4 tw-py-2"
                     >
                         <option value="">Select Role</option>
                         {roles.map((role) => (
@@ -53,10 +53,10 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                             </option>
                         ))}
                     </select>
-                    {errors.role && <div className="text-red-500">{errors.role}</div>}
+                    {errors.role && <div className="tw-text-red-500">{errors.role}</div>}
                 </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Permissions</label>
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Permissions</label>
                     <select
                         multiple
                         value={data.permissions}
@@ -66,7 +66,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                                 Array.from(e.target.selectedOptions, (option) => option.value)
                             )
                         }
-                        className="w-full border px-4 py-2"
+                        className="tw-w-full tw-border tw-px-4 tw-py-2"
                     >
                         {permissions.map((permission) => (
                             <option key={permission.id} value={permission.name}>
@@ -74,11 +74,11 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                             </option>
                         ))}
                     </select>
-                    {errors.permissions && <div className="text-red-500">{errors.permissions}</div>}
+                    {errors.permissions && <div className="tw-text-red-500">{errors.permissions}</div>}
                 </div>
                 <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700"
+                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
                 >
                     Update
                 </button>

@@ -7,27 +7,27 @@ const UsersIndex = () => {
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
-            <h1 className="text-2xl font-bold mb-6">Users</h1>
-            <Link href="/users/create" className="px-4 py-2 bg-blue-500 text-white rounded-lg">
+            <h1 className="tw-text-2xl tw-font-bold tw-mb-6">Users</h1>
+            <Link href="/users/create" className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg">
                 Add User
             </Link>
-            <table className="table-auto w-full border-collapse border border-gray-300 mt-4">
+            <table className="tw-table-auto tw-w-full tw-border-collapse tw-border tw-border-gray-300 tw-mt-4">
                 <thead>
                     <tr>
-                        <th className="border border-gray-300 p-2">Name</th>
-                        <th className="border border-gray-300 p-2">Email</th>
-                        <th className="border border-gray-300 p-2">Actions</th>
+                        <th className="tw-border tw-border-gray-300 tw-p-2">Name</th>
+                        <th className="tw-border tw-border-gray-300 tw-p-2">Email</th>
+                        <th className="tw-border tw-border-gray-300 tw-p-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user) => (
                         <tr key={user.id}>
-                            <td className="border border-gray-300 p-2">{user.name}</td>
-                            <td className="border border-gray-300 p-2">{user.email}</td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="tw-border tw-border-gray-300 tw-p-2">{user.name}</td>
+                            <td className="tw-border tw-border-gray-300 tw-p-2">{user.email}</td>
+                            <td className="tw-border tw-border-gray-300 tw-p-2">
                                 <Link
                                     href={`/users/${user.id}/edit`}
-                                    className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+                                    className="tw-bg-yellow-500 tw-text-white tw-px-4 tw-py-2 tw-rounded hover:tw-bg-yellow-600"
                                 >
                                     Edit
                                 </Link>
@@ -35,7 +35,7 @@ const UsersIndex = () => {
                                     as="button"
                                     method="delete"
                                     href={`/users/${user.id}`}
-                                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-2"
+                                    className="tw-bg-red-500 tw-text-white tw-px-4 tw-py-2 tw-rounded hover:tw-bg-red-600 tw-ml-2"
                                 >
                                     Delete
                                 </Link>

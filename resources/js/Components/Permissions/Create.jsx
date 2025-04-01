@@ -16,13 +16,13 @@ const PermissionCreate = ({ modules, routes }) => {
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
             <form onSubmit={handleSubmit}>
-                <h1 className="text-2xl font-bold mb-4">Add Permissions</h1>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Module</label>
+                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add Permissions</h1>
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Module</label>
                     <select
                         value={data.module_id}
                         onChange={(e) => setData("module_id", e.target.value)}
-                        className="w-full border px-4 py-2"
+                        className="tw-w-full tw-border tw-px-4 tw-py-2"
                     >
                         <option value="">Select Module</option>
                         {modules.map((module) => (
@@ -31,13 +31,13 @@ const PermissionCreate = ({ modules, routes }) => {
                             </option>
                         ))}
                     </select>
-                    {errors.module_id && <div className="text-red-500">{errors.module_id}</div>}
+                    {errors.module_id && <div className="tw-text-red-500">{errors.module_id}</div>}
                 </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Actions</label>
-                    <div className="flex space-x-4">
+                <div className="tw-mb-4">
+                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Actions</label>
+                    <div className="tw-flex tw-space-x-4">
                         {["view", "create", "edit", "delete"].map((action) => (
-                            <label key={action} className="flex items-center space-x-2">
+                            <label key={action} className="tw-flex tw-items-center tw-space-x-2">
                                 <input
                                     type="checkbox"
                                     value={action}
@@ -53,11 +53,11 @@ const PermissionCreate = ({ modules, routes }) => {
                             </label>
                         ))}
                     </div>
-                    {errors.actions && <div className="text-red-500">{errors.actions}</div>}
+                    {errors.actions && <div className="tw-text-red-500">{errors.actions}</div>}
                 </div>
                 <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700"
+                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
                 >
                     Create
                 </button>

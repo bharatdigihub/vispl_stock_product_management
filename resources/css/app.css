@@ -3,6 +3,87 @@
 @tailwind utilities;
 
 /* Add any custom styles here */
+html,body,#app{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --background-light: #50555a;
+    --background-dark: #ffffff;
+    --text-dark: #f8f9fa;
+    --text-light: #343a40;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-light: #ffffff;
+        --background-dark: #343a40;
+        --text-dark: #343a40;
+        --text-light: #f8f9fa;
+    }
+}
+
+input[type="text"], select {
+    @apply tw-bg-gray-100 tw-text-gray-800 tw-border tw-border-gray-300 tw-p-2 tw-rounded;
+}
+
+input:not([type="submit"]):focus, select:focus {
+    @apply tw-outline-none tw-border-blue-500;
+}
+
+body.dark input:not([type="submit"]), body.dark select {
+    @apply tw-bg-gray-800 tw-text-gray-100;
+}
+
+body.dark-mode input:not([type="submit"]), body.dark-mode select {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+/* Sidebar and Content States */
+.sidebar-full {
+    @apply tw-w-64; /* Full width for sidebar */
+}
+
+.sidebar-half {
+    @apply tw-w-20; /* Half width for sidebar */
+}
+
+.sidebar-closed {
+    @apply tw-w-0; /* Hidden sidebar */
+}
+
+.content-full {
+    @apply tw-ml-64; /* Full sidebar width margin */
+}
+
+.content-half {
+    @apply tw-ml-20; /* Half sidebar width margin */
+}
+
+.content-closed {
+    @apply tw-ml-0; /* No margin for hidden sidebar */
+}
+
+@media (max-width:991px) {
+    .sidebar-half {
+        @apply tw-w-64 tw-absolute;
+        /* Half width for sidebar */
+    }
+    .content-half {
+        @apply tw-ml-0; /* Half sidebar width margin */
+    }
+    .content-full {
+        /* Full sidebar width margin */
+        @apply tw-ml-0;
+    }
+    .sidebar-full {
+        @apply tw-w-64; /* Full width for sidebar */
+        margin-left: 0 !important;
+    }
+}
 
 header {
     display: flex;

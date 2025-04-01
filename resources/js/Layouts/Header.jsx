@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "@inertiajs/react";
+import { CButton, CBreadcrumb, CBreadcrumbItem } from "@coreui/react";
+import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
+import { CIcon } from '@coreui/icons-react';
+import { cilMoon, cilSun } from '@coreui/icons';
 
-const Header = () => {
+const Header = ({ toggleSidebar, currentPage }) => {
     const [permissions, setPermissions] = useState([]);
+    const { isDarkMode, toggleTheme } = useTheme(); // Use ThemeContext
 
     useEffect(() => {
         fetchPermissions();
@@ -28,29 +33,73 @@ const Header = () => {
     };
 
     return (
-        <header className="bg-blue-600 text-white p-4">
-            <nav className="container mx-auto flex justify-between items-center">
-                <h1 className="text-xl font-bold">Admin Panel</h1>
-                <ul className="flex space-x-4">
-                    {permissions.includes('view dashboard') && (
-                        <li><a href="/dashboard" className="hover:underline">Dashboard</a></li>
-                    )}
-                    {permissions.includes('manage users') && (
-                        <li><a href="/users" className="hover:underline">Users</a></li>
-                    )}
-                    {permissions.includes('assign roles') && (
-                        <li><a href="/roles" className="hover:underline">Roles</a></li>
-                    )}
-                    {permissions.includes('update permissions') && (
-                        <li><a href="/permissions" className="hover:underline">Permissions</a></li>
-                    )}
-                    {permissions.includes('create roles') && (
-                        <li><Link href={route("roles.create")} className="hover:underline">Add Role</Link></li>
-                    )}
-                    <li><button onClick={handleLogout} className="hover:underline">Logout</button></li>
-                </ul>
-            </nav>
-        </header>
+        <>
+            <header className={`tw-border-b  tw-p-4 ${isDarkMode ? 'tw-bg-gray-800 tw-text-indigo-300 tw-border-gray-800' : 'tw-bg-gray-50 tw-text-indigo-800 tw-border-gray-300'}`}>
+                <nav className="tw-container tw-w-100 tw-max-w-full tw-flex tw-justify-between tw-items-center">
+                    <div className="tw-flex tw-items-center tw-space-x-4">
+                        <CButton
+                            color="light"
+                            onClick={toggleSidebar}
+                            className={`${
+                                isDarkMode
+                                    ? 'tw-text-indigo-300 tw-border-indigo-300 tw-bg-transparent hover:tw-text-indigo-400 hover:tw-bg-indigo-50'
+                                    : 'tw-text-indigo-600 tw-border-indigo-600 hover:tw-text-indigo-700 hover:tw-bg-indigo-100'
+                            } tw-border tw-rounded tw-px-3 tw-py-2`}
+                        >
+                            ☰
+                        </CButton>
+                        <h1 className="tw-text-xl tw-font-bold">{currentPage || "Admin Panel"}</h1>
+                    </div>
+                    <ul className="tw-flex tw-space-x-4 tw-items-center">
+                        {permissions.includes('view dashboard') && (
+                            <li><a href="/dashboard" className="hover:tw-underline tw-text-sm">Dashboard</a></li>
+                        )}
+                        {permissions.includes('manage users') && (
+                            <li><a href="/users" className="hover:tw-underline tw-text-sm">Users</a></li>
+                        )}
+                        {permissions.includes('assign roles') && (
+                            <li><a href="/roles" className="hover:tw-underline tw-text-sm">Roles</a></li>
+                        )}
+                        {permissions.includes('update permissions') && (
+                            <li><a href="/permissions" className="hover:tw-underline tw-text-sm">Permissions</a></li>
+                        )}
+                        {permissions.includes('create roles') && (
+                            <li><Link href={route("roles.create")} className="hover:tw-underline tw-text-sm">Add Role</Link></li>
+                        )}
+                        <li>
+                            <button onClick={handleLogout} className="hover:tw-underline tw-text-sm">Logout</button>
+                        </li>
+                        <li>
+                            <button
+                                onClick={toggleTheme}
+                                className={`tw-px-2 tw-py-2 tw-rounded-full tw-flex tw-items-center ${
+                                    isDarkMode
+                                        ? 'tw-bg-gray-700 tw-text-gray-200 hover:tw-bg-gray-600'
+                                        : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
+                                }`}
+                            >
+                                <CIcon icon={isDarkMode ? cilSun : cilMoon} />
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <CBreadcrumb
+                className={`tw-mt-2 tw-px-4 ${
+                    isDarkMode ? 'tw-text-indigo-300 ' : ' tw-text-indigo-600'
+                }`}
+            >
+                <CBreadcrumbItem href="/" className={`${isDarkMode ? 'tw-text-indigo-300' : 'tw-text-indigo-600'}`}>
+                    Home
+                </CBreadcrumbItem>
+                <CBreadcrumbItem
+                    active
+                    className={`${isDarkMode ? 'tw-text-gray-50/100' : 'tw-text-indigo-600'}`}
+                >
+                    {currentPage || "Admin Panel"}
+                </CBreadcrumbItem>
+            </CBreadcrumb>
+        </>
     );
 };
 
