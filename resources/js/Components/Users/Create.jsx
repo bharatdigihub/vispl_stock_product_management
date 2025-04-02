@@ -3,6 +3,8 @@ import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
 import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import TextInput from "../TextInput"; // Import TextInput
+import InputLabel from "../InputLabel"; // Import InputLabel
+import InputError from "../InputError"; // Import InputError
 
 const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a prop
     const { data, setData, post, errors } = useForm({
@@ -23,47 +25,47 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
             <form onSubmit={handleSubmit}>
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Create User</h1>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Name</label>
+                    <InputLabel value="Name" className="tw-mb-1" />
                     <TextInput
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         className="tw-w-full"
                     />
-                    {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
+                    <InputError message={errors.name} className="tw-mt-1" />
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Email</label>
+                    <InputLabel value="Email" className="tw-mb-1" />
                     <TextInput
                         type="email"
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
                         className="tw-w-full"
                     />
-                    {errors.email && <div className="tw-text-red-500">{errors.email}</div>}
+                    <InputError message={errors.email} className="tw-mt-1" />
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Password</label>
+                    <InputLabel value="Password" className="tw-mb-1" />
                     <TextInput
                         type="password"
                         value={data.password}
                         onChange={(e) => setData("password", e.target.value)}
                         className="tw-w-full"
                     />
-                    {errors.password && <div className="tw-text-red-500">{errors.password}</div>}
+                    <InputError message={errors.password} className="tw-mt-1" />
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role</label>
+                    <InputLabel value="Role" className="tw-mb-1" />
                     <SelectDropdown
                         options={roles}
                         value={data.role}
                         onChange={(e) => setData("role", e.target.value)}
                         placeholder="Select Role"
                     />
-                    {errors.role && <div className="tw-text-red-500">{errors.role}</div>}
+                    <InputError message={errors.role} className="tw-mt-1" />
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Permissions</label>
+                    <InputLabel value="Permissions" className="tw-mb-1" />
                     <SelectDropdown
                         options={permissions}
                         value={data.permissions}
@@ -73,7 +75,7 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
                         multiple
                         placeholder="Select Permissions"
                     />
-                    {errors.permissions && <div className="tw-text-red-500">{errors.permissions}</div>}
+                    <InputError message={errors.permissions} className="tw-mt-1" />
                 </div>
                 <button
                     type="submit"

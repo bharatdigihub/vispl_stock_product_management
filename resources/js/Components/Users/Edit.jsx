@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
 import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
+import InputLabel from "../InputLabel"; // Import InputLabel
 
 const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
     const { data, setData, patch, errors } = useForm({
@@ -21,7 +22,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
             <form onSubmit={handleSubmit}>
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit User</h1>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Name</label>
+                    <InputLabel value="Name" className="tw-mb-1" />
                     <input
                         type="text"
                         value={data.name}
@@ -31,7 +32,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Email</label>
+                    <InputLabel value="Email" className="tw-mb-1" />
                     <input
                         type="email"
                         value={data.email}
@@ -41,7 +42,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                     {errors.email && <div className="tw-text-red-500">{errors.email}</div>}
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role</label>
+                    <InputLabel value="Role" className="tw-mb-1" />
                     <SelectDropdown
                         options={roles}
                         value={data.role}
@@ -51,7 +52,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                     {errors.role && <div className="tw-text-red-500">{errors.role}</div>}
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Permissions</label>
+                    <InputLabel value="Permissions" className="tw-mb-1" />
                     <SelectDropdown
                         options={permissions}
                         value={data.permissions}

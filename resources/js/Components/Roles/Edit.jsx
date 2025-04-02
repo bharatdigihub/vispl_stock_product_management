@@ -3,6 +3,8 @@ import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout";
 import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
 import TextInput from "../TextInput"; // Import TextInput
+import Checkbox from "../Checkbox"; // Import Checkbox
+import InputLabel from "../InputLabel"; // Import InputLabel
 
 const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
     const { data, setData, patch, errors } = useForm({
@@ -20,7 +22,7 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
             <form onSubmit={handleSubmit}>
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Role</h1>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role Name</label>
+                    <InputLabel value="Role Name" className="tw-mb-1" />
                     <TextInput
                         type="text"
                         value={data.name}
@@ -30,14 +32,14 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Permissions</label>
+                    <InputLabel value="Permissions" className="tw-mb-1" />
                     {modules.map((module) => (
                         <div key={module.id} className="tw-mb-4">
-                            <h3 className="tw-font-bold">{module.name}</h3>
+                            <h3 className="tw-font-bold mb-2">{module.name}</h3>
+                            <div className="tw-flex tw-flex-row tw-items-center tw-space-x-3">
                             {module.permissions.map((permission) => (
-                                <label key={permission.id} className="tw-block">
-                                    <input
-                                        type="checkbox"
+                                <label key={permission.id} className="tw-flex tw-items-center tw-space-x-2">
+                                    <Checkbox
                                         value={permission.id}
                                         checked={data.permissions.includes(permission.id)}
                                         onChange={(e) => {
@@ -48,9 +50,10 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
                                             );
                                         }}
                                     />
-                                    {permission.action}
+                                   <span>{permission.action}</span>
                                 </label>
                             ))}
+                            </div>
                         </div>
                     ))}
                 </div>

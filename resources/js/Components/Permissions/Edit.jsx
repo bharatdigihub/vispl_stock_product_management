@@ -1,13 +1,16 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout";
-import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
-import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
+import PrimaryButton from "../PrimaryButton";
+import SelectDropdown from "../SelectDropdown";
+import Checkbox from "../Checkbox";
+import InputLabel from "../InputLabel"; // Import InputLabel
+import InputError from "../InputError"; // Import InputError
 
 const PermissionEdit = ({ permission, modules, routes }) => {
     const { data, setData, patch, errors } = useForm({
         module_id: permission.module_id,
-        actions: permission.actions || [], // Pre-select existing actions
+        actions: permission.actions || [],
     });
 
     const handleSubmit = (e) => {
@@ -20,22 +23,21 @@ const PermissionEdit = ({ permission, modules, routes }) => {
             <form onSubmit={handleSubmit}>
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Permissions</h1>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Module</label>
+                    <InputLabel value="Module" className="tw-mb-1" />
                     <SelectDropdown
                         options={modules}
                         value={data.module_id}
                         onChange={(e) => setData("module_id", e.target.value)}
                         placeholder="Select Module"
                     />
-                    {errors.module_id && <div className="tw-text-red-500">{errors.module_id}</div>}
+                    <InputError message={errors.module_id} className="tw-mt-1" />
                 </div>
                 <div className="tw-mb-4">
-                    <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Actions</label>
+                    <InputLabel value="Actions" className="tw-mb-1" />
                     <div className="tw-flex tw-space-x-4">
                         {["view", "create", "edit", "delete"].map((action) => (
                             <label key={action} className="tw-flex tw-items-center tw-space-x-2">
-                                <input
-                                    type="checkbox"
+                                <Checkbox
                                     value={action}
                                     checked={data.actions.includes(action)}
                                     onChange={(e) => {
@@ -50,7 +52,7 @@ const PermissionEdit = ({ permission, modules, routes }) => {
                             </label>
                         ))}
                     </div>
-                    {errors.actions && <div className="tw-text-red-500">{errors.actions}</div>}
+                    <InputError message={errors.actions} className="tw-mt-1" />
                 </div>
                 <PrimaryButton
                     type="submit"
