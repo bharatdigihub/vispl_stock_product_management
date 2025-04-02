@@ -39,46 +39,46 @@ const Trigger = ({ children }) => {
 const Content = ({
     align = 'right',
     width = '48',
-    contentClasses = 'py-1',
+    contentClasses = 'tw-py-0',
     children,
 }) => {
     const { open, setOpen } = useContext(DropDownContext);
     const { theme } = useTheme();
 
-    let alignmentClasses = 'origin-top';
+    let alignmentClasses = 'tw-origin-top';
 
     if (align === 'left') {
-        alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
+        alignmentClasses = 'ltr:tw-origin-top-left rtl:tw-origin-top-right tw-start-0';
     } else if (align === 'right') {
-        alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
+        alignmentClasses = 'ltr:tw-origin-top-right rtl:tw-origin-top-left tw-end-0';
     }
 
     let widthClasses = '';
 
     if (width === '48') {
-        widthClasses = 'w-48';
+        widthClasses = 'tw-w-48';
     }
 
     const themeClasses =
-        theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
+        theme === 'dark' ? 'tw-bg-gray-800 tw-text-white' : 'tw-bg-white tw-text-black';
 
     return (
         <>
             <Transition
                 show={open}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
+                enter="tw-transition tw-ease-out tw-duration-200"
+                enterFrom="tw-opacity-0 tw-scale-95"
+                enterTo="tw-opacity-100 tw-scale-100"
+                leave="tw-transition tw-ease-in tw-duration-75"
+                leaveFrom="tw-opacity-100 tw-scale-100"
+                leaveTo="tw-opacity-0 tw-scale-95"
             >
                 <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+                    className={`tw-absolute tw-z-50 tw-mt-2 tw-rounded-md tw-shadow-lg ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
                     <div
-                        className={`rounded-md ring-1 ring-black ring-opacity-5 ${contentClasses} ${themeClasses}`}
+                        className={`tw-rounded-md tw-overflow-hidden tw-ring-1 tw-ring-black tw-ring-opacity-5 ${contentClasses} ${themeClasses}`}
                     >
                         {children}
                     </div>
@@ -89,13 +89,13 @@ const Content = ({
 };
 
 const DropdownLink = ({ className = '', children, ...props }) => {
+    const { theme } = useTheme(); // Use theme for consistent styling
     return (
         <Link
             {...props}
-            className={
-                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none ' +
-                className
-            }
+            className={`tw-block tw-w-full tw-px-4 tw-py-2 tw-text-start tw-text-sm tw-leading-5 tw-transition tw-duration-150 tw-ease-in-out hover:tw-bg-gray-100 focus:tw-bg-gray-100 focus:tw-outline-none ${
+                theme.mode === 'dark' ? 'tw-text-gray-300 hover:tw-bg-gray-700' : 'tw-text-gray-700 hover:tw-bg-gray-200'
+            } ${className}`}
         >
             {children}
         </Link>

@@ -5,6 +5,7 @@ import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import TextInput from "../TextInput"; // Import TextInput
 import InputLabel from "../InputLabel"; // Import InputLabel
 import InputError from "../InputError"; // Import InputError
+import PrimaryButton from "../PrimaryButton";
 
 const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a prop
     const { data, setData, post, errors } = useForm({
@@ -31,6 +32,7 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         className="tw-w-full"
+                        placeholder="Enter name" // Added placeholder
                     />
                     <InputError message={errors.name} className="tw-mt-1" />
                 </div>
@@ -41,6 +43,7 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
                         className="tw-w-full"
+                        placeholder="Enter email" // Added placeholder
                     />
                     <InputError message={errors.email} className="tw-mt-1" />
                 </div>
@@ -51,6 +54,7 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
                         value={data.password}
                         onChange={(e) => setData("password", e.target.value)}
                         className="tw-w-full"
+                        placeholder="Enter password" // Added placeholder
                     />
                     <InputError message={errors.password} className="tw-mt-1" />
                 </div>
@@ -60,7 +64,7 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
                         options={roles}
                         value={data.role}
                         onChange={(e) => setData("role", e.target.value)}
-                        placeholder="Select Role"
+                        placeholder="Select Role" // Placeholder already exists
                     />
                     <InputError message={errors.role} className="tw-mt-1" />
                 </div>
@@ -73,16 +77,17 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
                             setData("permissions", Array.from(e.target.selectedOptions, (option) => option.value))
                         }
                         multiple
-                        placeholder="Select Permissions"
+                        placeholder="Select Permissions" // Placeholder already exists
                     />
                     <InputError message={errors.permissions} className="tw-mt-1" />
                 </div>
-                <button
+               <PrimaryButton
                     type="submit"
-                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
+                    padding="tw-px-4 tw-py-2" // Added padding
+                    className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-0"
                 >
                     Create
-                </button>
+                </PrimaryButton>
             </form>
         </GlobalLayout>
     );

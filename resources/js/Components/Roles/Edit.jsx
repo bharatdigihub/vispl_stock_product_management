@@ -28,6 +28,7 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        placeholder="Enter role name" // Added placeholder
                     />
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
@@ -59,7 +60,8 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
                 </div>
                 <PrimaryButton
                     type="submit"
-                    className="tw-bg-blue-500 hover:tw-bg-blue-700"
+                    padding="tw-px-4 tw-py-2" // Added padding
+                    className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-0"
                 >
                     Update
                 </PrimaryButton>

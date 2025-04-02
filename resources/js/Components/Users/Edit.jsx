@@ -3,6 +3,7 @@ import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
 import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import InputLabel from "../InputLabel"; // Import InputLabel
+import PrimaryButton from "../PrimaryButton";
 
 const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
     const { data, setData, patch, errors } = useForm({
@@ -28,6 +29,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        placeholder="Enter name" // Added placeholder
                     />
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
@@ -38,6 +40,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
                         className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        placeholder="Enter email" // Added placeholder
                     />
                     {errors.email && <div className="tw-text-red-500">{errors.email}</div>}
                 </div>
@@ -67,12 +70,13 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                     />
                     {errors.permissions && <div className="tw-text-red-500">{errors.permissions}</div>}
                 </div>
-                <button
+                <PrimaryButton
                     type="submit"
-                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
+                    padding="tw-px-4 tw-py-2" // Added padding
+                    className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-0"
                 >
                     Update
-                </button>
+                </PrimaryButton>
             </form>
         </GlobalLayout>
     );

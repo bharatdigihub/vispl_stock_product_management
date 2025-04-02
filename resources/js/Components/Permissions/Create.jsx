@@ -53,12 +53,14 @@ const PermissionCreate = ({ modules, routes }) => {
                     </div>
                     <InputError message={errors.actions} className="tw-mt-1" />
                 </div>
-                <PrimaryButton
-                    type="submit"
-                    className="tw-bg-blue-500 hover:tw-bg-blue-700"
-                >
-                    Create
-                </PrimaryButton>
+              <PrimaryButton
+                type="submit"
+                padding="tw-px-4 tw-py-2" // Added padding
+                className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-0"
+            >
+                Create
+            </PrimaryButton>
+                
             </form>
         </GlobalLayout>
     );

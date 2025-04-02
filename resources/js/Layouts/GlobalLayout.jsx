@@ -3,15 +3,18 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "@inertiajs/react";
 import { CSidebar, CSidebarNav, CContainer, CCol } from "@coreui/react";
-import { cilSpeedometer, cilUser, cilSettings, cilLockLocked } from "@coreui/icons";
+import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronBottom, cilChevronTop } from "@coreui/icons"; // Add new icons
 import CIcon from "@coreui/icons-react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
+import NavLink, { DropdownMenu } from "../Components/NavLink";
 
 const GlobalLayout = ({ children }) => {
     const { theme } = useTheme(); // Use ThemeContext
     const [sidebarState, setSidebarState] = useState("full"); // "full", "half", or "closed"
     const [currentPage, setCurrentPage] = useState("");
     const [isMobileView, setIsMobileView] = useState(false); // Track if the view is mobile
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown menu
+    const [isSidebarLocked, setIsSidebarLocked] = useState(false); // State to lock the sidebar
 
     useEffect(() => {
         // Set the initial page name based on the current URL path
@@ -44,13 +47,36 @@ const GlobalLayout = ({ children }) => {
     }, []);
 
     const toggleSidebar = () => {
-        setSidebarState((prevState) => (prevState === "full" ? "half" : "full"));
+        if (!isSidebarLocked) {
+            setSidebarState((prevState) => (prevState === "full" ? "half" : "full"));
+        }
+    };
+
+    const toggleSidebarLock = () => {
+        setIsSidebarLocked((prevState) => !prevState);
+        if (!isSidebarLocked) {
+            setSidebarState("half"); // Lock the sidebar in "half" state
+        }
     };
 
     const handleMenuItemClick = (pageName) => {
         setCurrentPage(pageName); // Update the current page
         if (isMobileView) {
             setSidebarState("closed"); // Ensure sidebar stays closed on small screens after redirection
+        } else if (isSidebarLocked) {
+            setSidebarState("half"); // Ensure sidebar stays half if locked
+        }
+    };
+
+    const handleMouseEnter = () => {
+        if (isSidebarLocked && sidebarState === "half") {
+            setSidebarState("full");
+        }
+    };
+
+    const handleMouseLeave = () => {
+        if (isSidebarLocked && sidebarState === "full") {
+            setSidebarState("half");
         }
     };
 
@@ -60,13 +86,15 @@ const GlobalLayout = ({ children }) => {
                 {/* Sidebar */}
                 <CSidebar
                     visible={sidebarState !== "closed"}
+                    onMouseEnter={isSidebarLocked ? handleMouseEnter : undefined}
+                    onMouseLeave={isSidebarLocked ? handleMouseLeave : undefined}
                     className={`
-                        ${theme.sidebar} ${theme.sidebarText}
+                        tw-bg-gray-950 tw-text-white tw-h-screen Sidebar background always gray-950
                         tw-transition-all tw-fixed tw-top-0 tw-left-0 tw-min-h-screen ${
                         sidebarState === "full" ? "sidebar-full" : sidebarState === "half" ? "sidebar-half" : "sidebar-closed"
                     }`}
                 >
-                    <div className={`tw-text-center tw-mt-4 tw-font-bold tw-text-lg tw-flex tw-justify-between px-3 lg:tw-justify-center tw-items-center ${theme.sidebarText}`}>
+                    <div className={`tw-text-center tw-h-[74px] tw-font-bold tw-text-2xl tw-flex tw-justify-between px-3 lg:tw-justify-center tw-items-center tw-border-b tw-border-gray-800  tw-text-gray-50 tw-tracking-widest`}>
                         {sidebarState === "full" ? "VSIPL" : "VSL"}
                         {isMobileView && (
                             <button
@@ -77,64 +105,109 @@ const GlobalLayout = ({ children }) => {
                             </button>
                         )}
                     </div>
-                    <CSidebarNav className={`tw-mt-6 ${theme.mode === "dark" ? "tw-bg-black" : ""} `}>
+                    <CSidebarNav className="">
+                        <div
+                            className={`tw-text-sm mb-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
+                                sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
+                            }`}
+                        >
+                            Dashboard
+                        </div>
                         <li>
-                            <Link
+                            <NavLink
                                 href="/dashboard"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
-                                    currentPage === "Dashboard"
-                                        ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-300 ${theme.text}`
-                                }`}
+                                icon={cilSpeedometer}
+                                active={currentPage === "Dashboard"}
+                                sidebarState={sidebarState}
+                                theme={theme}
                                 onClick={() => handleMenuItemClick("Dashboard")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                <CIcon icon={cilSpeedometer} className={`${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"}`} />
-                                {sidebarState === "full" && "Dashboard"}
-                            </Link>
+                                Dashboard
+                            </NavLink>
                         </li>
                         <li>
-                            <Link
+                            <NavLink
                                 href="/users"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
-                                    currentPage === "User Management"
-                                        ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-300 ${theme.text}`
-                                }`}
+                                icon={cilUser}
+                                active={currentPage === "User Management"}
+                                sidebarState={sidebarState}
+                                theme={theme}
                                 onClick={() => handleMenuItemClick("User Management")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                <CIcon icon={cilUser} className={`${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"}`} />
-                                {sidebarState === "full" && "User Management"}
-                            </Link>
+                                User Management
+                            </NavLink>
                         </li>
                         <li>
-                            <Link
+                            <NavLink
                                 href="/roles"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
-                                    currentPage === "Roles"
-                                        ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-300 ${theme.text}`
-                                }`}
+                                icon={cilSettings}
+                                active={currentPage === "Roles"}
+                                sidebarState={sidebarState}
+                                theme={theme}
                                 onClick={() => handleMenuItemClick("Roles")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                <CIcon icon={cilSettings} className={`${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"}`} />
-                                {sidebarState === "full" && "Roles"}
-                            </Link>
+                                Roles
+                            </NavLink>
                         </li>
                         <li>
-                            <Link
+                            <NavLink
                                 href="/permissions"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
-                                    currentPage === "Permissions"
-                                        ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-300 ${theme.text}`
-                                }`}
+                                icon={cilLockLocked}
+                                active={currentPage === "Permissions"}
+                                sidebarState={sidebarState}
+                                theme={theme}
                                 onClick={() => handleMenuItemClick("Permissions")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                <CIcon icon={cilLockLocked} className={`${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"}`} />
-                                {sidebarState === "full" && "Permissions"}
-                            </Link>
+                                Permissions
+                            </NavLink>
                         </li>
+                        <div
+                            className={`tw-text-sm mt-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
+                                sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
+                            }`}
+                        >
+                            User Settings
+                        </div>
+                        <li>
+                            <DropdownMenu
+                                label="Settings"
+                                icon={cilSettings}
+                                items={[
+                                    {
+                                        href: "/profile",
+                                        label: "Profile",
+                                        icon: cilUserFemale,
+                                        active: currentPage === "Profile",
+                                        onClick: (e) => e.preventDefault(), // Prevent redirection
+                                    },
+                                    {
+                                        href: "/account",
+                                        label: "Account",
+                                        icon: cilWallet,
+                                        active: currentPage === "Account",
+                                        onClick: (e) => e.preventDefault(), // Prevent redirection
+                                    },
+                                ]}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            />
+                        </li>
+                        {/* Sidebar Footer */}
+                       
                     </CSidebarNav>
+                    <div className="tw-mt-auto tw-px-3 tw-py-2 tw-border-t tw-border-gray-800">
+                            <button
+                                className={`tw-w-10 tw-h-10 tw-flex tw-items-center tw-justify-center tw-rounded-full ${sidebarState === "half" ? "tw-mx-auto" : "tw-ml-auto"} ${theme.button} tw-transition-all tw-duration-300 tw-delay-150`}
+                                onClick={toggleSidebarLock}
+                            >
+                                <CIcon icon={cilLockLocked} className={`${isSidebarLocked ? "tw-text-red-500" : ""}`} />
+                            </button>
+                        </div>
                 </CSidebar>
 
                 {/* Main Content */}

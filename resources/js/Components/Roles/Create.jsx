@@ -4,6 +4,7 @@ import GlobalLayout from "../../Layouts/GlobalLayout";
 import TextInput from "../TextInput";
 import Checkbox from "../Checkbox";
 import InputLabel from "../InputLabel"; // Import InputLabel
+import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
 
 const RoleCreate = ({ modules }) => {
     const { data, setData, post, errors } = useForm({
@@ -27,6 +28,7 @@ const RoleCreate = ({ modules }) => {
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         className="tw-w-full"
+                        placeholder="Enter role name" // Added placeholder
                     />
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
@@ -53,12 +55,13 @@ const RoleCreate = ({ modules }) => {
                         </div>
                     ))}
                 </div>
-                <button
+                <PrimaryButton
                     type="submit"
-                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
+                    padding="tw-px-4 tw-py-2" // Added padding
+                    className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-0"
                 >
                     Create
-                </button>
+                </PrimaryButton>
             </form>
         </GlobalLayout>
     );

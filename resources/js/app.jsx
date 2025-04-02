@@ -15,4 +15,5 @@ createInertiaApp({
             </ThemeProvider>
         );
     },
+    //progress: false, // Disable the nprogress bar
 });
