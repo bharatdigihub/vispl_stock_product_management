@@ -1,5 +1,6 @@
 import React from "react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
+import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
 import { Link } from "@inertiajs/react";
 
 const RoleIndex = ({ roles, routes }) => {
@@ -7,12 +8,13 @@ const RoleIndex = ({ roles, routes }) => {
         <GlobalLayout> {/* Wrap with GlobalLayout */}
             <h1 className="tw-text-2xl tw-font-bold tw-mb-6">Roles</h1>
             <div className="tw-mb-4">
-                <Link
+                <PrimaryButton
+                    as="Link"
                     href={routes.create}
-                    className="tw-bg-blue-500 tw-text-white tw-px-4 tw-py-2 tw-rounded hover:tw-bg-blue-600"
+                    className="tw-bg-blue-500 hover:tw-bg-blue-600"
                 >
                     Add Role
-                </Link>
+                </PrimaryButton>
             </div>
             <table className="tw-table-auto tw-w-full tw-border-collapse tw-border tw-border-gray-300">
                 <thead>
@@ -26,20 +28,21 @@ const RoleIndex = ({ roles, routes }) => {
                         <tr key={role.id}>
                             <td className="tw-border tw-border-gray-300 tw-p-2">{role.name}</td>
                             <td className="tw-border tw-border-gray-300 tw-p-2">
-                                <Link
+                                <PrimaryButton
+                                    as="Link"
                                     href={routes.edit.replace(':id', role.id)}
-                                    className="tw-bg-yellow-500 tw-text-white tw-px-4 tw-py-2 tw-rounded hover:tw-bg-yellow-600"
+                                    className="tw-bg-yellow-500 hover:tw-bg-yellow-600"
                                 >
                                     Edit
-                                </Link>
-                                <Link
-                                    as="button"
+                                </PrimaryButton>
+                                <PrimaryButton
+                                    as="Link"
                                     method="delete"
                                     href={routes.destroy.replace(':id', role.id)}
-                                    className="tw-bg-red-500 tw-text-white tw-px-4 tw-py-2 tw-rounded hover:tw-bg-red-600 tw-ml-2"
+                                    className="tw-bg-red-500 hover:tw-bg-red-600 tw-ml-2"
                                 >
                                     Delete
-                                </Link>
+                                </PrimaryButton>
                             </td>
                         </tr>
                     ))}

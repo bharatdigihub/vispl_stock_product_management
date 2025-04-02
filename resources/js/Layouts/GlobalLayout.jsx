@@ -50,7 +50,7 @@ const GlobalLayout = ({ children }) => {
     const handleMenuItemClick = (pageName) => {
         setCurrentPage(pageName); // Update the current page
         if (isMobileView) {
-            setSidebarState("closed"); // Close sidebar on small screens after redirection
+            setSidebarState("closed"); // Ensure sidebar stays closed on small screens after redirection
         }
     };
 
@@ -61,22 +61,30 @@ const GlobalLayout = ({ children }) => {
                 <CSidebar
                     visible={sidebarState !== "closed"}
                     className={`
-                        ${theme.background} ${theme.text}
-                        tw-transition-all tw-fixed tw-top-0 tw-left-0 tw-h-full ${
+                        ${theme.sidebar} ${theme.sidebarText}
+                        tw-transition-all tw-fixed tw-top-0 tw-left-0 tw-min-h-screen ${
                         sidebarState === "full" ? "sidebar-full" : sidebarState === "half" ? "sidebar-half" : "sidebar-closed"
                     }`}
                 >
-                    <div className={`tw-text-center tw-mt-4 tw-font-bold tw-text-lg ${theme.text}`}>
+                    <div className={`tw-text-center tw-mt-4 tw-font-bold tw-text-lg tw-flex tw-justify-between px-3 lg:tw-justify-center tw-items-center ${theme.sidebarText}`}>
                         {sidebarState === "full" ? "VSIPL" : "VSL"}
+                        {isMobileView && (
+                            <button
+                                onClick={() => setSidebarState("closed")}
+                                className={`tw-w-10 tw-h-10 tw-rounded-full tw-ml-2 ${theme.button}`}
+                            >
+                                ✕
+                            </button>
+                        )}
                     </div>
-                    <CSidebarNav className={`tw-mt-6 ${theme.mode === "dark" ? "tw-bg-dark" : ""}`}>
+                    <CSidebarNav className={`tw-mt-6 ${theme.mode === "dark" ? "tw-bg-black" : ""} `}>
                         <li>
                             <Link
                                 href="/dashboard"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
+                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
                                     currentPage === "Dashboard"
                                         ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-100 ${theme.text}`
+                                        : `hover:tw-bg-indigo-300 ${theme.text}`
                                 }`}
                                 onClick={() => handleMenuItemClick("Dashboard")}
                             >
@@ -87,10 +95,10 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <Link
                                 href="/users"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
+                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
                                     currentPage === "User Management"
                                         ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-100 ${theme.text}`
+                                        : `hover:tw-bg-indigo-300 ${theme.text}`
                                 }`}
                                 onClick={() => handleMenuItemClick("User Management")}
                             >
@@ -101,10 +109,10 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <Link
                                 href="/roles"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
+                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
                                     currentPage === "Roles"
                                         ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-100 ${theme.text}`
+                                        : `hover:tw-bg-indigo-300 ${theme.text}`
                                 }`}
                                 onClick={() => handleMenuItemClick("Roles")}
                             >
@@ -115,10 +123,10 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <Link
                                 href="/permissions"
-                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
+                                className={`tw-flex tw-items-center tw-h-10 tw-py-2 tw-px-2 tw-rounded-md ${sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"} ${
                                     currentPage === "Permissions"
                                         ? "tw-bg-indigo-500 tw-text-white" // Active menu item styling
-                                        : `hover:tw-bg-indigo-100 ${theme.text}`
+                                        : `hover:tw-bg-indigo-300 ${theme.text}`
                                 }`}
                                 onClick={() => handleMenuItemClick("Permissions")}
                             >

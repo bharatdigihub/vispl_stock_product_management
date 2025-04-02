@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
+import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 
 const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
     const { data, setData, patch, errors } = useForm({
@@ -41,24 +42,18 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                 </div>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role</label>
-                    <select
+                    <SelectDropdown
+                        options={roles}
                         value={data.role}
                         onChange={(e) => setData("role", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
-                    >
-                        <option value="">Select Role</option>
-                        {roles.map((role) => (
-                            <option key={role.id} value={role.name}>
-                                {role.name}
-                            </option>
-                        ))}
-                    </select>
+                        placeholder="Select Role"
+                    />
                     {errors.role && <div className="tw-text-red-500">{errors.role}</div>}
                 </div>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Permissions</label>
-                    <select
-                        multiple
+                    <SelectDropdown
+                        options={permissions}
                         value={data.permissions}
                         onChange={(e) =>
                             setData(
@@ -66,14 +61,9 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                                 Array.from(e.target.selectedOptions, (option) => option.value)
                             )
                         }
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
-                    >
-                        {permissions.map((permission) => (
-                            <option key={permission.id} value={permission.name}>
-                                {permission.name}
-                            </option>
-                        ))}
-                    </select>
+                        multiple
+                        placeholder="Select Permissions"
+                    />
                     {errors.permissions && <div className="tw-text-red-500">{errors.permissions}</div>}
                 </div>
                 <button

@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout";
+import TextInput from "../TextInput"; // Import TextInput
 
 const RoleCreate = ({ modules }) => {
     const { data, setData, post, errors } = useForm({
@@ -19,11 +20,11 @@ const RoleCreate = ({ modules }) => {
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add Role</h1>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role Name</label>
-                    <input
+                    <TextInput
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        className="tw-w-full"
                     />
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>

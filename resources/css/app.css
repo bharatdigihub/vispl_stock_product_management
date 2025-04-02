@@ -25,7 +25,7 @@ html,body,#app{
     }
 }
 
-input[type="text"], select {
+input:not([type="submit"]), select , textarea{
     @apply tw-bg-gray-100 tw-text-gray-800 tw-border tw-border-gray-300 tw-p-2 tw-rounded;
 }
 
@@ -114,7 +114,9 @@ header nav a {
 header nav a:hover {
     color: #007bff;
 }
-
+.breadcrumb-item.active, .breadcrumb-item+.breadcrumb-item::before{
+    @apply tw-text-gray-500;
+}
 footer {
     display: flex;
     align-items: center;

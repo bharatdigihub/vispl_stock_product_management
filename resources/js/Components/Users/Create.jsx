@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
+import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
+import TextInput from "../TextInput"; // Import TextInput
 
 const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a prop
     const { data, setData, post, errors } = useForm({
@@ -22,66 +24,55 @@ const CreateUser = ({ roles, permissions, routes }) => { // Accept routes as a p
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Create User</h1>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Name</label>
-                    <input
+                    <TextInput
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        className="tw-w-full"
                     />
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Email</label>
-                    <input
+                    <TextInput
                         type="email"
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        className="tw-w-full"
                     />
                     {errors.email && <div className="tw-text-red-500">{errors.email}</div>}
                 </div>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Password</label>
-                    <input
+                    <TextInput
                         type="password"
                         value={data.password}
                         onChange={(e) => setData("password", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        className="tw-w-full"
                     />
                     {errors.password && <div className="tw-text-red-500">{errors.password}</div>}
                 </div>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role</label>
-                    <select
+                    <SelectDropdown
+                        options={roles}
                         value={data.role}
                         onChange={(e) => setData("role", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
-                    >
-                        <option value="">Select Role</option>
-                        {roles.map((role) => (
-                            <option key={role.id} value={role.name}>
-                                {role.name}
-                            </option>
-                        ))}
-                    </select>
+                        placeholder="Select Role"
+                    />
                     {errors.role && <div className="tw-text-red-500">{errors.role}</div>}
                 </div>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Permissions</label>
-                    <select
-                        multiple
+                    <SelectDropdown
+                        options={permissions}
                         value={data.permissions}
                         onChange={(e) =>
                             setData("permissions", Array.from(e.target.selectedOptions, (option) => option.value))
                         }
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
-                    >
-                        {permissions.map((permission) => (
-                            <option key={permission.id} value={permission.name}>
-                                {permission.name}
-                            </option>
-                        ))}
-                    </select>
+                        multiple
+                        placeholder="Select Permissions"
+                    />
                     {errors.permissions && <div className="tw-text-red-500">{errors.permissions}</div>}
                 </div>
                 <button

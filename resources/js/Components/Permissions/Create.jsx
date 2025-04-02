@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
-import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
+import GlobalLayout from "../../Layouts/GlobalLayout";
+import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
+import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 
 const PermissionCreate = ({ modules, routes }) => {
     const { data, setData, post, errors } = useForm({
@@ -19,18 +21,12 @@ const PermissionCreate = ({ modules, routes }) => {
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add Permissions</h1>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Module</label>
-                    <select
+                    <SelectDropdown
+                        options={modules}
                         value={data.module_id}
                         onChange={(e) => setData("module_id", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
-                    >
-                        <option value="">Select Module</option>
-                        {modules.map((module) => (
-                            <option key={module.id} value={module.id}>
-                                {module.name}
-                            </option>
-                        ))}
-                    </select>
+                        placeholder="Select Module"
+                    />
                     {errors.module_id && <div className="tw-text-red-500">{errors.module_id}</div>}
                 </div>
                 <div className="tw-mb-4">
@@ -55,12 +51,12 @@ const PermissionCreate = ({ modules, routes }) => {
                     </div>
                     {errors.actions && <div className="tw-text-red-500">{errors.actions}</div>}
                 </div>
-                <button
+                <PrimaryButton
                     type="submit"
-                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
+                    className="tw-bg-blue-500 hover:tw-bg-blue-700"
                 >
                     Create
-                </button>
+                </PrimaryButton>
             </form>
         </GlobalLayout>
     );

@@ -8,7 +8,7 @@ import { cilMoon, cilSun } from '@coreui/icons';
 
 const Header = ({ toggleSidebar, currentPage }) => {
     const [permissions, setPermissions] = useState([]);
-    const { isDarkMode, toggleTheme } = useTheme(); // Use ThemeContext
+    const { theme, toggleTheme } = useTheme(); // Use ThemeContext
 
     useEffect(() => {
         fetchPermissions();
@@ -34,17 +34,12 @@ const Header = ({ toggleSidebar, currentPage }) => {
 
     return (
         <>
-            <header className={`tw-border-b  tw-p-4 ${isDarkMode ? 'tw-bg-gray-800 tw-text-indigo-300 tw-border-gray-800' : 'tw-bg-gray-50 tw-text-indigo-800 tw-border-gray-300'}`}>
+            <header className={`tw-border-b tw-p-4 ${theme.background} ${theme.text} ${theme.border}`}>
                 <nav className="tw-container tw-w-100 tw-max-w-full tw-flex tw-justify-between tw-items-center">
                     <div className="tw-flex tw-items-center tw-space-x-4">
                         <CButton
-                            color="light"
                             onClick={toggleSidebar}
-                            className={`${
-                                isDarkMode
-                                    ? 'tw-text-indigo-300 tw-border-indigo-300 tw-bg-transparent hover:tw-text-indigo-400 hover:tw-bg-indigo-50'
-                                    : 'tw-text-indigo-600 tw-border-indigo-600 hover:tw-text-indigo-700 hover:tw-bg-indigo-100'
-                            } tw-border tw-rounded tw-px-3 tw-py-2`}
+                            className={`tw-border tw-rounded tw-px-3 tw-py-2 ${theme.button}`}
                         >
                             ☰
                         </CButton>
@@ -73,29 +68,22 @@ const Header = ({ toggleSidebar, currentPage }) => {
                             <button
                                 onClick={toggleTheme}
                                 className={`tw-px-2 tw-py-2 tw-rounded-full tw-flex tw-items-center ${
-                                    isDarkMode
+                                    theme.mode === "dark"
                                         ? 'tw-bg-gray-700 tw-text-gray-200 hover:tw-bg-gray-600'
                                         : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
                                 }`}
                             >
-                                <CIcon icon={isDarkMode ? cilSun : cilMoon} />
+                                <CIcon icon={theme.mode === "dark" ? cilSun : cilMoon} />
                             </button>
                         </li>
                     </ul>
                 </nav>
             </header>
-            <CBreadcrumb
-                className={`tw-mt-2 tw-px-4 ${
-                    isDarkMode ? 'tw-text-indigo-300 ' : ' tw-text-indigo-600'
-                }`}
-            >
-                <CBreadcrumbItem href="/" className={`${isDarkMode ? 'tw-text-indigo-300' : 'tw-text-indigo-600'}`}>
+            <CBreadcrumb className={`tw-mt-2 tw-px-4 ${theme.text}`}>
+                <CBreadcrumbItem href="/" className={theme.text}>
                     Home
                 </CBreadcrumbItem>
-                <CBreadcrumbItem
-                    active
-                    className={`${isDarkMode ? 'tw-text-gray-50/100' : 'tw-text-indigo-600'}`}
-                >
+                <CBreadcrumbItem active className={theme.text}>
                     {currentPage || "Admin Panel"}
                 </CBreadcrumbItem>
             </CBreadcrumb>

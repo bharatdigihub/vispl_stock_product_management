@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout";
+import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
+import TextInput from "../TextInput"; // Import TextInput
 
 const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
     const { data, setData, patch, errors } = useForm({
@@ -19,7 +21,7 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Role</h1>
                 <div className="tw-mb-4">
                     <label className="tw-block tw-text-sm tw-font-medium tw-mb-1">Role Name</label>
-                    <input
+                    <TextInput
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
@@ -52,12 +54,12 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
                         </div>
                     ))}
                 </div>
-                <button
+                <PrimaryButton
                     type="submit"
-                    className="tw-px-4 tw-py-2 tw-bg-blue-500 tw-text-white tw-rounded-lg hover:tw-bg-blue-700"
+                    className="tw-bg-blue-500 hover:tw-bg-blue-700"
                 >
                     Update
-                </button>
+                </PrimaryButton>
             </form>
         </GlobalLayout>
     );

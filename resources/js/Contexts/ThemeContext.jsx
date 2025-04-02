@@ -7,13 +7,19 @@ const themeColors = {
         background: 'tw-bg-gray-100',
         text: 'tw-text-black',
         header: 'tw-bg-white tw-text-black',
-        button: 'tw-bg-blue-500 tw-text-white hover:tw-bg-indigo-600',
+        button: 'tw-bg-gray-800 tw-text-white hover:tw-bg-gray-700 focus:tw-bg-gray-700 active:tw-bg-gray-900',
+        padding: 'tw-px-4 tw-py-2', // Define padding for light theme
+        sidebar: 'tw-bg-white tw-text-black',
+        sidebarText: 'tw-text-black',
     },
     dark: {
-        background: 'tw-bg-gray-900',
+        background: 'tw-bg-gray-700',
         text: 'tw-text-white',
-        header: 'tw-bg-gray-800 tw-text-white',
-        button: 'tw-bg-indigo-600 tw-text-white hover:tw-bg-blue-500',
+        header: 'tw-bg-indigo-900 tw-text-white',
+        button: 'tw-bg-gray-600 tw-text-white hover:tw-bg-indigo-500 focus:tw-bg-indigo-500 active:tw-bg-gray-700',
+        padding: 'tw-px-4 tw-py-2', // Define padding for dark theme
+        sidebar: 'tw-bg-gray-800 tw-text-white',
+        sidebarText: 'tw-text-white',
     },
 };
 
