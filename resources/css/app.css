@@ -44,15 +44,15 @@ body.dark-mode input:not([type="submit"]), body.dark-mode select {
 
 /* Sidebar and Content States */
 .sidebar-full {
-    @apply tw-w-64; /* Full width for sidebar */
+    @apply tw-w-64 tw-absolute; /* Full width for sidebar */
 }
 
 .sidebar-half {
-    @apply tw-w-20; /* Half width for sidebar */
+    @apply tw-w-20 tw-absolute; /* Half width for sidebar */
 }
 
 .sidebar-closed {
-    @apply tw-w-0; /* Hidden sidebar */
+    @apply tw-w-0 tw-absolute; /* Hidden sidebar */
 }
 
 .content-full {

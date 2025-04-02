@@ -62,8 +62,8 @@ const GlobalLayout = ({ children }) => {
                     visible={sidebarState !== "closed"}
                     className={`
                         ${theme.background} ${theme.text}
-                        tw-transition-all tw-fixed tw-ml-0 tw-top-0 tw-left-0 tw-h-full ${
-                        sidebarState === "full" ? "tw-w-64" : sidebarState === "half" ? "tw-w-20" : "tw-w-0"
+                        tw-transition-all tw-fixed tw-top-0 tw-left-0 tw-h-full ${
+                        sidebarState === "full" ? "sidebar-full" : sidebarState === "half" ? "sidebar-half" : "sidebar-closed"
                     }`}
                 >
                     <div className={`tw-text-center tw-mt-4 tw-font-bold tw-text-lg ${theme.text}`}>
@@ -132,9 +132,9 @@ const GlobalLayout = ({ children }) => {
                 {/* Main Content */}
                 <CContainer
                     fluid
-                    className={`tw-px-0 tw-transition-all tw-min-vh-100 tw-pl-0 tw-flex-grow-1 ${theme.background} ${theme.text} ${
-                        sidebarState === "full" ? "tw-pl-64" : sidebarState === "half" ? "tw-pl-20" : "tw-pl-0"
-                    }`}
+                    className={`tw-w-auto tw-px-0 tw-transition-all tw-min-vh-100 tw-flex-grow-1 content-${
+                        sidebarState
+                    } ${theme.background} ${theme.text}`}
                 >
                     <Header toggleSidebar={toggleSidebar} currentPage={currentPage} />
                     <CCol className="tw-p-5">{children}</CCol>
