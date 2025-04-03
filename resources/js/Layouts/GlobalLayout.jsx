@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "@inertiajs/react";
 import { CSidebar, CSidebarNav, CContainer, CCol } from "@coreui/react";
-import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronBottom, cilChevronTop } from "@coreui/icons"; // Add new icons
+import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronBottom, cilChevronTop, cilX } from "@coreui/icons"; // Add new icons
 import CIcon from "@coreui/icons-react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import NavLink, { DropdownMenu } from "../Components/NavLink";
@@ -31,10 +31,11 @@ const GlobalLayout = ({ children }) => {
         const handleResize = () => {
             const isMobile = window.innerWidth <= 992;
             setIsMobileView(isMobile);
-            if (!isMobile) {
-                setSidebarState("full"); // Reset sidebar to full for desktop view
-            } else {
+            if (isMobile) {
                 setSidebarState("half"); // Default to partially collapsed for mobile view
+                setIsSidebarLocked(false); // Unlock the sidebar in mobile view
+            } else {
+                setSidebarState("full"); // Reset sidebar to full for desktop view
             }
         };
 
@@ -81,31 +82,31 @@ const GlobalLayout = ({ children }) => {
     };
 
     return (
-        <div className={`tw-d-flex tw-flex-column tw-min-h-screen tw-overflow-x-hidden ${theme.background} ${theme.text}`}>
-            <div className="tw-d-flex tw-flex-grow-1">
+        <div className={`tw-d-flex tw-flex-column  tw-overflow-x-hidden ${theme.background} ${theme.text}`}>
+            <div className="tw-d-flex tw-min-h-screen tw-flex-grow-1 tw-relative">
                 {/* Sidebar */}
                 <CSidebar
                     visible={sidebarState !== "closed"}
                     onMouseEnter={isSidebarLocked ? handleMouseEnter : undefined}
                     onMouseLeave={isSidebarLocked ? handleMouseLeave : undefined}
                     className={`
-                        tw-bg-gray-950 tw-text-white tw-h-screen Sidebar background always gray-950
-                        tw-transition-all tw-fixed tw-top-0 tw-left-0 tw-min-h-screen ${
+                        ${theme.sidebar} tw-text-white tw-h-screen Sidebar background
+                        tw-transition-all tw-fixed tw-top-0 tw-bottom-0 tw-left-0  tw-min-h-screen ${
                         sidebarState === "full" ? "sidebar-full" : sidebarState === "half" ? "sidebar-half" : "sidebar-closed"
                     }`}
                 >
-                    <div className={`tw-text-center tw-h-[74px] tw-font-bold tw-text-2xl tw-flex tw-justify-between px-3 lg:tw-justify-center tw-items-center tw-border-b tw-border-gray-800  tw-text-gray-50 tw-tracking-widest`}>
+                    <div className={`tw-text-center tw-h-[59px] tw-font-bold  tw-flex tw-justify-between px-3 lg:tw-justify-center tw-items-center  tw-text-gray-50 ${sidebarState === "full" ? "tw-tracking-widest tw-text-2xl" : "tw-tracking-normal tw-text-lg"}`}>
                         {sidebarState === "full" ? "VSIPL" : "VSL"}
                         {isMobileView && (
                             <button
                                 onClick={() => setSidebarState("closed")}
-                                className={`tw-w-10 tw-h-10 tw-rounded-full tw-ml-2 ${theme.button}`}
+                                className={`tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-ml-2 ${theme.button}`}
                             >
-                                ✕
+                                <CIcon icon={cilX} width={14} /> {/* Use CoreUI React icon */}
                             </button>
                         )}
                     </div>
-                    <CSidebarNav className="">
+                    <CSidebarNav className={`tw-border-t tw-border-b ${theme.border.sidebarInner}`}>
                         <div
                             className={`tw-text-sm mb-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
                                 sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
@@ -200,9 +201,9 @@ const GlobalLayout = ({ children }) => {
                         {/* Sidebar Footer */}
                        
                     </CSidebarNav>
-                    <div className="tw-mt-auto tw-px-3 tw-py-2 tw-border-t tw-border-gray-800">
+                    <div className="tw-mt-auto tw-hidden lg:tw-flex tw-px-3 tw-py-2 tw-h-12 lg:tw-w-flex tw-items-center">
                             <button
-                                className={`tw-w-10 tw-h-10 tw-flex tw-items-center tw-justify-center tw-rounded-full ${sidebarState === "half" ? "tw-mx-auto" : "tw-ml-auto"} ${theme.button} tw-transition-all tw-duration-300 tw-delay-150`}
+                                className={`tw-w-10 tw-h-10  tw-items-center tw-justify-center tw-rounded-full ${sidebarState === "half" ? "tw-mx-auto" : "tw-ml-auto"} tw-border ${theme.border.sidebarInner} tw-transition-all tw-duration-300 tw-delay-150`}
                                 onClick={toggleSidebarLock}
                             >
                                 <CIcon icon={cilLockLocked} className={`${isSidebarLocked ? "tw-text-red-500" : ""}`} />
@@ -213,12 +214,15 @@ const GlobalLayout = ({ children }) => {
                 {/* Main Content */}
                 <CContainer
                     fluid
-                    className={`tw-w-auto tw-px-0 tw-transition-all tw-min-vh-100 tw-flex-grow-1 content-${
-                        sidebarState
-                    } ${theme.background} ${theme.text}`}
+                    className={`tw-max-w-full tw-px-0 tw-transition-all tw-min-vh-100 ${theme.background} ${theme.text}  content-${sidebarState}`}
                 >
-                    <Header toggleSidebar={toggleSidebar} currentPage={currentPage} />
-                    <CCol className="tw-p-5">{children}</CCol>
+                    <Header 
+                        toggleSidebar={toggleSidebar} 
+                        sidebarState={sidebarState} 
+                        currentPage={currentPage} 
+                        className={`head-${sidebarState}`}
+                    />
+                    <CCol className={`main-${sidebarState} tw-transition-all`}>{children}</CCol>
                 </CContainer>
             </div>
         </div>

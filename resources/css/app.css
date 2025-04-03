@@ -9,6 +9,12 @@ html,body,#app{
     margin: 0;
     padding: 0;
 }
+#app{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
 :root {
     --background-light: #50555a;
     --background-dark: #ffffff;
@@ -48,40 +54,57 @@ body.dark-mode input:not([type="submit"]), body.dark-mode select {
 }
 
 .sidebar-half {
-    @apply tw-w-20 tw-absolute; /* Half width for sidebar */
+    @apply tw-w-16 tw-absolute; /* Half width for sidebar */
 }
 
 .sidebar-closed {
     @apply tw-w-0 tw-absolute; /* Hidden sidebar */
 }
 
-.content-full {
-    @apply tw-ml-64; /* Full sidebar width margin */
+.content-full, .head-full {
+    @apply tw-left-64 tw-fixed tw-shadow-lg tw-top-0 tw-z-20 tw-transition-all tw-right-0 ; /* Full sidebar width margin */
 }
 
-.content-half {
-    @apply tw-ml-20; /* Half sidebar width margin */
+.content-half, .head-half {
+    @apply tw-left-16 tw-fixed tw-shadow-lg tw-top-0 tw-z-20 tw-transition-all tw-right-0 ; /* Half sidebar width margin */
 }
 
-.content-closed {
-    @apply tw-ml-0; /* No margin for hidden sidebar */
+.content-closed, .head-closed {
+    @apply tw-left-0 tw-fixed tw-shadow-lg tw-top-0 tw-z-20 tw-transition-all tw-right-0 ; /* No margin for hidden sidebar */
+}
+.main-full{
+    @apply tw-fixed tw-z-0 tw-overflow-y-auto tw-bottom-0 tw-top-[87px] tw-left-64 tw-right-0 tw-p-5 tw-w-auto;
+}
+
+.main-half{
+    @apply tw-fixed tw-z-0 tw-overflow-y-auto tw-bottom-0 tw-top-[87px] tw-left-16 tw-right-0 tw-p-5 tw-w-auto;
+}
+
+.main-closed{
+    @apply tw-fixed tw-z-0 tw-overflow-y-auto tw-bottom-0 tw-top-[87px] tw-left-0 tw-right-0 tw-p-5 tw-w-auto;
 }
 
 @media (max-width:991px) {
     .sidebar-half {
-        @apply tw-w-64 tw-absolute;
+        @apply tw-w-64;
         /* Half width for sidebar */
     }
-    .content-half {
-        @apply tw-ml-0; /* Half sidebar width margin */
+    .content-half, .head-half {
+        @apply tw-left-0; /* Half sidebar width margin */
     }
-    .content-full {
+    .content-full, .head-full {
         /* Full sidebar width margin */
-        @apply tw-ml-0;
+        @apply tw-left-0;
     }
     .sidebar-full {
         @apply tw-w-64; /* Full width for sidebar */
         margin-left: 0 !important;
+    }
+    .main-half{
+        @apply tw-left-0;
+    }
+    .main-full{
+        @apply tw-left-0;
     }
 }
 

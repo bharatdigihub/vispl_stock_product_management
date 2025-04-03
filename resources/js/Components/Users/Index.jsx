@@ -5,10 +5,11 @@ import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
 import TextInput from "../TextInput"; // Import TextInput
 import { CIcon } from "@coreui/icons-react"; // Import CIcon
 import { cilPencil, cilTrash } from "@coreui/icons"; // Import CoreUI icons
+import { useTheme } from "@/Contexts/ThemeContext";
 
 const UsersIndex = () => {
     const { users = [] } = usePage().props;
-
+    const { theme } = useTheme();
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
             <h1 className="tw-text-2xl tw-font-bold tw-mb-6">Users</h1>
@@ -20,24 +21,24 @@ const UsersIndex = () => {
             >
                 Add User
             </PrimaryButton>
-            <table className="tw-table-auto tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-shadow-sm tw-mt-4">
+            <table cellPadding={0} cellSpacing={0} className={`tw-table-auto tw-w-full tw-border ${theme.border.sidebarInner} tw-rounded-lg tw-shadow-sm tw-mt-4`}>
                 <thead className="tw-bg-gray-900 tw-text-white">
                     <tr>
-                        <th className="tw-border tw-border-gray-300 tw-p-3 tw-text-left tw-font-medium">Name</th>
-                        <th className="tw-border tw-border-gray-300 tw-p-3 tw-text-left tw-font-medium">Email</th>
-                        <th className="tw-border tw-border-gray-300 tw-p-3 tw-text-left tw-font-medium">Actions</th>
+                        <th className={`tw-border ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Name</th>
+                        <th className={`tw-border ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Email</th>
+                        <th className={`tw-border ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user) => (
-                        <tr key={user.id} className="tw-border-b">
-                            <td className="tw-border tw-border-gray-300 tw-p-3">{user.name}</td>
-                            <td className="tw-border tw-border-gray-300 tw-p-3">{user.email}</td>
-                            <td className="tw-border tw-border-gray-300 tw-p-3 tw-flex tw-gap-2">
+                        <tr key={user.id} className={`tw-border-b ${theme.border.sidebarInner}`}>
+                            <td className={`tw-border ${theme.border.sidebarInner} tw-p-3`}>{user.name}</td>
+                            <td className={`tw-border ${theme.border.sidebarInner} tw-p-3`}>{user.email}</td>
+                            <td className={`tw-border ${theme.border.sidebarInner} tw-p-3`}>
                                 <PrimaryButton
                                     as="a"
                                     href={`/users/${user.id}/edit`}
-                                    className="tw-bg-yellow-500 hover:tw-bg-yellow-600 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
+                                    className="tw-bg-yellow-500 hover:tw-bg-yellow-600 tw-mx-1 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
                                 >
                                     <CIcon icon={cilPencil} size="sm" /> {/* Use CoreUI icon */}
                                 </PrimaryButton>
@@ -45,7 +46,7 @@ const UsersIndex = () => {
                                     as="a"
                                     method="delete"
                                     href={`/users/${user.id}`}
-                                    className="tw-bg-red-500 hover:tw-bg-red-600 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
+                                    className="tw-bg-red-500 hover:tw-bg-red-600 tw-mx-1 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
                                 >
                                     <CIcon icon={cilTrash} size="sm" /> {/* Use CoreUI icon */}
                                 </PrimaryButton>

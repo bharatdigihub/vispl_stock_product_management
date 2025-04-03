@@ -57,9 +57,9 @@ const Dashboard = () => {
 
     return (
         <GlobalLayout>
-            <CCard className={`${theme.background} ${theme.text}`}>
-                <CCardHeader>Dashboard</CCardHeader>
-                <CCardBody>
+            <CCard className={` tw-shadow-lg tw-overflow-hidden ${theme.background} ${theme.border} ${theme.text}`}>
+                <CCardHeader className={`tw-bg-gray-100 ${theme.header} ${theme.border}`}>Dashboard</CCardHeader>
+                <CCardBody className={`tw-bg-gray-50 ${theme.background}`}>
                     Welcome to the dashboard!
                     <CRow className="mt-4">
                         <CCol sm="6" lg="3">

@@ -7,13 +7,14 @@ import { CIcon } from '@coreui/icons-react';
 import { cilMoon, cilSun, cilUser, cilAccountLogout, cilBell, cilCommentSquare, cilCreditCard, cilList, cilLockLocked, cilSettings, cilTask } from '@coreui/icons'; // Import user icon
 import Dropdown from '../Components/Dropdown'; // Import Dropdown component
 
-const Header = ({ toggleSidebar, currentPage }) => {
+const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
     const [permissions, setPermissions] = useState([]);
     const { theme, toggleTheme } = useTheme(); // Use ThemeContext
 
     useEffect(() => {
+        console.log("Sidebar State:", sidebarState); // Debug sidebarState
         fetchPermissions();
-    }, []);
+    }, [sidebarState]); // Add sidebarState as a dependency
 
     const fetchPermissions = async () => {
         try {
@@ -34,22 +35,20 @@ const Header = ({ toggleSidebar, currentPage }) => {
     };
 
     return (
-        <div>
-            <header className={`tw-h-[74px]  tw-border-b ${theme.border} tw-p-4 ${theme.background} ${theme.text} `}>
+        <div className={`
+            head-${sidebarState}
+            `}>
+            <header className={`tw-h-[60px] tw-border-b ${theme.header} ${theme.border.sidebarOuter} tw-p-4 ${theme.text} dark:tw-bg-black`}>
                 <nav className="tw-container tw-w-100 tw-max-w-full tw-flex tw-justify-between tw-items-center">
-                    <div className="tw-flex tw-items-center tw-space-x-4">
+                    <div className="tw-flex tw-items-center tw-space-x-2">
                         <CButton
                             onClick={toggleSidebar}
                             title="Toggle Sidebar" // Tooltip
-                            className={`tw-rounded-full tw-px-3 tw-py-2 ${
-                                theme.mode === "dark"
-                                    ? 'tw-bg-indigo-700 tw-text-white hover:tw-bg-indigo-600'
-                                    : 'tw-bg-indigo-200 tw-text-indigo-800 hover:tw-bg-indigo-300'
-                            }`}
+                            className={`tw-rounded-sm tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-py-2 ${theme.header} ${theme.menutext} ${theme.border}`}
                         >
                             ☰
                         </CButton>
-                        <h1 className="tw-text-xl tw-font-bold">{currentPage || "Admin Panel"}</h1>
+                        <h1 className="tw-text-md tw-font-bold">{currentPage || "Admin Panel"}</h1>
                     </div>
                     <ul className="tw-flex tw-space-x-4 tw-items-center">
                         {permissions.includes('view dashboard') && (
@@ -187,7 +186,8 @@ const Header = ({ toggleSidebar, currentPage }) => {
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/tasks">
-                                        <CIcon icon={cilTask} className="tw-mr-2" /> Tasks42
+                                        <CIcon icon={cilTask} className="tw-mr-2" /> Tasks
+                                        <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/comments">
                                         <CIcon icon={cilCommentSquare} className="tw-mr-2" /> Comments 
@@ -225,7 +225,7 @@ const Header = ({ toggleSidebar, currentPage }) => {
                     </ul>
                 </nav>
             </header>
-            <CBreadcrumb className={`tw-mt-2 tw-px-4 ${theme.text}`}>
+            <CBreadcrumb className={`tw-mb-0 tw-py-1 tw-px-4 tw-border-b tw-text-[12px] ${theme.border.sidebarOuter} ${theme.header} ${theme.text}`}>
                 <CBreadcrumbItem href="/" className={theme.text}>
                     Home
                 </CBreadcrumbItem>
