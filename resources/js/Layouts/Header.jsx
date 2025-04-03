@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 import { CButton, CBreadcrumb, CBreadcrumbItem } from "@coreui/react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import { CIcon } from '@coreui/icons-react';
-import { cilMoon, cilSun, cilUser, cilAccountLogout, cilBell, cilCommentSquare, cilCreditCard, cilList, cilLockLocked, cilSettings, cilTask } from '@coreui/icons'; // Import user icon
+import { cilMoon, cilSun, cilUser, cilAccountLogout, cilBell, cilCommentSquare, cilCreditCard, cilList, cilLockLocked, cilSettings, cilTask, cilHamburgerMenu, cilClearAll} from '@coreui/icons'; // Import user icon
 import Dropdown from '../Components/Dropdown'; // Import Dropdown component
 
 const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
@@ -40,17 +40,17 @@ const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
             `}>
             <header className={`tw-h-[60px] tw-border-b ${theme.header} ${theme.border.sidebarOuter} tw-p-4 ${theme.text} dark:tw-bg-black`}>
                 <nav className="tw-container tw-w-100 tw-max-w-full tw-flex tw-justify-between tw-items-center">
-                    <div className="tw-flex tw-items-center tw-space-x-2">
+                    <div className="tw-flex tw-items-center tw-space-x-2 tw-max-w-[35%] md:tw-max-w-full">
                         <CButton
                             onClick={toggleSidebar}
                             title="Toggle Sidebar" // Tooltip
-                            className={`tw-rounded-sm tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-py-2 ${theme.header} ${theme.menutext} ${theme.border}`}
+                            className={`tw-rounded-sm tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center  p-1 ${theme.header} ${theme.menutext} ${theme.border}`}
                         >
-                            ☰
+                            <CIcon width={30} icon={sidebarState === 'half' ? cilClearAll : cilHamburgerMenu} />
                         </CButton>
-                        <h1 className="tw-text-md tw-font-bold">{currentPage || "Admin Panel"}</h1>
+                        <h1 className="tw-text-md tw-font-bold tw-text-ellipsis tw-overflow-hidden">{currentPage || "Admin Panel"}</h1>
                     </div>
-                    <ul className="tw-flex tw-space-x-4 tw-items-center">
+                    <ul className="tw-flex tw-space-x-3 sm:tw-space-x-4 tw-items-center">
                         {permissions.includes('view dashboard') && (
                             <li><a href="/dashboard" className="hover:tw-underline tw-text-sm tw-text-inherit">Dashboard</a></li>
                         )}
@@ -70,13 +70,13 @@ const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
                             <button
                                 onClick={toggleTheme}
                                 title="Toggle Theme" // Tooltip
-                                className={`tw-px-2 tw-py-2 tw-rounded-full tw-flex tw-items-center ${
+                                className={`tw-px-2 tw-py-2 tw-border tw-rounded-full tw-transition-all tw-flex tw-items-center tw-justify-center ${
                                     theme.mode === "dark"
-                                        ? 'tw-bg-gray-700 tw-text-gray-200 hover:tw-bg-gray-600'
+                                        ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                         : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                }`}
+                                } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
                             >
-                                <CIcon icon={theme.mode === "dark" ? cilSun : cilMoon} />
+                                <CIcon icon={theme.mode === "dark" ? cilSun : cilMoon} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
                             </button>
                         </li>
                         <li className="tw-relative">
@@ -84,14 +84,14 @@ const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
                                 <Dropdown.Trigger>
                                     <button
                                         title="Notifications" // Tooltip
-                                        className={`tw-px-2 tw-py-2 tw-rounded-full tw-flex tw-items-center ${
+                                        className={`tw-px-2 tw-py-2 tw-border tw-rounded-full tw-transition-all tw-flex tw-items-center tw-justify-center ${
                                             theme.mode === "dark"
-                                                ? 'tw-bg-gray-700 tw-text-gray-200 hover:tw-bg-gray-600'
+                                                ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                                 : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                        } tw-relative`} // Add relative positioning
+                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
                                     >
-                                        <CIcon icon={cilBell} />
-                                        <span className="tw-absolute -tw-top-2 -tw-right-2 tw-bg-red-500 tw-text-white tw-rounded-full tw-text-[10px] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-font-bold">
+                                        <CIcon icon={cilBell} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
+                                        <span className="tw-absolute -tw-top-2 -tw-right-2 tw-bg-blue-500 tw-text-white tw-rounded-full tw-text-[10px] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-font-bold">
                                             5 {/* Example count */}
                                         </span>
                                     </button>
@@ -123,14 +123,14 @@ const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
                                 <Dropdown.Trigger>
                                     <button
                                         title="Messages" // Tooltip
-                                        className={`tw-px-2 tw-py-2 tw-rounded-full tw-flex tw-items-center ${
+                                        className={`tw-px-2 tw-py-2 tw-border tw-transition-all tw-rounded-full tw-flex tw-items-center tw-justify-center ${
                                             theme.mode === "dark"
-                                                ? 'tw-bg-gray-700 tw-text-gray-200 hover:tw-bg-gray-600'
+                                                ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                                 : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                        } tw-relative`} // Add relative positioning
+                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
                                     >
-                                        <CIcon icon={cilCommentSquare} />
-                                        <span className="tw-absolute -tw-top-2 -tw-right-2 tw-bg-red-500 tw-text-white tw-rounded-full tw-text-[10px] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-font-bold">
+                                        <CIcon icon={cilCommentSquare} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
+                                        <span className="tw-absolute -tw-top-2 -tw-right-2 tw-bg-green-500 tw-text-white tw-rounded-full tw-text-[10px] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-font-bold">
                                             3 {/* Example count */}
                                         </span>
                                     </button>
@@ -157,19 +157,19 @@ const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
                                 </Dropdown.Content>
                             </Dropdown>
                         </li>
-                        <li className="tw-border-l tw-border-gray-300 tw-h-6 tw-mx-2"></li> {/* Separator */}
+                        <li className={`tw-border-l ${theme.border.sidebarOuter} tw-h-6 tw-mx-2`}></li> {/* Separator */}
                         <li>
                             <Dropdown >
                                 <Dropdown.Trigger>
                                     <button
                                         title="User Menu" // Tooltip
-                                        className={`tw-w-8 tw-h-8 tw-rounded-full tw-flex tw-items-center tw-justify-center ${
+                                        className={`tw-px-2 tw-py-2 tw-border tw-rounded-full tw-transition-all tw-flex tw-items-center tw-justify-center ${
                                             theme.mode === "dark"
-                                                ? 'tw-bg-gray-700 tw-text-gray-200 hover:tw-bg-gray-600'
+                                                ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                                 : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                        }`}
+                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
                                     >
-                                        <CIcon icon={cilUser} />
+                                        <CIcon icon={cilUser} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
                                     </button>
                                 </Dropdown.Trigger>
                                 <Dropdown.Content align="right" width="48" className="user-dropdown py-0">

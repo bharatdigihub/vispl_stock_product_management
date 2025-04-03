@@ -4,6 +4,7 @@ import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
 import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import InputLabel from "../InputLabel"; // Import InputLabel
 import PrimaryButton from "../PrimaryButton";
+import TextInput from "../TextInput"; // Import TextInput
 
 const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
     const { data, setData, patch, errors } = useForm({
@@ -24,22 +25,22 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit User</h1>
                 <div className="tw-mb-4">
                     <InputLabel value="Name" className="tw-mb-1" />
-                    <input
+                    <TextInput
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        className="tw-w-full"
                         placeholder="Enter name" // Added placeholder
                     />
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
                 <div className="tw-mb-4">
                     <InputLabel value="Email" className="tw-mb-1" />
-                    <input
+                    <TextInput
                         type="email"
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
-                        className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        className="tw-w-full"
                         placeholder="Enter email" // Added placeholder
                     />
                     {errors.email && <div className="tw-text-red-500">{errors.email}</div>}

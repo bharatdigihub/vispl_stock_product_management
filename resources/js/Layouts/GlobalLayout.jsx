@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "@inertiajs/react";
 import { CSidebar, CSidebarNav, CContainer, CCol } from "@coreui/react";
-import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronBottom, cilChevronTop, cilX } from "@coreui/icons"; // Add new icons
+import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronLeft, cilChevronRight, cilX } from "@coreui/icons"; // Add new icons
 import CIcon from "@coreui/icons-react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import NavLink, { DropdownMenu } from "../Components/NavLink";
@@ -100,7 +100,7 @@ const GlobalLayout = ({ children }) => {
                         {isMobileView && (
                             <button
                                 onClick={() => setSidebarState("closed")}
-                                className={`tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-ml-2 ${theme.button}`}
+                                className={`tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-ml-2 tw-border ${theme.button} ${theme.border.sidebarInner}`}
                             >
                                 <CIcon icon={cilX} width={14} /> {/* Use CoreUI React icon */}
                             </button>
@@ -203,10 +203,11 @@ const GlobalLayout = ({ children }) => {
                     </CSidebarNav>
                     <div className="tw-mt-auto tw-hidden lg:tw-flex tw-px-3 tw-py-2 tw-h-12 lg:tw-w-flex tw-items-center">
                             <button
-                                className={`tw-w-10 tw-h-10  tw-items-center tw-justify-center tw-rounded-full ${sidebarState === "half" ? "tw-mx-auto" : "tw-ml-auto"} tw-border ${theme.border.sidebarInner} tw-transition-all tw-duration-300 tw-delay-150`}
+                                className={`tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center group tw-rounded-full hover:tw-bg-gray-900 ${sidebarState === "half" ? "tw-mx-auto" : "tw-ml-auto"} tw-border ${theme.border.sidebarInner} tw-transition-all tw-duration-300 tw-delay-150`}
                                 onClick={toggleSidebarLock}
                             >
-                                <CIcon icon={cilLockLocked} className={`${isSidebarLocked ? "tw-text-red-500" : ""}`} />
+                                
+                                <CIcon icon={sidebarState === 'half' ? cilChevronRight : cilChevronLeft} width={13} className={`tw-text-gray-400 group-hover:tw-text-gray-50 ${isSidebarLocked ? "tw-text-red-500" : ""}`} />
                             </button>
                         </div>
                 </CSidebar>
@@ -222,7 +223,9 @@ const GlobalLayout = ({ children }) => {
                         currentPage={currentPage} 
                         className={`head-${sidebarState}`}
                     />
-                    <CCol className={`main-${sidebarState} tw-transition-all`}>{children}</CCol>
+                    <CCol className={`main-${sidebarState} tw-transition-all`}>
+                        <div className="tw-max-w-7xl tw-mx-auto ">{children}</div>
+                    </CCol>
                 </CContainer>
             </div>
         </div>

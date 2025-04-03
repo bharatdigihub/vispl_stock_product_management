@@ -57,12 +57,12 @@ const Dashboard = () => {
 
     return (
         <GlobalLayout>
-            <CCard className={` tw-shadow-lg tw-overflow-hidden ${theme.background} ${theme.border} ${theme.text}`}>
-                <CCardHeader className={`tw-bg-gray-100 ${theme.header} ${theme.border}`}>Dashboard</CCardHeader>
+            <CCard className={` tw-shadow-lg tw-overflow-hidden ${theme.background} ${theme.border.sidebarOuter} ${theme.text}`}>
+                <CCardHeader className={`tw-bg-gray-100 ${theme.header} ${theme.border.sidebarOuter}`}>Dashboard</CCardHeader>
                 <CCardBody className={`tw-bg-gray-50 ${theme.background}`}>
                     Welcome to the dashboard!
-                    <CRow className="mt-4">
-                        <CCol sm="6" lg="3">
+                    <CRow className="mt-4 tw-gap-3 px-2">
+                        <CCol className="tw-w-4/12 md:tw-w-4/12 tw-flex-auto lg:tw-w-2/12 tw-px-0" >
                             <CCard className="bg-primary text-white" style={cardStyle}>
                                 <CanvasBackground type="circle" />
                                 <CCardBody style={contentStyle}>
@@ -71,7 +71,7 @@ const Dashboard = () => {
                                 </CCardBody>
                             </CCard>
                         </CCol>
-                        <CCol sm="6" lg="3">
+                        <CCol className="tw-w-4/12 md:tw-w-4/12 tw-flex-auto lg:tw-w-2/12 tw-px-0" >
                             <CCard className="bg-success text-white" style={cardStyle}>
                                 <CanvasBackground type="rect" />
                                 <CCardBody style={contentStyle}>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                                 </CCardBody>
                             </CCard>
                         </CCol>
-                        <CCol sm="6" lg="3">
+                        <CCol className="tw-w-4/12 md:tw-w-4/12 tw-flex-auto lg:tw-w-2/12 tw-px-0" >
                             <CCard className="bg-warning text-white" style={cardStyle}>
                                 <CanvasBackground type="polyline" />
                                 <CCardBody style={contentStyle}>
@@ -89,7 +89,7 @@ const Dashboard = () => {
                                 </CCardBody>
                             </CCard>
                         </CCol>
-                        <CCol sm="6" lg="3">
+                        <CCol className="tw-w-4/12 md:tw-w-4/12 tw-flex-auto lg:tw-w-2/12 tw-px-0" >
                             <CCard className="bg-danger text-white" style={cardStyle}>
                                 <CanvasBackground type="line" />
                                 <CCardBody style={contentStyle}>

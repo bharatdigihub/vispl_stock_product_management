@@ -15,38 +15,7 @@ html,body,#app{
     justify-content: space-between;
     
 }
-:root {
-    --background-light: #50555a;
-    --background-dark: #ffffff;
-    --text-dark: #f8f9fa;
-    --text-light: #343a40;
-}
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background-light: #ffffff;
-        --background-dark: #343a40;
-        --text-dark: #343a40;
-        --text-light: #f8f9fa;
-    }
-}
-
-input:not([type="submit"]), select , textarea{
-    @apply tw-bg-gray-100 tw-text-gray-800 tw-border tw-border-gray-300 tw-p-2 tw-rounded;
-}
-
-input:not([type="submit"]):focus, select:focus {
-    @apply tw-outline-none tw-border-blue-500;
-}
-
-body.dark input:not([type="submit"]), body.dark select {
-    @apply tw-bg-gray-800 tw-text-gray-100;
-}
-
-body.dark-mode input:not([type="submit"]), body.dark-mode select {
-    background-color: var(--background-dark);
-    color: var(--text-dark);
-}
 
 /* Sidebar and Content States */
 .sidebar-full {
@@ -151,7 +120,22 @@ footer {
     color: #6c757d;
 }
 
-
-.user-dropdown{
-    @apply tw-absolute
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    
 }
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset !important;
+    -webkit-text-fill-color: white !important;
+}
+/* .user-dropdown{
+    @apply tw-absolute
+} */

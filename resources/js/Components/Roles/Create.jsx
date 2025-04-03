@@ -32,13 +32,13 @@ const RoleCreate = ({ modules }) => {
                     />
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
-                <div className="tw-mb-4">
+                <div className="tw-my-4">
                     <InputLabel value="Permissions" className="tw-mb-1" />
                     {modules.map((module) => (
                         <div key={module.id} className="tw-mb-4">
-                            <h3 className="tw-font-bold">{module.name}</h3>
+                            <h3 className="tw-font-bold tw-mb-3 mt-3">{module.name}</h3>
                             {module.permissions.map((permission) => (
-                                <label key={permission.id} className="tw-block">
+                                <label key={permission.id} className="tw-flex tw-items-center tw-space-x-2 mb-1">
                                     <Checkbox
                                         value={permission.id}
                                         onChange={(e) => {
@@ -49,7 +49,7 @@ const RoleCreate = ({ modules }) => {
                                             );
                                         }}
                                     />
-                                    {permission.action}
+                                    <span>{permission.action}</span>
                                 </label>
                             ))}
                         </div>

@@ -21,40 +21,42 @@ const UsersIndex = () => {
             >
                 Add User
             </PrimaryButton>
-            <table cellPadding={0} cellSpacing={0} className={`tw-table-auto tw-w-full tw-border ${theme.border.sidebarInner} tw-rounded-lg tw-shadow-sm tw-mt-4`}>
-                <thead className="tw-bg-gray-900 tw-text-white">
-                    <tr>
-                        <th className={`tw-border ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Name</th>
-                        <th className={`tw-border ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Email</th>
-                        <th className={`tw-border ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user) => (
-                        <tr key={user.id} className={`tw-border-b ${theme.border.sidebarInner}`}>
-                            <td className={`tw-border ${theme.border.sidebarInner} tw-p-3`}>{user.name}</td>
-                            <td className={`tw-border ${theme.border.sidebarInner} tw-p-3`}>{user.email}</td>
-                            <td className={`tw-border ${theme.border.sidebarInner} tw-p-3`}>
-                                <PrimaryButton
-                                    as="a"
-                                    href={`/users/${user.id}/edit`}
-                                    className="tw-bg-yellow-500 hover:tw-bg-yellow-600 tw-mx-1 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
-                                >
-                                    <CIcon icon={cilPencil} size="sm" /> {/* Use CoreUI icon */}
-                                </PrimaryButton>
-                                <PrimaryButton
-                                    as="a"
-                                    method="delete"
-                                    href={`/users/${user.id}`}
-                                    className="tw-bg-red-500 hover:tw-bg-red-600 tw-mx-1 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
-                                >
-                                    <CIcon icon={cilTrash} size="sm" /> {/* Use CoreUI icon */}
-                                </PrimaryButton>
-                            </td>
+            <div className="tw-overflow-x-auto">
+                <table cellPadding={0} cellSpacing={0} className={`tw-table-fixed tw-w-full tw-border ${theme.border.sidebarOuter} tw-rounded-lg tw-shadow-sm tw-mt-4`}>
+                    <thead className="tw-bg-gray-900 tw-text-white">
+                        <tr>
+                            <th className={`tw-border ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium tw-w-48`}>Name</th>
+                            <th className={`tw-border ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium lg:tw-w-full tw-w-96`}>Email</th>
+                            <th className={`tw-border ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium tw-w-28`}>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {users.map((user) => (
+                            <tr key={user.id} className={`tw-border-b ${theme.border.sidebarOuter}`}>
+                                <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{user.name}</td>
+                                <td className={`tw-border lg:tw-w-full tw-w-96 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{user.email}</td>
+                                <td className={`tw-border tw-w-28 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
+                                    <PrimaryButton
+                                        as="a"
+                                        href={`/users/${user.id}/edit`}
+                                        className="tw-bg-yellow-500 hover:tw-bg-yellow-600 tw-mx-1 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
+                                    >
+                                        <CIcon icon={cilPencil} size="sm" /> {/* Use CoreUI icon */}
+                                    </PrimaryButton>
+                                    <PrimaryButton
+                                        as="a"
+                                        method="delete"
+                                        href={`/users/${user.id}`}
+                                        className="tw-bg-red-500 hover:tw-bg-red-600 tw-mx-1 tw-rounded-full tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center"
+                                    >
+                                        <CIcon icon={cilTrash} size="sm" /> {/* Use CoreUI icon */}
+                                    </PrimaryButton>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </GlobalLayout>
     );
 };
