@@ -22,18 +22,18 @@ const RoleIndex = ({ roles, routes }) => {
                 </PrimaryButton>
             </div>
             <div className="tw-overflow-x-auto">
-                <table className={`tw-table-auto tw-w-full tw-border ${theme.border.sidebarInner} tw-rounded-lg tw-shadow-sm`}>
+                <table className={`tw-table-auto tw-w-full tw-border ${theme.border.sidebarOuter} tw-rounded-lg tw-shadow-sm`}>
                     <thead className="tw-bg-gray-900 tw-text-white">
                         <tr>
-                            <th className={`tw-border ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Name</th>
-                            <th className={`tw-border tw-w-28 ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Actions</th>
+                            <th className={`tw-border ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium`}>Name</th>
+                            <th className={`tw-border tw-w-28 ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium`}>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {roles.map((role) => (
-                            <tr key={role.id} className={`tw-border-b ${theme.border.sidebarInner}`}>
-                                <td className={`tw-border ${theme.border.sidebarInner} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{role.name}</td>
-                                <td className={`tw-border tw-w-28 ${theme.border.sidebarInner} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
+                            <tr key={role.id} className={`tw-border-b ${theme.border.sidebarOuter}`}>
+                                <td className={`tw-border ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{role.name}</td>
+                                <td className={`tw-border tw-w-28 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
                                     <PrimaryButton
                                         as="Link"
                                         href={routes.edit.replace(':id', role.id)}

@@ -21,18 +21,18 @@ const PermissionIndex = ({ permissions, routes }) => {
                 </PrimaryButton>
             </div>
             <div className="tw-overflow-x-auto">
-                <table className={`tw-table-fixed tw-w-full tw-border ${theme.border.sidebarInner}`}>
+                <table className={`tw-table-fixed tw-w-full tw-border ${theme.border.sidebarOuter}`}>
                     <thead className="tw-bg-gray-900 tw-text-white">
                         <tr>
-                            <th className={`tw-border  ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium`}>Name</th>
-                            <th className={`tw-border tw-min-w-40 tw-w-28 ${theme.border.sidebarInner} tw-p-3 tw-text-left tw-font-medium tw-max-w-20`}>Actions</th>
+                            <th className={`tw-border  ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium`}>Name</th>
+                            <th className={`tw-border tw-min-w-40 tw-w-28 ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium tw-max-w-20`}>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {permissions.map((permission) => (
-                            <tr key={permission.id} className={`tw-border-b ${theme.border.sidebarInner}`}>
-                                <td className={`tw-border  ${theme.border.sidebarInner} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{permission.name}</td>
-                                <td className={`tw-border tw-min-w-40 tw-w-28 ${theme.border.sidebarInner} tw-p-3 tw-max-w-20 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
+                            <tr key={permission.id} className={`tw-border-b ${theme.border.sidebarOuter}`}>
+                                <td className={`tw-border  ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{permission.name}</td>
+                                <td className={`tw-border tw-min-w-40 tw-w-28 ${theme.border.sidebarOuter} tw-p-3 tw-max-w-20 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
                                     <PrimaryButton
                                         as="Link"
                                         href={routes.edit.replace(':id', permission.id)}
