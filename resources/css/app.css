@@ -53,6 +53,12 @@ html,body,#app{
     @apply tw-fixed tw-z-0 tw-overflow-y-auto tw-bottom-0 tw-top-[87px] tw-left-0 tw-right-0 tw-p-5 tw-w-auto;
 }
 
+@media (min-width: 992px) {
+    .sidebar:not(.sidebar-end){
+        margin-left: 0 !important;
+    }
+}
+
 @media (max-width:991px) {
     .sidebar-half {
         @apply tw-w-64;
