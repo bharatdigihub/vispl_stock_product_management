@@ -6,7 +6,6 @@ const themeColors = {
     light: {
         background: 'tw-bg-gray-200',
         text: 'tw-text-black',
-        header: 'tw-bg-white tw-text-black',
         button: 'tw-bg-gray-800 tw-text-white hover:tw-bg-gray-700 focus:tw-bg-gray-700 active:tw-bg-gray-900',
         padding: 'tw-px-4 tw-py-2', 
         sidebar: 'tw-bg-gray-800 tw-border-r tw-border-gray-800', 
@@ -22,7 +21,6 @@ const themeColors = {
     dark: {
         background: 'tw-bg-gray-950',
         text: 'tw-text-white',
-        header: 'tw-bg-indigo-950 tw-text-white',
         button: 'tw-bg-gray-950 tw-text-white hover:tw-bg-indigo-500 focus:tw-bg-indigo-500 active:tw-bg-gray-700',
         padding: 'tw-px-4 tw-py-2', 
         sidebar: 'tw-bg-gray-950 tw-border-r tw-border-gray-800', 

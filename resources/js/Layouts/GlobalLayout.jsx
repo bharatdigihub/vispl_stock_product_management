@@ -10,7 +10,7 @@ import NavLink, { DropdownMenu } from "../Components/NavLink";
 
 const GlobalLayout = ({ children }) => {
     const { theme } = useTheme(); // Use ThemeContext
-    const [sidebarState, setSidebarState] = useState("closed"); // Initially closed
+    const [sidebarState, setSidebarState] = useState("full"); // Initially closed
     const [currentPage, setCurrentPage] = useState("");
     const [isMobileView, setIsMobileView] = useState(false); // Track if the view is mobile
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown menu
@@ -31,12 +31,8 @@ const GlobalLayout = ({ children }) => {
         const handleResize = () => {
             const isMobile = window.innerWidth <= 991;
             setIsMobileView(isMobile);
-
-            if (!isMobile) {
-                // Ensure sidebar is not hidden for larger screens
-                if (sidebarState === "closed" && !isSidebarLocked) {
-                    setSidebarState("full"); // Reset sidebar to full for desktop view
-                }
+            if (!isMobile && sidebarState === "closed") {
+                setSidebarState("full"); // Reset sidebar to full for desktop view
             }
         };
 
@@ -46,7 +42,7 @@ const GlobalLayout = ({ children }) => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [sidebarState, isSidebarLocked]);
+    }, [sidebarState]);
 
     const toggleSidebar = () => {
         if (!isSidebarLocked) {
@@ -65,8 +61,6 @@ const GlobalLayout = ({ children }) => {
         setCurrentPage(pageName); // Update the current page
         if (isMobileView) {
             setSidebarState("closed"); // Ensure sidebar stays closed on small screens after redirection
-        } else if (isSidebarLocked) {
-            setSidebarState("half"); // Keep the sidebar locked to "half" on larger screens
         }
     };
 
@@ -110,7 +104,7 @@ const GlobalLayout = ({ children }) => {
                     <CSidebarNav className={`tw-border-t tw-border-b ${theme.border.sidebarInner}`}>
                         <div
                             className={`tw-text-sm mb-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
-                                isMobileView || sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
+                                sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
                             }`}
                         >
                             Dashboard
@@ -199,15 +193,18 @@ const GlobalLayout = ({ children }) => {
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             />
                         </li>
+                        {/* Sidebar Footer */}
+                       
                     </CSidebarNav>
                     <div className="tw-mt-auto tw-hidden lg:tw-flex tw-px-3 tw-py-2 tw-h-12 lg:tw-w-flex tw-items-center">
-                        <button
-                            className={`tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center group tw-rounded-full hover:tw-bg-gray-900 ${sidebarState === "half" ? "tw-mx-auto" : "tw-ml-auto"} tw-border ${theme.border.sidebarInner} tw-transition-all tw-duration-300 tw-delay-150`}
-                            onClick={toggleSidebarLock}
-                        >
-                            <CIcon icon={sidebarState === 'half' ? cilChevronRight : cilChevronLeft} width={13} className={`tw-text-gray-400 group-hover:tw-text-gray-50 ${isSidebarLocked ? "tw-text-red-500" : ""}`} />
-                        </button>
-                    </div>
+                            <button
+                                className={`tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center group tw-rounded-full hover:tw-bg-gray-900 ${sidebarState === "half" ? "tw-mx-auto" : "tw-ml-auto"} tw-border ${theme.border.sidebarInner} tw-transition-all tw-duration-300 tw-delay-150`}
+                                onClick={toggleSidebarLock}
+                            >
+                                
+                                <CIcon icon={sidebarState === 'half' ? cilChevronRight : cilChevronLeft} width={13} className={`tw-text-gray-400 group-hover:tw-text-gray-50 ${isSidebarLocked ? "tw-text-red-500" : ""}`} />
+                            </button>
+                        </div>
                 </CSidebar>
 
                 {/* Main Content */}
