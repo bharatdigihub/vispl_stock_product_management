@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react"; // Import usePage for dynamic breadcrumb
 import { CButton, CBreadcrumb, CBreadcrumbItem } from "@coreui/react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import { useSidebar } from '../Contexts/SidebarContext'; // Import SidebarContext
@@ -12,6 +12,8 @@ const Header = ({ currentPage }) => {
     const [permissions, setPermissions] = useState([]);
     const { sidebarState, toggleSidebar, isMobileView } = useSidebar(); // Use isMobileView from SidebarContext
     const { theme, toggleTheme } = useTheme(); // Use ThemeContext
+    const { url } = usePage(); // Get the current URL from Inertia.js
+    const breadcrumbPaths = url.split('/').filter(Boolean); // Split path into segments
 
     useEffect(() => {
         //console.log("Sidebar State:", sidebarState); // Debug sidebarState
@@ -226,12 +228,28 @@ const Header = ({ currentPage }) => {
                 </nav>
             </header>
             <CBreadcrumb className={`tw-mb-0 tw-py-1 tw-px-4 tw-border-b tw-text-[12px] ${theme.border.sidebarOuter} ${theme.header} ${theme.text}`}>
-                <CBreadcrumbItem href="/" className={theme.text}>
-                    Home
+                <CBreadcrumbItem>
+                    <Link href="/" className={theme.text}>
+                        Home
+                    </Link>
                 </CBreadcrumbItem>
-                <CBreadcrumbItem active className={theme.text}>
-                    {currentPage || "Admin Panel"}
-                </CBreadcrumbItem>
+                {breadcrumbPaths.map((path, index) => {
+                    const isLast = index === breadcrumbPaths.length - 1;
+                    const href = `/${breadcrumbPaths.slice(0, index + 1).join('/')}`;
+                    return (
+                        <CBreadcrumbItem key={index} active={isLast}>
+                            {isLast ? (
+                                <span className={theme.text}>
+                                    {path.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}
+                                </span>
+                            ) : (
+                                <Link href={href} className={theme.text}>
+                                    {path.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}
+                                </Link>
+                            )}
+                        </CBreadcrumbItem>
+                    );
+                })}
             </CBreadcrumb>
         </div>
     );
