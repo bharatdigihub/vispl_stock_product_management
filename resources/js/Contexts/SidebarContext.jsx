@@ -14,6 +14,7 @@ export const SidebarProvider = ({ children }) => {
             if (!isMobile && sidebarState === "closed") {
                 setSidebarState("full");
             }
+            
         };
 
         window.addEventListener("resize", handleResize);

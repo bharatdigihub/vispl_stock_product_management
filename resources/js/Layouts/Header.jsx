@@ -14,7 +14,7 @@ const Header = ({ currentPage }) => {
     const { theme, toggleTheme } = useTheme(); // Use ThemeContext
 
     useEffect(() => {
-        console.log("Sidebar State:", sidebarState); // Debug sidebarState
+        //console.log("Sidebar State:", sidebarState); // Debug sidebarState
         fetchPermissions();
     }, [sidebarState]); // Add sidebarState as a dependency
 
@@ -23,7 +23,7 @@ const Header = ({ currentPage }) => {
             const response = await axios.get('/api/user/permissions');
             setPermissions(response.data); // Set permissions from API response
         } catch (error) {
-            console.error('Failed to fetch permissions:', error);
+            //console.error('Failed to fetch permissions:', error);
         }
     };
 
@@ -46,7 +46,7 @@ const Header = ({ currentPage }) => {
                             title="Toggle Sidebar" // Tooltip
                             className={`tw-rounded-sm tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center  p-1 ${theme.header} ${theme.menutext} ${theme.border}`}
                         >
-                            <CIcon width={30} icon={isMobileView && sidebarState === 'closed' ? cilClearAll : cilHamburgerMenu} />
+                            <CIcon width={30} icon={isMobileView && sidebarState === 'closed' ? cilClearAll : sidebarState === 'half' ? cilClearAll : cilHamburgerMenu} />
                         </CButton>
                         <h1 className="tw-text-md tw-font-bold tw-text-ellipsis tw-overflow-hidden">{currentPage || "Admin Panel"}</h1>
                     </div>

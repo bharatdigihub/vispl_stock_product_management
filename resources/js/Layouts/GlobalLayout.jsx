@@ -19,10 +19,12 @@ const GlobalLayout = ({ children }) => {
             "/users": "User Management",
             "/roles": "Roles",
             "/permissions": "Permissions",
+            "/users/create": "Create User",
+            "/users/{}/edit": "Edit User",
         };
         const currentPath = window.location.pathname;
         setCurrentPage(pathToPageName[currentPath] || "Admin Panel");
-
+ 
         // Add a resize listener to detect mobile view
         const handleResize = () => {
             const isMobile = window.innerWidth <= 991;
