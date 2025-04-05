@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Link } from "@inertiajs/react";
 import { CButton, CBreadcrumb, CBreadcrumbItem } from "@coreui/react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
+import { useSidebar } from '../Contexts/SidebarContext'; // Import SidebarContext
 import { CIcon } from '@coreui/icons-react';
 import { cilMoon, cilSun, cilUser, cilAccountLogout, cilBell, cilCommentSquare, cilCreditCard, cilList, cilLockLocked, cilSettings, cilTask, cilHamburgerMenu, cilClearAll} from '@coreui/icons'; // Import user icon
 import Dropdown from '../Components/Dropdown'; // Import Dropdown component
 
-const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
+const Header = ({ currentPage }) => {
     const [permissions, setPermissions] = useState([]);
+    const { sidebarState, toggleSidebar, isMobileView } = useSidebar(); // Use isMobileView from SidebarContext
     const { theme, toggleTheme } = useTheme(); // Use ThemeContext
 
     useEffect(() => {
@@ -35,9 +37,7 @@ const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
     };
 
     return (
-        <div className={`
-            head-${sidebarState}
-            `}>
+        <div className={`head-${sidebarState}`}>
             <header className={`tw-h-[60px] tw-border-b ${theme.header} ${theme.border.sidebarOuter} tw-p-4 ${theme.text} dark:tw-bg-black`}>
                 <nav className="tw-container tw-w-100 tw-max-w-full tw-flex tw-justify-between tw-items-center">
                     <div className="tw-flex tw-items-center tw-space-x-2 tw-max-w-[35%] md:tw-max-w-full">
@@ -46,7 +46,7 @@ const Header = ({ toggleSidebar, currentPage, sidebarState }) => {
                             title="Toggle Sidebar" // Tooltip
                             className={`tw-rounded-sm tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center  p-1 ${theme.header} ${theme.menutext} ${theme.border}`}
                         >
-                            <CIcon width={30} icon={sidebarState === 'half' ? cilClearAll : cilHamburgerMenu} />
+                            <CIcon width={30} icon={isMobileView && sidebarState === 'closed' ? cilClearAll : cilHamburgerMenu} />
                         </CButton>
                         <h1 className="tw-text-md tw-font-bold tw-text-ellipsis tw-overflow-hidden">{currentPage || "Admin Panel"}</h1>
                     </div>

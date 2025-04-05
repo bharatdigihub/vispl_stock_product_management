@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import Footer from "./Footer";
-import { Link } from "@inertiajs/react";
 import { CSidebar, CSidebarNav, CContainer, CCol } from "@coreui/react";
 import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronLeft, cilChevronRight, cilX } from "@coreui/icons"; // Add new icons
 import CIcon from "@coreui/icons-react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import NavLink, { DropdownMenu } from "../Components/NavLink";
+import { useSidebar } from '../Contexts/SidebarContext'; // Import SidebarContext
 
 const GlobalLayout = ({ children }) => {
+    const { sidebarState, setSidebarState, toggleSidebar, toggleSidebarLock, isSidebarLocked, isMobileView, closeSidebar } = useSidebar();
     const { theme } = useTheme(); // Use ThemeContext
-    const [sidebarState, setSidebarState] = useState("full"); // Initially closed
     const [currentPage, setCurrentPage] = useState("");
-    const [isMobileView, setIsMobileView] = useState(false); // Track if the view is mobile
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown menu
-    const [isSidebarLocked, setIsSidebarLocked] = useState(false); // State to lock the sidebar
 
     useEffect(() => {
         // Set the initial page name based on the current URL path
@@ -30,7 +26,6 @@ const GlobalLayout = ({ children }) => {
         // Add a resize listener to detect mobile view
         const handleResize = () => {
             const isMobile = window.innerWidth <= 991;
-            setIsMobileView(isMobile);
             if (!isMobile && sidebarState === "closed") {
                 setSidebarState("full"); // Reset sidebar to full for desktop view
             }
@@ -42,26 +37,11 @@ const GlobalLayout = ({ children }) => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [sidebarState]);
-
-    const toggleSidebar = () => {
-        if (!isSidebarLocked) {
-            setSidebarState((prevState) => (prevState === "full" ? "half" : "full"));
-        }
-    };
-
-    const toggleSidebarLock = () => {
-        setIsSidebarLocked((prevState) => !prevState);
-        if (!isSidebarLocked) {
-            setSidebarState("half"); // Lock the sidebar in "half" state
-        }
-    };
+    }, [sidebarState, setSidebarState]);
 
     const handleMenuItemClick = (pageName) => {
-        setCurrentPage(pageName); // Update the current page
-        if (isMobileView) {
-            setSidebarState("closed"); // Ensure sidebar stays closed on small screens after redirection
-        }
+        setCurrentPage(pageName);
+        closeSidebar(); // Close the sidebar after redirection
     };
 
     const handleMouseEnter = () => {
@@ -77,7 +57,7 @@ const GlobalLayout = ({ children }) => {
     };
 
     return (
-        <div className={`tw-d-flex tw-flex-column  tw-overflow-x-hidden ${theme.background} ${theme.text}`}>
+        <div className={`tw-d-flex tw-flex-column tw-overflow-x-hidden ${theme.background} ${theme.text}`}>
             <div className="tw-d-flex tw-min-h-screen tw-flex-grow-1 tw-relative">
                 {/* Sidebar */}
                 <CSidebar
