@@ -1,9 +1,11 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import { useTheme } from '../Contexts/ThemeContext';
 
 export default forwardRef(function TextInput(
     { type = 'text', className = '', isFocused = false, ...props },
     ref,
 ) {
+    const { theme } = useTheme();
     const localRef = useRef(null);
 
     useImperativeHandle(ref, () => ({
@@ -16,14 +18,23 @@ export default forwardRef(function TextInput(
         }
     }, [isFocused]);
 
+    const baseClass = `${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text} tw-min-h-10 tw-py-0 tw-w-full tw-block tw-rounded-sm `;
+
+    if (type === 'textarea') {
+        return (
+            <textarea
+                {...props}
+                className={baseClass +''+ className}
+                ref={localRef}
+            />
+        );
+    }
+
     return (
         <input
             {...props}
             type={type}
-            className={
-                'rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ' +
-                className
-            }
+            className={baseClass +''+ className}
             ref={localRef}
         />
     );

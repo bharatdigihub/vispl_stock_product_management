@@ -1,10 +1,14 @@
+import { useTheme } from '../Contexts/ThemeContext';
+
 export default function Checkbox({ className = '', ...props }) {
+    const { theme } = useTheme();
+
     return (
         <input
             {...props}
             type="checkbox"
             className={
-                'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ' +
+                `${theme.checkbox} ${theme.text} tw-rounded tw-shadow-sm ` +
                 className
             }
         />

@@ -1,23 +1,83 @@
 import { Link } from '@inertiajs/react';
+import CIcon from '@coreui/icons-react';
+import { cilChevronBottom, cilChevronTop } from "@coreui/icons";
+import { useState } from 'react';
 
 export default function NavLink({
+    href,
     active = false,
-    className = '',
+    icon = null,
+    sidebarState = "full",
+    theme = {},
+    onClick = () => {},
     children,
-    ...props
 }) {
     return (
         <Link
-            {...props}
-            className={
-                'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none ' +
-                (active
-                    ? 'border-indigo-400 text-gray-900 focus:border-indigo-700'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 focus:border-gray-300 focus:text-gray-700') +
-                className
-            }
+            href={href}
+            className={`tw-flex tw-items-center tw-h-10 tw-py-2  focus-visible:tw-outline-0 tw-border tw-border-transparent tw-px-2 tw-rounded-sm mb-1 ${
+                sidebarState === "half" ? "tw-justify-center" : "tw-justify-start"
+            } ${
+                active
+                    ? "tw-bg-indigo-600/30  tw-border-indigo-800 tw-text-gray-50"
+                    : "hover:tw-bg-gray-800 tw-text-inherit"
+            }`}
+            onClick={onClick}
         >
-            {children}
+            {icon && <CIcon icon={icon} className={` ${active ? "tw-text-gray-50" : "tw-text-gray-500" } ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`} />}
+            {sidebarState === "full" && (
+                <span className="tw-text-[13px] tw-tracking-wider tw-font-medium">{children}</span>
+            )}
         </Link>
+    );
+}
+
+export function DropdownMenu({
+    label,
+    icon = null,
+    items = [],
+    sidebarState = "full",
+    theme = {},
+}) {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    return (
+        <div>
+            <div
+                className={`tw-flex tw-items-center tw-h-10 tw-border tw-border-transparent tw-py-2 tw-px-2 tw-rounded-sm ${
+                    sidebarState === "half" ? "tw-justify-center" : "tw-justify-between"
+                } ${isDropdownOpen ? "tw-bg-indigo-600/30  tw-border-indigo-800 tw-text-gray-50" : "hover:tw-bg-gray-800"} tw-cursor-pointer`}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+                <div className="tw-flex tw-items-center">
+                    {icon && <CIcon icon={icon} className={`tw-text-gray-500 ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`} />}
+                    {sidebarState === "full" && <span className="tw-text-[13px] tw-tracking-wider tw-font-medium">{label}</span>}
+                </div>
+                {sidebarState === "full" && (
+                    <CIcon
+                        icon={isDropdownOpen ? cilChevronTop : cilChevronBottom}
+                        className={`tw-text-lg ${isDropdownOpen ? "tw-text-gray-50" : "tw-text-gray-500"}`}
+                    />
+                )}
+            </div>
+            {isDropdownOpen && sidebarState !== "half" && (
+                <ul className="tw-ml-3 tw-mt-1 tw-border-l-2 tw-border-indigo-900">
+                    {items.map((item, index) => (
+                        <li key={index} className="tw-ml-4">
+                            <NavLink
+                                href={item.href}
+                                icon={item.icon}
+                                active={item.active}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={item.onClick}
+                            >
+                                {item.label}
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
     );
 }

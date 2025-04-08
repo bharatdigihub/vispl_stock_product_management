@@ -1,6 +1,10 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout";
+import PrimaryButton from "../PrimaryButton"; // Import PrimaryButton
+import TextInput from "../TextInput"; // Import TextInput
+import Checkbox from "../Checkbox"; // Import Checkbox
+import InputLabel from "../InputLabel"; // Import InputLabel
 
 const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
     const { data, setData, patch, errors } = useForm({
@@ -16,26 +20,27 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
     return (
         <GlobalLayout>
             <form onSubmit={handleSubmit}>
-                <h1 className="text-2xl font-bold mb-4">Edit Role</h1>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Role Name</label>
-                    <input
+                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Role</h1>
+                <div className="tw-mb-4">
+                    <InputLabel value="Role Name" className="tw-mb-1" />
+                    <TextInput
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        className="w-full border px-4 py-2"
+                        className="tw-w-full tw-border tw-px-4 tw-py-2"
+                        placeholder="Enter role name" // Added placeholder
                     />
-                    {errors.name && <div className="text-red-500">{errors.name}</div>}
+                    {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                 </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Permissions</label>
+                <div className="tw-mb-4">
+                    <InputLabel value="Permissions" className="tw-mb-1" />
                     {modules.map((module) => (
-                        <div key={module.id} className="mb-4">
-                            <h3 className="font-bold">{module.name}</h3>
+                        <div key={module.id} className="tw-mb-4">
+                            <h3 className="tw-font-bold mb-2">{module.name}</h3>
+                            <div className="tw-flex tw-flex-row tw-items-center tw-space-x-3">
                             {module.permissions.map((permission) => (
-                                <label key={permission.id} className="block">
-                                    <input
-                                        type="checkbox"
+                                <label key={permission.id} className="tw-flex tw-items-center tw-space-x-2">
+                                    <Checkbox
                                         value={permission.id}
                                         checked={data.permissions.includes(permission.id)}
                                         onChange={(e) => {
@@ -46,18 +51,20 @@ const RoleEdit = ({ role, modules, rolePermissions, routes }) => {
                                             );
                                         }}
                                     />
-                                    {permission.action}
+                                   <span>{permission.action}</span>
                                 </label>
                             ))}
+                            </div>
                         </div>
                     ))}
                 </div>
-                <button
+                <PrimaryButton
                     type="submit"
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700"
+                    padding="tw-px-4 tw-py-2" // Added padding
+                    className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-0"
                 >
                     Update
-                </button>
+                </PrimaryButton>
             </form>
         </GlobalLayout>
     );
