@@ -22,6 +22,13 @@ const GlobalLayout = ({ children }) => {
             "/users/create": "Create User",
             "/users/{}/edit": "Edit User",
             "/color": "Color",
+            "/unit" : "Unit",
+            "/unit/create": "Create Unit",
+            "/unit/{}/edit": "Edit Unit",
+            "/gsm": "Gsm",
+            "/gsm/create": "Create Gsm",
+            "/gsm/{}/edit": "Edit Gsm",
+           
         };
         const currentPath = window.location.pathname;
         setCurrentPage(pathToPageName[currentPath] || "Admin Panel");
