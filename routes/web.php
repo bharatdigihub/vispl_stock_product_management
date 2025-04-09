@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\GsmController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -61,6 +62,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/gsm/{gsm}/edit', [GsmController::class, 'edit'])->name('gsm.edit');
     Route::patch('/gsm', [GsmController::class, 'update'])->name('gsm.update');
     Route::get('/gsm/{gsm}/delete', [GsmController::class, 'destroy'])->name('gsm.destroy');
+
+  Route::get('/unit', [UnitController::class, 'index'])->name('unit.index'); // Add this line for listing users
+    Route::get('/unit/create', [UnitController::class, 'create'])->name('unit.create');
+    Route::post('/unit', [UnitController::class, 'store'])->name('unit.store');
+    Route::get('/unit/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edit');
+    Route::patch('/unit', [UnitController::class, 'update'])->name('unit.update');
+    Route::get('/unit/{unit}/delete', [UnitController::class, 'destroy'])->name('unit.destroy');
 
 
 });
