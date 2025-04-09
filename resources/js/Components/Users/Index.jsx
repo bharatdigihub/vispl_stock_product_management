@@ -6,6 +6,9 @@ import TextInput from "../TextInput"; // Import TextInput
 import { CIcon } from "@coreui/icons-react"; // Import CIcon
 import { cilPencil, cilTrash } from "@coreui/icons"; // Import CoreUI icons
 import { useTheme } from "@/Contexts/ThemeContext";
+import InputLabel from "../InputLabel"; // Import InputLabel
+import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
+import Checkbox from "../Checkbox"; // Import Checkbox
 
 const UsersIndex = () => {
     const { users = [] } = usePage().props;
@@ -17,12 +20,12 @@ const UsersIndex = () => {
                 as="a" // Use "a" instead of Link
                 href="/users/create"
                 padding="tw-px-4 tw-py-2" // Added padding
-                className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-0" // Added tw-px-4 and tw-py-2
+                className="tw-mb-4 tw-bg-indigo-500 hover:tw-bg-indigo-600 mb-3" // Added tw-px-4 and tw-py-2
             >
                 Add User
             </PrimaryButton>
-            <div className="tw-overflow-x-auto">
-                <table cellPadding={0} cellSpacing={0} className={`tw-table-fixed tw-w-full tw-border ${theme.border.sidebarOuter} tw-rounded-lg tw-shadow-sm tw-mt-4`}>
+            <div className="tw-overflow-x-auto tw-mb-10">
+                <table cellPadding={0} cellSpacing={0} className={`tw-table-fixed tw-w-full tw-border ${theme.border.sidebarOuter} tw-rounded-lg tw-shadow-sm`}>
                     <thead className="tw-bg-gray-900 tw-text-white">
                         <tr>
                             <th className={`tw-border ${theme.border.sidebarOuter} tw-p-3 tw-text-left tw-font-medium tw-w-48`}>Name</th>
@@ -56,6 +59,401 @@ const UsersIndex = () => {
                         ))}
                     </tbody>
                 </table>
+               
+            </div>
+            <div className={`tw-mt-5 tw-overflow-x-auto tw-p-6 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.mode === "dark" ? "tw-bg-gray-900" : theme.background} tw-shadow-md`}>
+                <h2 className={`tw-text-xl tw-font-bold tw-mb-4 ${theme.text}`}>Form Design</h2>
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
+                    {/* Row 1 */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Name" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="text"
+                            placeholder="Enter name"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Email" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="email"
+                            placeholder="Enter email"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Row 2 */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Role" className={`tw-mb-2 ${theme.text}`} />
+                        <SelectDropdown
+                            options={[
+                                { id: 1, name: "Admin" },
+                                { id: 2, name: "User" },
+                                { id: 3, name: "Guest" },
+                            ]}
+                            placeholder="Select role"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header} tw-flex tw-items-center tw-gap-3`}>
+                        <Checkbox id="activebox" className={`${theme.checkbox}`} />
+                        <InputLabel for="activebox" value="Active" className={`tw-text-sm ${theme.text}`} />
+                    </div>
+                    {/* Row 3 */}
+                    <div className={`tw-col-span-2 tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Description" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="textarea"
+                            placeholder="Enter description"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text} tw-min-h-28`}
+                        />
+                    </div>
+                    {/* Submit Button */}
+                    <div className="tw-col-span-2 tw-flex tw-justify-end tw-p-4">
+                        <PrimaryButton type="submit" className={`${theme.button} tw-py-2 tw-px-6 tw-rounded-md`}>
+                            Submit
+                        </PrimaryButton>
+                    </div>
+                </div>
+            </div>
+            <div className={`tw-mt-10 tw-overflow-x-auto tw-p-6 tw-border ${theme.border.sidebarOuter} tw-rounded-lg ${theme.mode === "dark" ? "tw-bg-gray-900" : theme.background} tw-shadow-md`}>
+                <h2 className={`tw-text-xl tw-font-bold tw-mb-4 ${theme.text}`}>All Possible Input Fields</h2>
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
+                    {/* Text Input */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Text Input" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="text"
+                            placeholder="Enter text"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Password Input */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Password Input" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="password"
+                            placeholder="Enter password"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Email Input */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Email Input" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="email"
+                            placeholder="Enter email"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Number Input */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Number Input" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="number"
+                            placeholder="Enter number"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Date Input */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Date Input" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="date"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* File Input */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="File Input" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="file"
+                            className={`tw-mt-1 tw-py-1 tw-px-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Checkbox */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header} tw-flex tw-items-center tw-gap-3`}>
+                        <Checkbox id="checkbox" className={`${theme.checkbox}`} />
+                        <InputLabel for="checkbox" value="Checkbox" className={`tw-text-sm ${theme.text}`} />
+                    </div>
+                    {/* Radio Button */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
+                        <div className="tw-flex tw-flex-col tw-gap-2">
+                            <div className="radio-group-item tw-flex tw-items-center">
+                                <TextInput
+                                    type="radio"
+                                    name="radioGroup"
+                                    id="radio1"
+                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
+                                />
+                                <InputLabel for="radio1" value="Option 1" className={`${theme.text}`} />
+                            </div>
+                            <div className="radio-group-item tw-flex tw-items-center">
+                                <TextInput
+                                    type="radio"
+                                    name="radioGroup"
+                                    id="radio2"
+                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
+                                />
+                                <InputLabel for="radio2" value="Option 2" className={`${theme.text}`} />
+                            </div>
+                            <div className="radio-group-item tw-flex tw-items-center">
+                                <TextInput
+                                    type="radio"
+                                    name="radioGroup"
+                                    id="radio3"
+                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
+                                />
+                                <InputLabel for="radio3" value="Option 3" className={`${theme.text}`} />
+                            </div>
+                        </div>
+                    </div>
+                    {/* Select Dropdown */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Select Dropdown" className={`tw-mb-2 ${theme.text}`} />
+                        <SelectDropdown
+                            options={[
+                                { id: 1, name: "Option 1" },
+                                { id: 2, name: "Option 2" },
+                                { id: 3, name: "Option 3" },
+                            ]}
+                            placeholder="Select an option"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Textarea */}
+                    <div className={`tw-col-span-2 tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Textarea" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="textarea"
+                            placeholder="Enter text"
+                            className={`tw-mt-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text} tw-min-h-28`}
+                        />
+                    </div>
+                     {/* Submit Button */}
+                     <div className="tw-col-span-2 tw-flex tw-justify-end tw-p-4">
+                        <PrimaryButton type="submit" className={`${theme.button} tw-py-2 tw-px-6 tw-rounded-md`}>
+                            Submit
+                        </PrimaryButton>
+                    </div>
+                </div>
+            </div>
+            <div className={`tw-mt-10 tw-overflow-x-auto tw-p-6 tw-border ${theme.border.sidebarOuter} tw-rounded-lg ${theme.mode === "dark" ? "tw-bg-gray-900" : theme.background} tw-shadow-md`}>
+                <h2 className={`tw-text-xl tw-font-bold tw-mb-4 ${theme.text}`}>File Upload Designs</h2>
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
+                    {/* Design 1: Basic File Input */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Basic File Input" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="file"
+                            className={`tw-mt-1 tw-py-1 tw-px-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                        />
+                    </div>
+                    {/* Design 2: Drag and Drop */}
+                    <div className={`tw-p-4 tw-border-dashed tw-border-2 ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header} tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-2`}>
+                        <InputLabel value="Drag and Drop" className={`tw-mb-2 ${theme.text}`} />
+                        <div className={`tw-w-full tw-h-32 tw-flex tw-items-center tw-justify-center ${theme.inputBackground} tw-border-2 tw-border-dashed ${theme.border.sidebarOuter} tw-rounded-md`}>
+                            <p className={`tw-text-sm ${theme.text}`}>Drag files here or click to upload</p>
+                        </div>
+                        <TextInput
+                            type="file"
+                            className="tw-hidden"
+                            id="drag-and-drop"
+                        />
+                        <label htmlFor="drag-and-drop" className={`tw-cursor-pointer tw-text-sm tw-font-medium tw-text-indigo-600 hover:tw-underline`}>
+                            Browse Files
+                        </label>
+                    </div>
+                    {/* Design 3: Button Trigger */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Button Trigger" className={`tw-mb-2 ${theme.text}`} />
+                        <PrimaryButton
+                            as="label"
+                            htmlFor="button-trigger"
+                            className={`${theme.button} tw-cursor-pointer`}
+                        >
+                            Upload File
+                        </PrimaryButton>
+                        <TextInput
+                            type="file"
+                            id="button-trigger"
+                            className="tw-hidden"
+                        />
+                    </div>
+                    {/* Design 4: Preview Uploaded File */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Preview Uploaded File" className={`tw-mb-2 ${theme.text}`} />
+                        <TextInput
+                            type="file"
+                            id="file-preview"
+                            className={`tw-mt-1 tw-py-1 tw-px-1 ${theme.border.sidebarOuter} ${theme.inputBackground} ${theme.text}`}
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                const preview = document.getElementById("file-preview-output");
+                                if (file) {
+                                    preview.textContent = `Selected File: ${file.name}`;
+                                } else {
+                                    preview.textContent = "No file selected";
+                                }
+                            }}
+                        />
+                        <p id="file-preview-output" className={`tw-mt-2 tw-text-sm ${theme.text}`}>No file selected</p>
+                    </div>
+                </div>
+            </div>
+            <div className={`tw-mt-10 tw-overflow-x-auto tw-p-6 tw-border ${theme.border.sidebarOuter} tw-rounded-lg ${theme.mode === "dark" ? "tw-bg-gray-900" : theme.background} tw-shadow-md`}>
+                <h2 className={`tw-text-xl tw-font-bold tw-mb-4 ${theme.text}`}>Radio Option Designs</h2>
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
+                    {/* Design 1: Basic Radio Buttons */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Basic Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
+                        <div className="tw-flex tw-flex-col tw-gap-2">
+                            <div className="tw-flex tw-items-center">
+                                <TextInput
+                                    type="radio"
+                                    name="basicRadio"
+                                    id="basicRadio1"
+                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
+                                />
+                                <InputLabel for="basicRadio1" value="Option 1" className={`${theme.text}`} />
+                            </div>
+                            <div className="tw-flex tw-items-center">
+                                <TextInput
+                                    type="radio"
+                                    name="basicRadio"
+                                    id="basicRadio2"
+                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
+                                />
+                                <InputLabel for="basicRadio2" value="Option 2" className={`${theme.text}`} />
+                            </div>
+                        </div>
+                    </div>
+                    {/* Design 2: Inline Radio Buttons */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Inline Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
+                        <div className="tw-flex tw-gap-4">
+                            <div className="tw-flex tw-items-center">
+                                <TextInput
+                                    type="radio"
+                                    name="inlineRadio"
+                                    id="inlineRadio1"
+                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
+                                />
+                                <InputLabel for="inlineRadio1" value="Option 1" className={`${theme.text}`} />
+                            </div>
+                            <div className="tw-flex tw-items-center">
+                                <TextInput
+                                    type="radio"
+                                    name="inlineRadio"
+                                    id="inlineRadio2"
+                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
+                                />
+                                <InputLabel for="inlineRadio2" value="Option 2" className={`${theme.text}`} />
+                            </div>
+                        </div>
+                    </div>
+                    {/* Design 3: Card Style Radio Buttons */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Card Style Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
+                        <div className="tw-grid tw-grid-cols-2 tw-gap-4">
+                            <label
+                                htmlFor="cardRadio1"
+                                className={`tw-flex tw-items-center tw-justify-center tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            >
+                                <TextInput
+                                    type="radio"
+                                    name="cardRadio"
+                                    id="cardRadio1"
+                                    className="tw-hidden"
+                                />
+                                <span className={`${theme.text}`}>Option 1</span>
+                            </label>
+                            <label
+                                htmlFor="cardRadio2"
+                                className={`tw-flex tw-items-center tw-justify-center tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            >
+                                <TextInput
+                                    type="radio"
+                                    name="cardRadio"
+                                    id="cardRadio2"
+                                    className="tw-hidden"
+                                />
+                                <span className={`${theme.text}`}>Option 2</span>
+                            </label>
+                        </div>
+                    </div>
+                    {/* Design 4: Toggle Style Radio Buttons */}
+                    <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
+                        <InputLabel value="Toggle Style Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
+                        <div className="tw-flex tw-gap-4">
+                            <label
+                                htmlFor="toggleRadio1"
+                                className={`tw-flex tw-items-center tw-justify-center tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            >
+                                <TextInput
+                                    type="radio"
+                                    name="toggleRadio"
+                                    id="toggleRadio1"
+                                    className="tw-hidden"
+                                />
+                                <span className={`${theme.text}`}>Option 1</span>
+                            </label>
+                            <label
+                                htmlFor="toggleRadio2"
+                                className={`tw-flex tw-items-center tw-justify-center tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            >
+                                <TextInput
+                                    type="radio"
+                                    name="toggleRadio"
+                                    id="toggleRadio2"
+                                    className="tw-hidden"
+                                />
+                                <span className={`${theme.text}`}>Option 2</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={`tw-mt-10 tw-overflow-x-auto tw-p-6 tw-border ${theme.border.sidebarOuter} tw-rounded-lg ${theme.mode === "dark" ? "tw-bg-gray-900" : theme.background} tw-shadow-md`}>
+                <h2 className={`tw-text-xl tw-font-bold tw-mb-4 ${theme.text}`}>Button Variants</h2>
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6">
+                    {/* Small Button */}
+                    <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
+                        <PrimaryButton className="tw-bg-blue-500 hover:tw-bg-blue-600 tw-py-1 tw-px-3 tw-text-sm">
+                            Small Blue Button
+                        </PrimaryButton>
+                        <PrimaryButton className="tw-bg-green-500 hover:tw-bg-green-600 tw-py-1 tw-px-3 tw-text-sm">
+                            Small Green Button
+                        </PrimaryButton>
+                        <PrimaryButton className="tw-bg-red-500 hover:tw-bg-red-600 tw-py-1 tw-px-3 tw-text-sm">
+                            Small Red Button
+                        </PrimaryButton>
+                    </div>
+                    {/* Medium Button */}
+                    <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
+                        <PrimaryButton className="tw-bg-blue-500 hover:tw-bg-blue-600 tw-py-2 tw-px-4 tw-text-base">
+                            Medium Blue Button
+                        </PrimaryButton>
+                        <PrimaryButton className="tw-bg-green-500 hover:tw-bg-green-600 tw-py-2 tw-px-4 tw-text-base">
+                            Medium Green Button
+                        </PrimaryButton>
+                        <PrimaryButton className="tw-bg-red-500 hover:tw-bg-red-600 tw-py-2 tw-px-4 tw-text-base">
+                            Medium Red Button
+                        </PrimaryButton>
+                    </div>
+                    {/* Large Button */}
+                    <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
+                        <PrimaryButton className="tw-bg-blue-500 hover:tw-bg-blue-600 tw-py-3 tw-px-6 tw-text-lg">
+                            Large Blue Button
+                        </PrimaryButton>
+                        <PrimaryButton className="tw-bg-green-500 hover:tw-bg-green-600 tw-py-3 tw-px-6 tw-text-lg">
+                            Large Green Button
+                        </PrimaryButton>
+                        <PrimaryButton className="tw-bg-red-500 hover:tw-bg-red-600 tw-py-3 tw-px-6 tw-text-lg">
+                            Large Red Button
+                        </PrimaryButton>
+                    </div>
+                </div>
             </div>
         </GlobalLayout>
     );

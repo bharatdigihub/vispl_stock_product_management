@@ -101,7 +101,7 @@ const GlobalLayout = ({ children }) => {
                                 onClick={() => handleMenuItemClick("Dashboard")}
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                Dashboard
+                                Dashboard 
                             </NavLink>
                         </li>
                         <li>

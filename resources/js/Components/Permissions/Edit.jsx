@@ -6,6 +6,7 @@ import SelectDropdown from "../SelectDropdown";
 import Checkbox from "../Checkbox";
 import InputLabel from "../InputLabel"; // Import InputLabel
 import InputError from "../InputError"; // Import InputError
+import RadioButton from "../RadioButton"; // Import RadioButton
 
 const PermissionEdit = ({ permission, modules, routes }) => {
     const { data, setData, patch, errors } = useForm({
@@ -36,20 +37,21 @@ const PermissionEdit = ({ permission, modules, routes }) => {
                     <InputLabel value="Actions" className="tw-mb-1" />
                     <div className="tw-flex tw-space-x-4">
                         {["view", "create", "edit", "delete"].map((action) => (
-                            <label key={action} className="tw-flex tw-items-center tw-space-x-2">
-                                <Checkbox
-                                    value={action}
-                                    checked={data.actions.includes(action)}
-                                    onChange={(e) => {
-                                        const value = e.target.value;
-                                        setData("actions", e.target.checked
-                                            ? [...data.actions, value]
-                                            : data.actions.filter((a) => a !== value)
-                                        );
-                                    }}
-                                />
-                                <span>{action}</span>
-                            </label>
+                            <RadioButton
+                                key={action}
+                                id={`action-${action}`}
+                                name="actions"
+                                value={action}
+                                label={action}
+                                checked={data.actions.includes(action)}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    setData("actions", e.target.checked
+                                        ? [...data.actions, value]
+                                        : data.actions.filter((a) => a !== value)
+                                    );
+                                }}
+                            />
                         ))}
                     </div>
                     <InputError message={errors.actions} className="tw-mt-1" />
