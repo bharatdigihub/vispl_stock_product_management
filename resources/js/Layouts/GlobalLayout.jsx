@@ -21,6 +21,7 @@ const GlobalLayout = ({ children }) => {
             "/permissions": "Permissions",
             "/users/create": "Create User",
             "/users/{}/edit": "Edit User",
+            "/color": "Color",
         };
         const currentPath = window.location.pathname;
         setCurrentPage(pathToPageName[currentPath] || "Admin Panel");
@@ -101,7 +102,7 @@ const GlobalLayout = ({ children }) => {
                                 onClick={() => handleMenuItemClick("Dashboard")}
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                Dashboard 
+                                Dashboard
                             </NavLink>
                         </li>
                         <li>
@@ -175,6 +176,78 @@ const GlobalLayout = ({ children }) => {
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             />
                         </li>
+
+                        <li>
+                            <NavLink
+                                href="/color"
+                                icon={cilUser}
+                                active={currentPage === "Color"}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={() => handleMenuItemClick("Color")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            >
+                                Color
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                href="/gsm"
+                                icon={cilUser}
+                                active={currentPage === "Gsm"}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={() => handleMenuItemClick("Gsm")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            >
+                                GSM List
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                href="/unit"
+                                icon={cilUser}
+                                active={currentPage === "Unit"}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={() => handleMenuItemClick("Unit")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            >
+                                Unit List
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                href="/size"
+                                icon={cilUser}
+                                active={currentPage === "Size"}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={() => handleMenuItemClick("Size")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            >
+                                Size List
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                href="/sewer"
+                                icon={cilUser}
+                                active={currentPage === "Sewer"}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={() => handleMenuItemClick("Sewer")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            >
+                                Sewer List
+                            </NavLink>
+                        </li>
+
+                        
+                         
+                      
+                        
+
                         {/* Sidebar Footer */}
                        
                     </CSidebarNav>

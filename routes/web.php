@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\GsmController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -44,6 +47,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Color routes
+    Route::get('/color', [ColorController::class, 'index'])->name('color.index'); // Add this line for listing users
+    Route::get('/color/create', [ColorController::class, 'create'])->name('color.create');
+    Route::post('/color', [ColorController::class, 'store'])->name('color.store');
+    Route::get('/color/{color}/edit', [ColorController::class, 'edit'])->name('color.edit');
+    Route::patch('/color', [ColorController::class, 'update'])->name('color.update');
+    Route::delete('/color/{color}', [ColorController::class, 'destroy'])->name('color.destroy');
+
+    Route::get('/gsm', [GsmController::class, 'index'])->name('gsm.index'); // Add this line for listing users
+    Route::get('/gsm/create', [GsmController::class, 'create'])->name('gsm.create');
+    Route::post('/gsm', [GsmController::class, 'store'])->name('gsm.store');
+    Route::get('/gsm/{gsm}/edit', [GsmController::class, 'edit'])->name('gsm.edit');
+    Route::patch('/gsm', [GsmController::class, 'update'])->name('gsm.update');
+    Route::get('/gsm/{gsm}/delete', [GsmController::class, 'destroy'])->name('gsm.destroy');
+
+  Route::get('/unit', [UnitController::class, 'index'])->name('unit.index'); // Add this line for listing users
+    Route::get('/unit/create', [UnitController::class, 'create'])->name('unit.create');
+    Route::post('/unit', [UnitController::class, 'store'])->name('unit.store');
+    Route::get('/unit/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edit');
+    Route::patch('/unit', [UnitController::class, 'update'])->name('unit.update');
+    Route::get('/unit/{unit}/delete', [UnitController::class, 'destroy'])->name('unit.destroy');
+
+
 });
 
 // API routes
