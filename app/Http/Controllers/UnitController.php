@@ -74,36 +74,46 @@ class UnitController extends Controller
     }
 
     // Show the form for editing a user
-    public function edit($gsm)
+    public function edit($unit)
     {
         $roles = Role::all();
-        $gsms =Gsm::find($gsm);
+        //$units =Unit::find($unit);
+        $munits= Unit::select('units.*', 'parent.unitname as parent_name')
+        ->where('units.id', '=', $unit)
+        ->leftJoin('units as parent', 'units.baseunitid', '=', 'parent.id')
+        ->get();
+        //$units=json_encode($munits);
+        $units = (object) $munits->first()->toArray();
 
         $routes = [
-            'update' => route('gsm.update'), // Pass the store route explicitly
+            'update' => route('unit.update'), // Pass the store route explicitly
         ];
+
+        $primaryunits = Unit::all();
         
       
 
-        return Inertia::render('Gsms/Edit', compact('roles', 'gsms','routes'));
+        return Inertia::render('Units/Edit', compact('roles','primaryunits', 'units','routes'));
     }
 
     // Update the specified user in the database
     public function update(Request $request)
     {
-        $gsmid=$request->gsmid;
-        $gsm = Gsm::find($gsmid);
+        $unitid=$request->unitid;
+        $unit = Unit::find($unitid);
         $validated = $request->validate([
             'name' => 'required|string|max:255'
         ]);
 
-        $gsm->name = $validated['name'];
+        $unit->unitname = $validated['name'];
+        $unit->unitrate = $request->unitrate;
+        $unit->baseunitid = $request->baseunitid;
         //$color->status = 1;
-        $gsm->update();
+        $unit->update();
 
        
 
-        return redirect()->route('gsm.index')->with('success', 'GSM Size updated successfully.');
+        return redirect()->route('unit.index')->with('success', 'Unit name updated successfully.');
     }
 
     // Delete the specified user from the database

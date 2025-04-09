@@ -5,11 +5,15 @@ import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import InputLabel from "../InputLabel"; // Import InputLabel
 import PrimaryButton from "../PrimaryButton";
 import TextInput from "../TextInput"; // Import TextInput
+import { Select } from "@headlessui/react";
 
-const EditGsm = ({ gsms, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
+const EditUnit = ({ primaryunits,units, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
     const { data, setData, patch, errors } = useForm({
-        name: gsms.name,
-        gsmid:gsms.id,
+        name: units.unitname,
+        unitid:units.id,
+        baseunitid:units.baseunitid,
+        unitrate:units.unitrate,
+        baseunitname:units.parent_name,
        
     });
 
@@ -17,11 +21,12 @@ const EditGsm = ({ gsms, roles = [], permissions = [], routes, userRole, userPer
         e.preventDefault();
         patch(routes.update); // Use the update route passed from the backend
     };
+    console.log(units);
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
             <form onSubmit={handleSubmit}>
-                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Gsm Size</h1>
+                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Unit</h1>
                 <div className="tw-mb-4">
                     <InputLabel value="Name" className="tw-mb-1" />
                     <TextInput
@@ -34,12 +39,43 @@ const EditGsm = ({ gsms, roles = [], permissions = [], routes, userRole, userPer
                     {errors.name && <div className="tw-text-red-500">{errors.name}</div>}
                     <TextInput
                         type="hidden"
-                        value={data.gsmid}
-                        onChange={(e) => setData("gsmid", e.target.value)}
+                        value={data.unitid}
+                        onChange={(e) => setData("unitid", e.target.value)}
                         className="tw-w-full"
                         placeholder="Enter name" // Added placeholder
                     />
                 </div>
+
+                 <div className="tw-mb-4">
+                                <InputLabel value="Select base Unit" className="tw-mb-1" />
+                                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("baseunitid", e.target.value)}>
+                                {data.baseunitid &&
+                                    <option value="{data.baseunitid}">{data.baseunitname}</option>
+                                }
+                                    
+                                
+                      <option value="0">Primary</option>
+                      {primaryunits.map((baseunit) => (
+                        <option key={baseunit.id} value={baseunit.id}>
+                          {baseunit.unitname}
+                        </option>
+                      ))}
+                
+                    </Select>
+                                    
+                                </div>
+
+                            <div className="tw-mb-4">
+                                                <InputLabel value="Rate" className="tw-mb-1" />
+                                                <TextInput
+                                                    type="text"
+                                                    value={data.unitrate}
+                                                    onChange={(e) => setData("unitrate", e.target.value)}
+                                                    className="tw-w-full"
+                                                    placeholder="Enter unit rate in numerical value" // Added placeholder
+                                                />
+                                                
+                                            </div>
                 
                
                 
@@ -55,4 +91,4 @@ const EditGsm = ({ gsms, roles = [], permissions = [], routes, userRole, userPer
     );
 };
 
-export default EditGsm;
+export default EditUnit

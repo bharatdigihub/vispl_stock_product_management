@@ -13,7 +13,7 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
     // const { units = [] } = usePage().props;// Accept routes as a prop
     const { data, setData, post, errors } = useForm({
         name: "",
-        baseunitid: "0",
+        baseunitid: "",
         unitrate: "",
         
     });
@@ -42,7 +42,7 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
                 <div className="tw-mb-4">
                 <InputLabel value="Select base Unit" className="tw-mb-1" />
                 <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("baseunitid", e.target.value)}>
-      <option value="0">Primary</option>
+      <option value="0">Primay</option>
       {units.map((unit) => (
         <option key={unit.id} value={unit.id}>
           {unit.unitname}
