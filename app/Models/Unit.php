@@ -18,7 +18,7 @@ class Unit extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'unitname',
         'baseunitid',
         'unitrate',
         'status',

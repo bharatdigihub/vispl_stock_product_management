@@ -20,12 +20,15 @@ class UnitController extends Controller
 
         if ($user->hasRole('super-admin')) {
             // Superadmin can view all users
-            $units = Unit::all();
+            //$units = Unit::all();
         } else {
             // Non-superadmin can only view their own data
             $users = User::where('id', $user->id)->get();
-            $units = Unit::all();
+            //$units = Unit::all();
         }
+        $units = Unit::select('units.*', 'parent.unitname as parent_name')
+        ->leftJoin('units as parent', 'units.baseunitid', '=', 'parent.id')
+        ->get();
 
         return Inertia::render('Units/Index', compact('units','users'));
     }
@@ -41,6 +44,10 @@ class UnitController extends Controller
              // Pass the store route explicitly
         ];
         $units = Unit::all();
+       
+    
+
+
 
         return Inertia::render('Units/Create', compact('permissions','units', 'routes')); // Pass routes to the view
     }
@@ -52,8 +59,10 @@ class UnitController extends Controller
             'name' => 'required|string|max:255'
         ]);
 
-        $gsm = Gsm::create([
-            'name' => $request->name,
+        $unit = Unit::create([
+            'unitname' => $request->name,
+            'baseunitid' => $request->baseunitid,
+            'unitrate' => $request->unitrate,
             'status' => 1,
             
         ]);
@@ -61,7 +70,7 @@ class UnitController extends Controller
         // Assign role to user
        // $user->roles()->attach($request->role);
 
-        return redirect()->route('gsm.index')->with('success', 'New Color added successfully.');
+        return redirect()->route('unit.index')->with('success', 'New Unit added successfully.');
     }
 
     // Show the form for editing a user

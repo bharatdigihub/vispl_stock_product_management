@@ -10,6 +10,7 @@ import { useTheme } from "@/Contexts/ThemeContext";
 const UnitIndex = () => {
     const { units = [] } = usePage().props;
     const { theme } = useTheme();
+    console.log("units", units);
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
@@ -36,9 +37,12 @@ const UnitIndex = () => {
                     <tbody>
                         {units.map((unit) => (
                             <tr key={unit.id} className={`tw-border-b ${theme.border.sidebarOuter}`}>
-                                <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{unit.name} gsm</td>
-                                <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{unit.baseunitid} gsm</td>
-                                <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{unit.unitrate} gsm</td>
+                                <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{unit.unitname}</td>
+                                <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
+                                    {unit.baseunitid==0?'Primary':unit.parent_name}
+                                    
+                                </td>
+                                <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{unit.unitrate} </td>
                               
                                 <td className={`tw-border tw-w-28 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
                                     <PrimaryButton

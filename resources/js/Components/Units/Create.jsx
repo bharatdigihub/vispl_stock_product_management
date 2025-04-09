@@ -6,12 +6,15 @@ import TextInput from "../TextInput"; // Import TextInput
 import InputLabel from "../InputLabel"; // Import InputLabel
 import InputError from "../InputError"; // Import InputError
 import PrimaryButton from "../PrimaryButton";
+import { Select } from "@headlessui/react";
 
 
 const CreateUnit = ({ units,roles, permissions, routes }) => { 
     // const { units = [] } = usePage().props;// Accept routes as a prop
     const { data, setData, post, errors } = useForm({
         name: "",
+        baseunitid: "",
+        unitrate: "",
         
     });
 
@@ -35,6 +38,32 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
                     />
                     <InputError message={errors.name} className="tw-mt-1" />
                 </div>
+
+                <div className="tw-mb-4">
+                <InputLabel value="Select base Unit" className="tw-mb-1" />
+                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("baseunitid", e.target.value)}>
+      <option value="0">Primay</option>
+      {units.map((unit) => (
+        <option key={unit.id} value={unit.id}>
+          {unit.unitname}
+        </option>
+      ))}
+
+    </Select>
+                    
+                </div>
+                <div className="tw-mb-4">
+                    <InputLabel value="Rate" className="tw-mb-1" />
+                    <TextInput
+                        type="text"
+                        value={data.unitrate}
+                        onChange={(e) => setData("unitrate", e.target.value)}
+                        className="tw-w-full"
+                        placeholder="Enter unit rate in numerical value" // Added placeholder
+                    />
+                    
+                </div>
+
                 
                 
                 
