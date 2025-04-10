@@ -94,10 +94,15 @@ class ColorController extends Controller
     }
 
     // Delete the specified user from the database
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+         // Find the item by ID or fail (throw an error if not found)
+         $color = Color::find($id);
+
+         // Delete the item
+       
+        $color->delete();
+        return redirect()->route('color.index')->with('success', 'One Color deleted successfully.');
     }
 
     // Fetch all permissions for the authenticated user

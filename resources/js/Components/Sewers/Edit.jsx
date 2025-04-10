@@ -20,7 +20,7 @@ const EditSize = ({ primaryunits,sizes, roles = [], permissions = [], routes, us
         e.preventDefault();
         patch(routes.update); // Use the update route passed from the backend
     };
-   console.log(data);
+    //console.log(sizes[0].name);
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
@@ -48,8 +48,8 @@ const EditSize = ({ primaryunits,sizes, roles = [], permissions = [], routes, us
                  <div className="tw-mb-4 m-1">
                                 <InputLabel value="Select Unit" className="tw-mb-1 m-1" />
                                 <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("unitid", e.target.value)}>
-                                {data.unitid==0?<option value="0">Primary</option>:<option value="{data.unitid}">{data.unitname}</option>
-                                    
+                                {data.unitid &&
+                                    <option value="{data.unitid}">{data.unitname}</option>
                                 }
                                     
                                 

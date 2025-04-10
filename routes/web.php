@@ -8,6 +8,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\GsmController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SewerController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -54,7 +56,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/color', [ColorController::class, 'store'])->name('color.store');
     Route::get('/color/{color}/edit', [ColorController::class, 'edit'])->name('color.edit');
     Route::patch('/color', [ColorController::class, 'update'])->name('color.update');
-    Route::delete('/color/{color}', [ColorController::class, 'destroy'])->name('color.destroy');
+    Route::get('/color/{color}', [ColorController::class, 'destroy'])->name('color.destroy');
 
     Route::get('/gsm', [GsmController::class, 'index'])->name('gsm.index'); // Add this line for listing users
     Route::get('/gsm/create', [GsmController::class, 'create'])->name('gsm.create');
@@ -63,12 +65,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/gsm', [GsmController::class, 'update'])->name('gsm.update');
     Route::get('/gsm/{gsm}/delete', [GsmController::class, 'destroy'])->name('gsm.destroy');
 
-  Route::get('/unit', [UnitController::class, 'index'])->name('unit.index'); // Add this line for listing users
+    Route::get('/unit', [UnitController::class, 'index'])->name('unit.index'); // Add this line for listing users
     Route::get('/unit/create', [UnitController::class, 'create'])->name('unit.create');
     Route::post('/unit', [UnitController::class, 'store'])->name('unit.store');
     Route::get('/unit/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edit');
     Route::patch('/unit', [UnitController::class, 'update'])->name('unit.update');
     Route::get('/unit/{unit}/delete', [UnitController::class, 'destroy'])->name('unit.destroy');
+
+    Route::get('/size', [SizeController::class, 'index'])->name('size.index'); // Add this line for listing users
+    Route::get('/size/create', [SizeController::class, 'create'])->name('size.create');
+    Route::post('/size', [SizeController::class, 'store'])->name('size.store');
+    Route::get('/size/{size}/edit', [SizeController::class, 'edit'])->name('size.edit');
+    Route::patch('/size', [SizeController::class, 'update'])->name('size.update');
+    Route::get('/size/{size}/delete', [SizeController::class, 'destroy'])->name('size.destroy');
+
+    Route::get('/sewer', [SewerController::class, 'index'])->name('sewer.index'); // Add this line for listing users
+    Route::get('/sewer/create', [SewerController::class, 'create'])->name('sewer.create');
+    Route::post('/sewer', [SewerController::class, 'store'])->name('sewer.store');
+    Route::get('/sewer/{sewer}/edit', [SewerController::class, 'edit'])->name('sewer.edit');
+    Route::patch('/sewer', [SewerController::class, 'update'])->name('sewer.update');
+    Route::get('/sewer/{sewer}/delete', [SewerController::class, 'destroy'])->name('sewer.destroy');
 
 
 });

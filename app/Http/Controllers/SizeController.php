@@ -5,13 +5,15 @@ use App\Models\User;
 use App\Models\Color;
 use App\Models\Gsm;
 use App\Models\Unit;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
-class UnitController extends Controller
+class SizeController extends Controller
 {
     // Display a list of users
     public function index()
@@ -30,7 +32,12 @@ class UnitController extends Controller
         ->leftJoin('units as parent', 'units.baseunitid', '=', 'parent.id')
         ->get();
 
-        return Inertia::render('Units/Index', compact('units','users'));
+        $sizes= DB::table('sizes')
+    ->leftJoin('units', 'sizes.unitid', '=', 'units.id')
+    ->select('sizes.id', 'units.unitname','sizes.name', 'sizes.status')
+    ->get();
+
+        return Inertia::render('Sizes/Index', compact('users','sizes'));
     }
 
     // Show the form for creating a new user
@@ -40,7 +47,7 @@ class UnitController extends Controller
         //$colors = Role::all(); // Fetch all roles
         $permissions = Permission::all(); // Fetch all permissions
         $routes = [
-            'store' => route('unit.store'),
+            'store' => route('size.store'),
              // Pass the store route explicitly
         ];
         $units = Unit::all();
@@ -49,7 +56,7 @@ class UnitController extends Controller
 
 
 
-        return Inertia::render('Units/Create', compact('permissions','units', 'routes')); // Pass routes to the view
+        return Inertia::render('Sizes/Create', compact('permissions','units', 'routes')); // Pass routes to the view
     }
 
     // Store a newly created user in the database
@@ -59,10 +66,10 @@ class UnitController extends Controller
             'name' => 'required|string|max:255'
         ]);
 
-        $unit = Unit::create([
-            'unitname' => $request->name,
-            'baseunitid' => $request->baseunitid,
-            'unitrate' => $request->unitrate,
+        $size = Size::create([
+            'name' => $request->name,
+            'unitid' => $request->unitid,
+           
             'status' => 1,
             
         ]);
@@ -70,62 +77,68 @@ class UnitController extends Controller
         // Assign role to user
        // $user->roles()->attach($request->role);
 
-        return redirect()->route('unit.index')->with('success', 'New Unit added successfully.');
+        return redirect()->route('size.index')->with('success', 'New Size added successfully.');
     }
 
     // Show the form for editing a user
-    public function edit($unit)
+    public function edit($size)
     {
         $roles = Role::all();
         //$units =Unit::find($unit);
-        $munits= Unit::select('units.*', 'parent.unitname as parent_name')
-        ->where('units.id', '=', $unit)
-        ->leftJoin('units as parent', 'units.baseunitid', '=', 'parent.id')
+        /*$msizes= Size::select('sizes.*', 'sizes.id as sizeid')
+        ->where('sizes.id', '=', $size)
+        ->leftJoin('units as parent', 'units.id', '=', 'sizes.unitid')
+        ->get();*/
+
+        $msizes= DB::table('sizes')
+        ->leftJoin('units', 'sizes.unitid', '=', 'units.id')
+        ->select('sizes.id', 'units.unitname','sizes.name', 'sizes.status', 'sizes.unitid')
+        ->where('sizes.id', '=', $size)
         ->get();
-        //$units=json_encode($munits);
-        $units = (object) $munits->first()->toArray();
+      
+       $sizes = $msizes;
 
         $routes = [
-            'update' => route('unit.update'), // Pass the store route explicitly
+            'update' => route('size.update'), // Pass the store route explicitly
         ];
 
         $primaryunits = Unit::all();
         
       
 
-        return Inertia::render('Units/Edit', compact('roles','primaryunits', 'units','routes'));
+        return Inertia::render('Sizes/Edit', compact('roles','primaryunits', 'sizes','routes'));
     }
 
     // Update the specified user in the database
     public function update(Request $request)
     {
-        $unitid=$request->unitid;
-        $unit = Unit::find($unitid);
+        $sizeid=$request->sizeid;
+        $size = Size::find($sizeid);
         $validated = $request->validate([
             'name' => 'required|string|max:255'
         ]);
 
-        $unit->unitname = $validated['name'];
-        $unit->unitrate = $request->unitrate;
-        $unit->baseunitid = $request->baseunitid;
+        $size->name = $validated['name'];
+       
+        $size->unitid = $request->unitid;
         //$color->status = 1;
-        $unit->update();
+        $size->update();
 
        
 
-        return redirect()->route('unit.index')->with('success', 'Unit name updated successfully.');
+        return redirect()->route('size.index')->with('success', 'Size name updated successfully.');
     }
 
     // Delete the specified user from the database
     public function destroy($id)
     {
          // Find the item by ID or fail (throw an error if not found)
-         $unit = Unit::find($id);
+         $size = Size::find($id);
 
          // Delete the item
        
-        $unit->delete();
-        return redirect()->route('unit.index')->with('success', 'One Unit deleted successfully.');
+        $size->delete();
+        return redirect()->route('size.index')->with('success', 'One  Size deleted successfully.');
     }
 
     // Fetch all permissions for the authenticated user

@@ -9,12 +9,12 @@ import PrimaryButton from "../PrimaryButton";
 import { Select } from "@headlessui/react";
 
 
-const CreateUnit = ({ units,roles, permissions, routes }) => { 
+const CreateSize = ({ units,roles, permissions, routes }) => { 
     // const { units = [] } = usePage().props;// Accept routes as a prop
     const { data, setData, post, errors } = useForm({
         name: "",
-        baseunitid: "",
-        unitrate: "",
+        unitid: "0",
+       
         
     });
 
@@ -26,7 +26,7 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
             <form onSubmit={handleSubmit}>
-                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add New Unit</h1>
+                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add New Size</h1>
                 <div className="tw-mb-4">
                     <InputLabel value="Name" className="tw-mb-1" />
                     <TextInput
@@ -34,15 +34,15 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         className="tw-w-full"
-                        placeholder="Enter name" // Added placeholder
+                        placeholder="Enter Size name" // Added placeholder
                     />
                     <InputError message={errors.name} className="tw-mt-1" />
                 </div>
 
                 <div className="tw-mb-4">
-                <InputLabel value="Select base Unit" className="tw-mb-1" />
-                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("baseunitid", e.target.value)}>
-      <option value="0">Primay</option>
+                <InputLabel value="Select  Unit" className="tw-mb-1 m-1" />
+                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("unitid", e.target.value)}>
+      
       {units.map((unit) => (
         <option key={unit.id} value={unit.id}>
           {unit.unitname}
@@ -52,19 +52,7 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
     </Select>
                     
                 </div>
-                <div className="tw-mb-4">
-                    <InputLabel value="Rate" className="tw-mb-1" />
-                    <TextInput
-                        type="text"
-                        value={data.unitrate}
-                        onChange={(e) => setData("unitrate", e.target.value)}
-                        className="tw-w-full"
-                        placeholder="Enter unit rate in numerical value" // Added placeholder
-                    />
-                    
-                </div>
-
-                
+              
                 
                 
               
@@ -80,4 +68,4 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
     );
 };
 
-export default CreateUnit;
+export default CreateSize;
