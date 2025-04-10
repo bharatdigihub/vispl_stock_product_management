@@ -33,28 +33,31 @@ const PermissionEdit = ({ permission, modules, routes }) => {
                     />
                     <InputError message={errors.module_id} className="tw-mt-1" />
                 </div>
+
                 <div className="tw-mb-4">
                     <InputLabel value="Actions" className="tw-mb-1" />
-                    <div className="tw-flex tw-space-x-4">
-                        {["view", "create", "edit", "delete"].map((action) => (
-                            <RadioButton
-                                key={action}
-                                id={`action-${action}`}
-                                name="actions"
-                                value={action}
-                                label={action}
-                                checked={data.actions.includes(action)}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    setData("actions", e.target.checked
-                                        ? [...data.actions, value]
-                                        : data.actions.filter((a) => a !== value)
-                                    );
-                                }}
-                            />
-                        ))}
-                    </div>
-                    <InputError message={errors.actions} className="tw-mt-1" />
+                    {permission.actions.map((action) => (
+                        <RadioButton
+                            key={action}
+                            id={`action-${action}`}
+                            name="actions" // Ensure the name is consistent for the group
+                            value={action}
+                            label={action}
+                            checked={data.actions.includes(action)} // Ensure this correctly reflects the checked state
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                setData("actions", e.target.checked
+                                    ? [...data.actions, value]
+                                    : data.actions.filter((a) => a !== value)
+                                );
+                            }}
+                            className={`tw-px-4 tw-py-2 tw-border tw-rounded-full tw-transition-all tw-duration-200 ${
+                                data.actions.includes(action)
+                                    ? "tw-bg-indigo-500 tw-text-white tw-border-indigo-600 hover:tw-bg-indigo-600"
+                                    : "tw-bg-gray-200 tw-text-gray-800 tw-border-gray-300 hover:tw-bg-gray-300"
+                            }`}
+                        />
+                    ))}
                 </div>
                 
                 <PrimaryButton

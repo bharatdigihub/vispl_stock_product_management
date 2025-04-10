@@ -9,6 +9,7 @@ import { useTheme } from "@/Contexts/ThemeContext";
 import InputLabel from "../InputLabel"; // Import InputLabel
 import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import Checkbox from "../Checkbox"; // Import Checkbox
+import RadioInput from "../RadioInput"; // Import RadioInput component
 
 const UsersIndex = () => {
     const { users = [] } = usePage().props;
@@ -308,108 +309,80 @@ const UsersIndex = () => {
                     <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
                         <InputLabel value="Basic Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
                         <div className="tw-flex tw-flex-col tw-gap-2">
-                            <div className="tw-flex tw-items-center">
-                                <TextInput
-                                    type="radio"
-                                    name="basicRadio"
-                                    id="basicRadio1"
-                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
-                                />
-                                <InputLabel for="basicRadio1" value="Option 1" className={`${theme.text}`} />
-                            </div>
-                            <div className="tw-flex tw-items-center">
-                                <TextInput
-                                    type="radio"
-                                    name="basicRadio"
-                                    id="basicRadio2"
-                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
-                                />
-                                <InputLabel for="basicRadio2" value="Option 2" className={`${theme.text}`} />
-                            </div>
+                            <RadioInput
+                                id="basicRadio1"
+                                name="basicRadio"
+                                value="option1"
+                                label="Option 1"
+                                className={`tw-mr-2`}
+                            />
+                            <RadioInput
+                                id="basicRadio2"
+                                name="basicRadio"
+                                value="option2"
+                                label="Option 2"
+                                className={`tw-mr-2`}
+                            />
                         </div>
                     </div>
                     {/* Design 2: Inline Radio Buttons */}
                     <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
                         <InputLabel value="Inline Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
                         <div className="tw-flex tw-gap-4">
-                            <div className="tw-flex tw-items-center">
-                                <TextInput
-                                    type="radio"
-                                    name="inlineRadio"
-                                    id="inlineRadio1"
-                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
-                                />
-                                <InputLabel for="inlineRadio1" value="Option 1" className={`${theme.text}`} />
-                            </div>
-                            <div className="tw-flex tw-items-center">
-                                <TextInput
-                                    type="radio"
-                                    name="inlineRadio"
-                                    id="inlineRadio2"
-                                    className={`tw-mr-2 tw-flex tw-rounded-full tw-max-w-4 tw-max-h-4 tw-min-w-4 tw-min-h-4 tw-p-0 ${theme.border.sidebarOuter}`}
-                                />
-                                <InputLabel for="inlineRadio2" value="Option 2" className={`${theme.text}`} />
-                            </div>
+                            <RadioInput
+                                id="inlineRadio1"
+                                name="inlineRadio"
+                                value="option1"
+                                label="Option 1"
+                                className={`tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            />
+                            <RadioInput
+                                id="inlineRadio2"
+                                name="inlineRadio"
+                                value="option2"
+                                label="Option 2"
+                                className={`tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            />
                         </div>
                     </div>
                     {/* Design 3: Card Style Radio Buttons */}
                     <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
                         <InputLabel value="Card Style Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
                         <div className="tw-grid tw-grid-cols-2 tw-gap-4">
-                            <label
-                                htmlFor="cardRadio1"
-                                className={`tw-flex tw-items-center tw-justify-center tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
-                            >
-                                <TextInput
-                                    type="radio"
-                                    name="cardRadio"
-                                    id="cardRadio1"
-                                    className="tw-hidden"
-                                />
-                                <span className={`${theme.text}`}>Option 1</span>
-                            </label>
-                            <label
-                                htmlFor="cardRadio2"
-                                className={`tw-flex tw-items-center tw-justify-center tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
-                            >
-                                <TextInput
-                                    type="radio"
-                                    name="cardRadio"
-                                    id="cardRadio2"
-                                    className="tw-hidden"
-                                />
-                                <span className={`${theme.text}`}>Option 2</span>
-                            </label>
+                            <RadioInput
+                                id="cardRadio1"
+                                name="cardRadio"
+                                value="option1"
+                                label="Option 1"
+                                className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            />
+                            <RadioInput
+                                id="cardRadio2"
+                                name="cardRadio"
+                                value="option2"
+                                label="Option 2"
+                                className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            />
                         </div>
                     </div>
                     {/* Design 4: Toggle Style Radio Buttons */}
                     <div className={`tw-p-4 tw-border ${theme.border.sidebarOuter} tw-rounded-sm ${theme.header}`}>
                         <InputLabel value="Toggle Style Radio Buttons" className={`tw-mb-2 ${theme.text}`} />
                         <div className="tw-flex tw-gap-4">
-                            <label
-                                htmlFor="toggleRadio1"
-                                className={`tw-flex tw-items-center tw-justify-center tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
-                            >
-                                <TextInput
-                                    type="radio"
-                                    name="toggleRadio"
-                                    id="toggleRadio1"
-                                    className="tw-hidden"
-                                />
-                                <span className={`${theme.text}`}>Option 1</span>
-                            </label>
-                            <label
-                                htmlFor="toggleRadio2"
-                                className={`tw-flex tw-items-center tw-justify-center tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full tw-cursor-pointer hover:tw-bg-gray-100 ${theme.inputBackground}`}
-                            >
-                                <TextInput
-                                    type="radio"
-                                    name="toggleRadio"
-                                    id="toggleRadio2"
-                                    className="tw-hidden"
-                                />
-                                <span className={`${theme.text}`}>Option 2</span>
-                            </label>
+                            <RadioInput
+                                id="toggleRadio1"
+                                name="toggleRadio"
+                                value="option1"
+                                label="Option 1"
+                                className={`tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            />
+                            <RadioInput
+                                id="toggleRadio2"
+                                name="toggleRadio"
+                                value="option2"
+                                label="Option 2"
+                                className={`tw-px-4 tw-py-2 tw-border ${theme.border.sidebarOuter} tw-rounded-full hover:tw-bg-gray-100 ${theme.inputBackground}`}
+                            />
                         </div>
                     </div>
                 </div>
@@ -419,38 +392,38 @@ const UsersIndex = () => {
                 <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6">
                     {/* Small Button */}
                     <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
-                        <PrimaryButton className="tw-bg-blue-500 hover:tw-bg-blue-600 tw-py-1 tw-px-3 tw-text-sm">
-                            Small Blue Button
-                        </PrimaryButton>
-                        <PrimaryButton className="tw-bg-green-500 hover:tw-bg-green-600 tw-py-1 tw-px-3 tw-text-sm">
-                            Small Green Button
-                        </PrimaryButton>
-                        <PrimaryButton className="tw-bg-red-500 hover:tw-bg-red-600 tw-py-1 tw-px-3 tw-text-sm">
-                            Small Red Button
+                        <PrimaryButton className={`${theme.button} tw-py-1 tw-px-3 tw-text-sm tw-rounded-md tw-shadow-md`}>
+                            Small Button
                         </PrimaryButton>
                     </div>
                     {/* Medium Button */}
                     <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
-                        <PrimaryButton className="tw-bg-blue-500 hover:tw-bg-blue-600 tw-py-2 tw-px-4 tw-text-base">
-                            Medium Blue Button
-                        </PrimaryButton>
-                        <PrimaryButton className="tw-bg-green-500 hover:tw-bg-green-600 tw-py-2 tw-px-4 tw-text-base">
-                            Medium Green Button
-                        </PrimaryButton>
-                        <PrimaryButton className="tw-bg-red-500 hover:tw-bg-red-600 tw-py-2 tw-px-4 tw-text-base">
-                            Medium Red Button
+                        <PrimaryButton className={`${theme.button} tw-py-2 tw-px-4 tw-text-base tw-rounded-md tw-shadow-md`}>
+                            Medium Button
                         </PrimaryButton>
                     </div>
                     {/* Large Button */}
                     <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
-                        <PrimaryButton className="tw-bg-blue-500 hover:tw-bg-blue-600 tw-py-3 tw-px-6 tw-text-lg">
-                            Large Blue Button
+                        <PrimaryButton className={`${theme.button} tw-py-3 tw-px-6 tw-text-lg tw-rounded-md tw-shadow-md`}>
+                            Large Button
                         </PrimaryButton>
-                        <PrimaryButton className="tw-bg-green-500 hover:tw-bg-green-600 tw-py-3 tw-px-6 tw-text-lg">
-                            Large Green Button
+                    </div>
+                    {/* Success Button */}
+                    <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
+                        <PrimaryButton className={`${theme.success} tw-py-2 tw-px-4 tw-text-base tw-rounded-md tw-shadow-md`}>
+                            Success Button
                         </PrimaryButton>
-                        <PrimaryButton className="tw-bg-red-500 hover:tw-bg-red-600 tw-py-3 tw-px-6 tw-text-lg">
-                            Large Red Button
+                    </div>
+                    {/* Warning Button */}
+                    <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
+                        <PrimaryButton className={`${theme.warning} tw-py-2 tw-px-4 tw-text-base tw-rounded-md tw-shadow-md`}>
+                            Warning Button
+                        </PrimaryButton>
+                    </div>
+                    {/* Danger Button */}
+                    <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
+                        <PrimaryButton className={`${theme.danger} tw-py-2 tw-px-4 tw-text-base tw-rounded-md tw-shadow-md`}>
+                            Danger Button
                         </PrimaryButton>
                     </div>
                 </div>

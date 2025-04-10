@@ -11,6 +11,7 @@ export default function NavLink({
     theme = {},
     onClick = () => {},
     children,
+    className = "",
 }) {
     return (
         <Link
@@ -21,7 +22,7 @@ export default function NavLink({
                 active
                     ? "tw-bg-indigo-600/30  tw-border-indigo-800 tw-text-gray-50"
                     : "hover:tw-bg-gray-800 tw-text-inherit"
-            }`}
+            } ${className}`}
             onClick={onClick}
         >
             {icon && <CIcon icon={icon} className={` ${active ? "tw-text-gray-50" : "tw-text-gray-500" } ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`} />}
@@ -71,6 +72,11 @@ export function DropdownMenu({
                                 sidebarState={sidebarState}
                                 theme={theme}
                                 onClick={item.onClick}
+                                className={`tw-px-4 tw-py-2 tw-border tw-rounded-full ${
+                                    item.active
+                                        ? "tw-bg-indigo-500 tw-text-white"
+                                        : "tw-bg-gray-200 tw-text-gray-800"
+                                } hover:tw-bg-gray-300`}
                             >
                                 {item.label}
                             </NavLink>

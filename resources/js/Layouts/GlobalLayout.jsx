@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import { CSidebar, CSidebarNav, CContainer, CCol } from "@coreui/react";
-import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronLeft, cilChevronRight, cilX } from "@coreui/icons"; // Add new icons
+import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronLeft, cilChevronRight, cilX, cilNotes, cilLayers, cilResizeBoth, cilColorFill, cilRecycle } from "@coreui/icons"; // Add new icons
 import CIcon from "@coreui/icons-react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import NavLink, { DropdownMenu } from "../Components/NavLink";
@@ -183,11 +183,17 @@ const GlobalLayout = ({ children }) => {
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             />
                         </li>
-
+                        <div
+                            className={`tw-text-sm mb-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
+                                sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
+                            }`}
+                        >
+                            Lists
+                        </div>
                         <li>
                             <NavLink
                                 href="/color"
-                                icon={cilUser}
+                                icon={cilColorFill}
                                 active={currentPage === "Color"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -200,7 +206,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/gsm"
-                                icon={cilUser}
+                                icon={cilNotes}
                                 active={currentPage === "Gsm"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -213,7 +219,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/unit"
-                                icon={cilUser}
+                                icon={cilLayers}
                                 active={currentPage === "Unit"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -226,7 +232,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/size"
-                                icon={cilUser}
+                                icon={cilResizeBoth}
                                 active={currentPage === "Size"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -239,7 +245,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/sewer"
-                                icon={cilUser}
+                                icon={cilRecycle}
                                 active={currentPage === "Sewer"}
                                 sidebarState={sidebarState}
                                 theme={theme}

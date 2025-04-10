@@ -142,6 +142,73 @@ input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset !important;
     -webkit-text-fill-color: white !important;
 }
+
+/* RadioInput Styles */
+.radio-input-label {
+    @apply tw-flex tw-items-center tw-gap-2 tw-cursor-pointer;
+}
+
+.radio-input-hidden {
+    @apply tw-hidden;
+}
+
+.radio-input-outer {
+    @apply tw-flex tw-rounded-full tw-w-4 tw-h-4 tw-border-2 tw-flex-shrink-0 tw-justify-center tw-items-center;
+}
+
+.radio-input-outer-checked-dark {
+    @apply tw-border-purple-500 tw-bg-purple-500;
+}
+
+.radio-input-outer-checked-light {
+    @apply tw-border-orange-500 tw-bg-orange-500;
+}
+
+.radio-input-outer-unchecked-dark {
+    @apply tw-border-gray-500 tw-bg-gray-700;
+}
+
+.radio-input-outer-unchecked-light {
+    @apply tw-border-gray-300 tw-bg-gray-100;
+}
+
+.radio-input-inner {
+    @apply tw-block tw-w-2 tw-h-2 tw-rounded-full;
+}
+
+.radio-input-inner-checked-dark {
+    @apply tw-bg-purple-300;
+}
+
+.radio-input-inner-checked-light {
+    @apply tw-bg-orange-300;
+}
+
+.radio-input-inner-unchecked-dark {
+    @apply tw-bg-gray-500;
+}
+
+.radio-input-inner-unchecked-light {
+    @apply tw-bg-gray-300;
+}
+
+/* RadioInput Styles with :checked */
+.radio-input-hidden:checked + .radio-input-outer {
+    @apply tw-border-orange-500 tw-bg-orange-500 dark:tw-border-purple-500 dark:tw-bg-purple-500;
+}
+
+.radio-input-hidden:checked + .radio-input-outer .radio-input-inner {
+    @apply tw-bg-orange-300 dark:tw-bg-purple-300;
+}
+
+.radio-input-hidden:not(:checked) + .radio-input-outer {
+    @apply tw-border-gray-300 tw-bg-gray-100 dark:tw-border-gray-500 dark:tw-bg-gray-700;
+}
+
+.radio-input-hidden:not(:checked) + .radio-input-outer .radio-input-inner {
+    @apply tw-bg-gray-300 dark:tw-bg-gray-500;
+}
+
 /* .user-dropdown{
     @apply tw-absolute
 } */

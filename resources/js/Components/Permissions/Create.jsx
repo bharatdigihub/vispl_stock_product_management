@@ -50,6 +50,11 @@ const PermissionCreate = ({ modules, routes }) => {
                                         : data.actions.filter((a) => a !== value)
                                     );
                                 }}
+                                className={`tw-px-4 tw-py-2 tw-border tw-rounded-full ${
+                                    data.actions.includes(action)
+                                        ? "tw-bg-indigo-500 tw-text-white"
+                                        : "tw-bg-gray-200 tw-text-gray-800"
+                                } hover:tw-bg-gray-300`}
                             />
                         ))}
                     </div>
