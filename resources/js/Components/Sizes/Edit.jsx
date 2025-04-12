@@ -12,7 +12,7 @@ const EditSize = ({ primaryunits,sizes, roles = [], permissions = [], routes, us
         name: sizes[0].name,
         unitid:sizes[0].unitid,
         sizeid:sizes[0].id,
-      unitname:sizes[0].unitname,
+        unitname:sizes[0].unitname,
        
     });
 
