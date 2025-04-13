@@ -28,6 +28,12 @@ const GlobalLayout = ({ children }) => {
             "/gsm": "Gsm",
             "/gsm/create": "Create Gsm",
             "/gsm/{}/edit": "Edit Gsm",
+            "/size": "Size",
+            "/size/create": "Create Size",
+            "/size/{}/edit": "Edit Size",
+            "/sewer": "Sewer",
+            "/sewer/create": "Create Sewer",
+            "/sewer/{}/edit": "Edit Sewer", 
            
         };
         const currentPath = window.location.pathname;
