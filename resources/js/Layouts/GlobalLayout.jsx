@@ -33,7 +33,7 @@ const GlobalLayout = ({ children }) => {
             "/size/{}/edit": "Edit Size",
             "/sewer": "Sewer",
             "/sewer/create": "Create Sewer",
-            "/sewer/{}/edit": "Edit Sewer", 
+            "/sewer/{}/edit": "Edit Sewer",
            
         };
         const currentPath = window.location.pathname;
@@ -258,7 +258,21 @@ const GlobalLayout = ({ children }) => {
                                 onClick={() => handleMenuItemClick("Sewer")}
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                Sewer List
+                                Sticher List
+                            </NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink
+                                href="/material"
+                                icon={cilUser}
+                                active={currentPage === "Material"}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={() => handleMenuItemClick("Material")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            >
+                                Raw-Material List
                             </NavLink>
                         </li>
 
