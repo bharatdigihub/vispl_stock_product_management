@@ -29,14 +29,14 @@ const CreateSewer = ({ productionhouses,productionunits,units,roles, permissions
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
             <form onSubmit={handleSubmit}>
-                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add New Sewer Group</h1>
+                <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add New Sticher Group</h1>
                 <div className="tw-mb-4">
                     <InputLabel value="Group Name" className="tw-mb-1" />
                     <TextInput
                         type="text"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        className="tw-w-full"
+                        className="tw-w-full tw-rounded-md tw-border tw-border-gray-950"
                         placeholder="Enter Group name" // Added placeholder
                     />
                     <InputError message={errors.name} className="tw-mt-1" />

@@ -10,6 +10,7 @@ use App\Http\Controllers\GsmController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SewerController;
+use App\Http\Controllers\MaterialController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -85,6 +86,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sewer/{sewer}/edit', [SewerController::class, 'edit'])->name('sewer.edit');
     Route::patch('/sewer', [SewerController::class, 'update'])->name('sewer.update');
     Route::get('/sewer/{sewer}/delete', [SewerController::class, 'destroy'])->name('sewer.destroy');
+
+    Route::get('/material', [MaterialController::class, 'index'])->name('material.index'); // Add this line for listing users
+    Route::get('/material/create', [MaterialController::class, 'create'])->name('material.create');
+    Route::post('/material', [MaterialController::class, 'store'])->name('material.store');
+    Route::get('/material/{material}/edit', [MaterialController::class, 'edit'])->name('material.edit');
+    Route::patch('/material', [MaterialController::class, 'update'])->name('material.update');
+    Route::get('/material/{material}/delete', [MaterialController::class, 'destroy'])->name('material.destroy');
 
 
 });

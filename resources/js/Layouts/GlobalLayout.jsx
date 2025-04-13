@@ -239,7 +239,21 @@ const GlobalLayout = ({ children }) => {
                                 onClick={() => handleMenuItemClick("Sewer")}
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
-                                Sewer List
+                                Sticher List
+                            </NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink
+                                href="/material"
+                                icon={cilUser}
+                                active={currentPage === "Sewer"}
+                                sidebarState={sidebarState}
+                                theme={theme}
+                                onClick={() => handleMenuItemClick("Sewer")}
+                                className="tw-transition-all tw-duration-300 tw-delay-150"
+                            >
+                                Raw-Material List
                             </NavLink>
                         </li>
 
