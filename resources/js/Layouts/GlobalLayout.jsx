@@ -247,10 +247,10 @@ const GlobalLayout = ({ children }) => {
                             <NavLink
                                 href="/material"
                                 icon={cilUser}
-                                active={currentPage === "Sewer"}
+                                active={currentPage === "Material"}
                                 sidebarState={sidebarState}
                                 theme={theme}
-                                onClick={() => handleMenuItemClick("Sewer")}
+                                onClick={() => handleMenuItemClick("Material")}
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             >
                                 Raw-Material List
