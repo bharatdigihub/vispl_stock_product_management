@@ -118,7 +118,7 @@ const GlobalLayout = ({ children }) => {
                                 Dashboard
                             </NavLink>
                         </li>
-                        <li>
+                        {/*<li>
                             <NavLink
                                 href="/users"
                                 icon={cilUser}
@@ -131,7 +131,7 @@ const GlobalLayout = ({ children }) => {
                                 User Management
                             </NavLink>
                         </li>
-                        <li>
+                         <li>
                             <NavLink
                                 href="/roles"
                                 icon={cilSettings}
@@ -156,32 +156,61 @@ const GlobalLayout = ({ children }) => {
                             >
                                 Permissions
                             </NavLink>
-                        </li>
+                        </li> */}
                         <div
                             className={`tw-text-sm mt-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
                                 sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
                             }`}
                         >
-                            User Settings
+                           Settings
                         </div>
                         <li>
                             <DropdownMenu
-                                label="Settings"
+                                label="Master Settings"
                                 icon={cilSettings}
                                 items={[
                                     {
-                                        href: "/profile",
-                                        label: "Profile",
-                                        icon: cilUserFemale,
-                                        active: currentPage === "Profile",
-                                        onClick: (e) => e.preventDefault(), // Prevent redirection
+                                        href: "/color",
+                                        label: "Color List",
+                                        icon: cilColorFill,
+                                        active: currentPage === "Color",
+                                        onClick: (e) => handleMenuItemClick("Color"), // Prevent redirection
                                     },
                                     {
-                                        href: "/account",
-                                        label: "Account",
-                                        icon: cilWallet,
-                                        active: currentPage === "Account",
-                                        onClick: (e) => e.preventDefault(), // Prevent redirection
+                                        href: "/gsm",
+                                        label: "Gsm List",
+                                        icon: cilNotes,
+                                        active: currentPage === "Gsm",
+                                        onClick: (e) => handleMenuItemClick("Gsm"), // Prevent redirection
+                                    },
+                                    {
+                                        href: "/unit",
+                                        label: "Unit List",
+                                        icon: cilLayers,
+                                        active: currentPage === "Unit",
+                                        onClick: (e) => handleMenuItemClick("Unit"), // Prevent redirection
+                                    },
+                                    {
+                                        href: "/size",
+                                        label: "Size List",
+                                        icon: cilResizeBoth,
+                                        active: currentPage === "Size",
+                                        onClick: (e) => handleMenuItemClick("Size"), // Prevent redirection
+                                    },
+                                    {
+                                        href: "/sewer",
+                                        label: "Sewer",
+                                        icon: cilRecycle,
+                                        active: currentPage === "Sewer",
+                                        onClick: (e) => handleMenuItemClick("Sewer"), // Prevent redirection
+                                    },
+                                    {
+                                        href: "/material",
+                                        label: "Material",
+                                        icon: cilRecycle,
+                                        active: currentPage === "Material",
+                                        onClick: (e) => handleMenuItemClick("Material"), // Prevent redirection
+                                        
                                     },
                                 ]}
                                 sidebarState={sidebarState}
@@ -189,14 +218,14 @@ const GlobalLayout = ({ children }) => {
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             />
                         </li>
-                        <div
+                        {/* <div
                             className={`tw-text-sm mb-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
                                 sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
                             }`}
                         >
-                            Lists
-                        </div>
-                        <li>
+                            Lists   
+                        </div> */}
+                        {/* <li>
                             <NavLink
                                 href="/color"
                                 icon={cilColorFill}
@@ -274,7 +303,7 @@ const GlobalLayout = ({ children }) => {
                             >
                                 Raw-Material List
                             </NavLink>
-                        </li>
+                        </li> */}
 
                         
                          

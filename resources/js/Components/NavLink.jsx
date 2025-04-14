@@ -1,8 +1,9 @@
+
+
 import { Link } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
 import CIcon from '@coreui/icons-react';
 import { cilChevronBottom, cilChevronTop } from "@coreui/icons";
-import { useState } from 'react';
-
 export default function NavLink({
     href,
     active = false,
@@ -40,7 +41,30 @@ export function DropdownMenu({
     sidebarState = "full",
     theme = {},
 }) {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const key = `dropdown-open-${label}`;
+    const hasActiveItem = items.some(item => item.active);
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(() => {
+        const stored = localStorage.getItem(key);
+        return stored === 'true' || hasActiveItem;
+    });
+
+    useEffect(() => {
+        // Keep dropdown open if an item is active
+        if (hasActiveItem && !isDropdownOpen) {
+            setIsDropdownOpen(true);
+        }
+    }, [hasActiveItem]);
+
+    useEffect(() => {
+        localStorage.setItem(key, isDropdownOpen);
+    }, [isDropdownOpen]);
+
+    const handleToggle = () => {
+        const newState = !isDropdownOpen;
+        setIsDropdownOpen(newState);
+        localStorage.setItem(key, newState);
+    };
 
     return (
         <div>
@@ -48,7 +72,7 @@ export function DropdownMenu({
                 className={`tw-flex tw-items-center tw-h-10 tw-border tw-border-transparent tw-py-2 tw-px-2 tw-rounded-sm ${
                     sidebarState === "half" ? "tw-justify-center" : "tw-justify-between"
                 } ${isDropdownOpen ? "tw-bg-indigo-600/30  tw-border-indigo-800 tw-text-gray-50" : "hover:tw-bg-gray-800"} tw-cursor-pointer`}
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                onClick={handleToggle}
             >
                 <div className="tw-flex tw-items-center">
                     {icon && <CIcon icon={icon} className={`tw-text-gray-500 ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`} />}
@@ -61,6 +85,7 @@ export function DropdownMenu({
                     />
                 )}
             </div>
+
             {isDropdownOpen && sidebarState !== "half" && (
                 <ul className="tw-ml-3 tw-mt-1 tw-border-l-2 tw-border-indigo-900">
                     {items.map((item, index) => (
@@ -74,8 +99,8 @@ export function DropdownMenu({
                                 onClick={item.onClick}
                                 className={`tw-px-4 tw-py-2 tw-border tw-rounded-full ${
                                     item.active
-                                        ? "tw-bg-indigo-500 tw-text-white"
-                                        : "tw-bg-gray-200 tw-text-gray-800"
+                                        ? "tw-bg-indigo-600/30 tw-text-white"
+                                        : "tw-bg-gray-800 tw-text-white"
                                 } hover:tw-bg-gray-300`}
                             >
                                 {item.label}
