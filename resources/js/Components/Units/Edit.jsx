@@ -46,38 +46,29 @@ const EditUnit = ({ primaryunits,units, roles = [], permissions = [], routes, us
                     />
                 </div>
 
-                 <div className="tw-mb-4">
-                                <InputLabel value="Select base Unit" className="tw-mb-1" />
-                                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("baseunitid", e.target.value)}>
-                                {data.baseunitid &&
-                                    <option value="{data.baseunitid}">{data.baseunitname}</option>
-                                }
-                                    
-                                
-                      <option value="0">Primary</option>
-                      {primaryunits.map((baseunit) => (
-                        <option key={baseunit.id} value={baseunit.id}>
-                          {baseunit.unitname}
-                        </option>
-                      ))}
-                
-                    </Select>
-                                    
-                                </div>
+                <div className="tw-mb-4">
+                    <InputLabel value="Select base Unit" className="tw-mb-1" />
+                    <SelectDropdown
+                        options={[
+                            { id: "0", name: "Primary" },
+                            ...primaryunits.map((unit) => ({ id: unit.id, name: unit.unitname })),
+                        ]}
+                        value={data.baseunitid}
+                        onChange={(e) => setData("baseunitid", e.target.value)}
+                        placeholder="Select Base Unit"
+                    />
+                </div>
 
-                            <div className="tw-mb-4">
-                                                <InputLabel value="Rate" className="tw-mb-1" />
-                                                <TextInput
-                                                    type="text"
-                                                    value={data.unitrate}
-                                                    onChange={(e) => setData("unitrate", e.target.value)}
-                                                    className="tw-w-full"
-                                                    placeholder="Enter unit rate in numerical value" // Added placeholder
-                                                />
-                                                
-                                            </div>
-                
-               
+                <div className="tw-mb-4">
+                    <InputLabel value="Rate" className="tw-mb-1" />
+                    <TextInput
+                        type="text"
+                        value={data.unitrate}
+                        onChange={(e) => setData("unitrate", e.target.value)}
+                        className="tw-w-full"
+                        placeholder="Enter unit rate in numerical value" // Added placeholder
+                    />
+                </div>
                 
                 <PrimaryButton
                     type="submit"

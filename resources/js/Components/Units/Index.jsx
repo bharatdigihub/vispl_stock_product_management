@@ -6,9 +6,10 @@ import TextInput from "../TextInput"; // Import TextInput
 import { CIcon } from "@coreui/icons-react"; // Import CIcon
 import { cilPencil, cilTrash } from "@coreui/icons"; // Import CoreUI icons
 import { useTheme } from "@/Contexts/ThemeContext";
+import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 
 const UnitIndex = () => {
-    const { units = [] } = usePage().props;
+    const { units = [], primaryunits = [] } = usePage().props;
     const { theme } = useTheme();
     console.log("units", units);
 
@@ -39,8 +40,12 @@ const UnitIndex = () => {
                             <tr key={unit.id} className={`tw-border-b ${theme.border.sidebarOuter}`}>
                                 <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{unit.unitname}</td>
                                 <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>
-                                    {unit.baseunitid==0?'Primary':unit.parent_name}
-                                    
+                                    <SelectDropdown
+                                        options={primaryunits.map((unit) => ({ id: unit.id, name: unit.unitname }))}
+                                        value={unit.baseunitid === 0 ? "Primary" : unit.parent_name}
+                                        onChange={(e) => console.log(e.target.value)} // Replace with appropriate handler
+                                        placeholder="Select Base Unit"
+                                    />
                                 </td>
                                 <td className={`tw-border tw-w-48 ${theme.border.sidebarOuter} tw-p-3 ${theme.mode === "dark" ? 'tw-bg-gray-900 tw-text-gray-100' : 'tw-bg-gray-100'}`}>{unit.unitrate} </td>
                               
