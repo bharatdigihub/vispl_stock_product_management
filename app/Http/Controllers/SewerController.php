@@ -68,6 +68,7 @@ class SewerController extends Controller
             'unitprice' => 'required|numeric',
             'productionhouseid' => 'required|numeric',
             'productionunitid' => 'required|numeric',
+            'unitid' => 'required|numeric',
         ]);
 
         $sewer = Sewer::create([
