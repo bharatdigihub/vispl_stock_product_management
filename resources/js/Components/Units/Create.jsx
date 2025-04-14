@@ -40,16 +40,17 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
                 </div>
 
                 <div className="tw-mb-4">
-                    <InputLabel value="Select base Unit" className="tw-mb-1" />
-                    <SelectDropdown
-                        options={[
-                            { id: "0", name: "Primary" },
-                            ...units.map((unit) => ({ id: unit.id, name: unit.unitname })),
-                        ]}
-                        value={data.baseunitid}
-                        onChange={(e) => setData("baseunitid", e.target.value)}
-                        placeholder="Select Base Unit"
-                    />
+                <InputLabel value="Select base Unit" className="tw-mb-1" />
+                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("baseunitid", e.target.value)}>
+      <option value="0">Primary</option>
+      {units.map((unit) => (
+        <option key={unit.id} value={unit.id}>
+          {unit.unitname}
+        </option>
+      ))}
+
+    </Select>
+                    
                 </div>
                 <div className="tw-mb-4">
                     <InputLabel value="Rate" className="tw-mb-1" />

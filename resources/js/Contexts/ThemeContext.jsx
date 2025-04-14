@@ -6,7 +6,7 @@ const themeColors = {
     light: {
         background: 'tw-bg-gray-200',
         text: 'tw-text-black',
-        button: 'tw-bg-indigo-500 tw-text-white hover:tw-bg-indigo-600 focus:tw-bg-indigo-600 active:tw-bg-indigo-700',
+        button: 'tw-bg-gray-800 tw-text-white hover:tw-bg-gray-700 focus:tw-bg-gray-700 active:tw-bg-gray-900',
         padding: 'tw-px-4 tw-py-2', 
         sidebar: 'tw-bg-gray-800 tw-border-r tw-border-gray-800', 
         menutext: 'tw-text-black',
@@ -17,16 +17,11 @@ const themeColors = {
         header: 'tw-bg-white',
         inputBackground: 'tw-bg-white', // Add input background for light mode
         checkbox: 'tw-bg-white tw-border-gray-300 tw-text-indigo-600 focus:tw-ring-indigo-500', // Add checkbox styles for light mode
-        primary: 'tw-bg-blue-500 tw-text-white hover:tw-bg-blue-600 focus:tw-bg-blue-600 active:tw-bg-blue-700',
-        secondary: 'tw-bg-green-500 tw-text-white hover:tw-bg-green-600 focus:tw-bg-green-600 active:tw-bg-green-700',
-        success: 'tw-bg-green-500 tw-text-white hover:tw-bg-green-600 focus:tw-bg-green-600 active:tw-bg-green-700',
-        warning: 'tw-bg-yellow-500 tw-text-white hover:tw-bg-yellow-600 focus:tw-bg-yellow-600 active:tw-bg-yellow-700',
-        danger: 'tw-bg-red-500 tw-text-white hover:tw-bg-red-600 focus:tw-bg-red-600 active:tw-bg-red-700',
     },
     dark: {
         background: 'tw-bg-gray-950',
         text: 'tw-text-white',
-        button: 'tw-bg-indigo-500 tw-text-white hover:tw-bg-indigo-600 focus:tw-bg-indigo-600 active:tw-bg-indigo-700',
+        button: 'tw-bg-gray-950 tw-text-white hover:tw-bg-indigo-500 focus:tw-bg-indigo-500 active:tw-bg-gray-700',
         padding: 'tw-px-4 tw-py-2', 
         sidebar: 'tw-bg-gray-950 tw-border-r tw-border-gray-800', 
         menutext: 'tw-text-white',
@@ -37,11 +32,6 @@ const themeColors = {
         header: 'tw-bg-gray-950',
         inputBackground: 'tw-bg-gray-800', // Add input background for dark mode
         checkbox: 'tw-bg-gray-800 tw-border-gray-600 tw-text-indigo-400 focus:tw-ring-indigo-500', // Add checkbox styles for dark mode
-        primary: 'tw-bg-indigo-500 tw-text-white hover:tw-bg-indigo-600 focus:tw-bg-indigo-600 active:tw-bg-indigo-700',
-        secondary: 'tw-bg-teal-500 tw-text-white hover:tw-bg-teal-600 focus:tw-bg-teal-600 active:tw-bg-teal-700',
-        success: 'tw-bg-green-600 tw-text-white hover:tw-bg-green-700 focus:tw-bg-green-700 active:tw-bg-green-800',
-        warning: 'tw-bg-yellow-600 tw-text-white hover:tw-bg-yellow-700 focus:tw-bg-yellow-700 active:tw-bg-yellow-800',
-        danger: 'tw-bg-red-600 tw-text-white hover:tw-bg-red-700 focus:tw-bg-red-700 active:tw-bg-red-800',
     },
 };
 

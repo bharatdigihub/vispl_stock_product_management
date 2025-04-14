@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import { CSidebar, CSidebarNav, CContainer, CCol } from "@coreui/react";
-import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronLeft, cilChevronRight, cilX, cilNotes, cilLayers, cilResizeBoth, cilColorFill, cilRecycle } from "@coreui/icons"; // Add new icons
+import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronLeft, cilChevronRight, cilX } from "@coreui/icons"; // Add new icons
 import CIcon from "@coreui/icons-react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import NavLink, { DropdownMenu } from "../Components/NavLink";
@@ -22,19 +22,6 @@ const GlobalLayout = ({ children }) => {
             "/users/create": "Create User",
             "/users/{}/edit": "Edit User",
             "/color": "Color",
-            "/unit" : "Unit",
-            "/unit/create": "Create Unit",
-            "/unit/{}/edit": "Edit Unit",
-            "/gsm": "Gsm",
-            "/gsm/create": "Create Gsm",
-            "/gsm/{}/edit": "Edit Gsm",
-            "/size": "Size",
-            "/size/create": "Create Size",
-            "/size/{}/edit": "Edit Size",
-            "/sewer": "Sewer",
-            "/sewer/create": "Create Sewer",
-            "/sewer/{}/edit": "Edit Sewer",
-           
         };
         const currentPath = window.location.pathname;
         setCurrentPage(pathToPageName[currentPath] || "Admin Panel");
@@ -118,7 +105,7 @@ const GlobalLayout = ({ children }) => {
                                 Dashboard
                             </NavLink>
                         </li>
-                        {/*<li>
+                        <li>
                             <NavLink
                                 href="/users"
                                 icon={cilUser}
@@ -131,7 +118,7 @@ const GlobalLayout = ({ children }) => {
                                 User Management
                             </NavLink>
                         </li>
-                         <li>
+                        <li>
                             <NavLink
                                 href="/roles"
                                 icon={cilSettings}
@@ -156,61 +143,32 @@ const GlobalLayout = ({ children }) => {
                             >
                                 Permissions
                             </NavLink>
-                        </li> */}
+                        </li>
                         <div
                             className={`tw-text-sm mt-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
                                 sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
                             }`}
                         >
-                           Settings
+                            User Settings
                         </div>
                         <li>
                             <DropdownMenu
-                                label="Master Settings"
+                                label="Settings"
                                 icon={cilSettings}
                                 items={[
                                     {
-                                        href: "/color",
-                                        label: "Color List",
-                                        icon: cilColorFill,
-                                        active: currentPage === "Color",
-                                        onClick: (e) => handleMenuItemClick("Color"), // Prevent redirection
+                                        href: "/profile",
+                                        label: "Profile",
+                                        icon: cilUserFemale,
+                                        active: currentPage === "Profile",
+                                        onClick: (e) => e.preventDefault(), // Prevent redirection
                                     },
                                     {
-                                        href: "/gsm",
-                                        label: "Gsm List",
-                                        icon: cilNotes,
-                                        active: currentPage === "Gsm",
-                                        onClick: (e) => handleMenuItemClick("Gsm"), // Prevent redirection
-                                    },
-                                    {
-                                        href: "/unit",
-                                        label: "Unit List",
-                                        icon: cilLayers,
-                                        active: currentPage === "Unit",
-                                        onClick: (e) => handleMenuItemClick("Unit"), // Prevent redirection
-                                    },
-                                    {
-                                        href: "/size",
-                                        label: "Size List",
-                                        icon: cilResizeBoth,
-                                        active: currentPage === "Size",
-                                        onClick: (e) => handleMenuItemClick("Size"), // Prevent redirection
-                                    },
-                                    {
-                                        href: "/sewer",
-                                        label: "Sewer",
-                                        icon: cilRecycle,
-                                        active: currentPage === "Sewer",
-                                        onClick: (e) => handleMenuItemClick("Sewer"), // Prevent redirection
-                                    },
-                                    {
-                                        href: "/material",
-                                        label: "Material",
-                                        icon: cilRecycle,
-                                        active: currentPage === "Material",
-                                        onClick: (e) => handleMenuItemClick("Material"), // Prevent redirection
-                                        
+                                        href: "/account",
+                                        label: "Account",
+                                        icon: cilWallet,
+                                        active: currentPage === "Account",
+                                        onClick: (e) => e.preventDefault(), // Prevent redirection
                                     },
                                 ]}
                                 sidebarState={sidebarState}
@@ -218,17 +176,11 @@ const GlobalLayout = ({ children }) => {
                                 className="tw-transition-all tw-duration-300 tw-delay-150"
                             />
                         </li>
-                        {/* <div
-                            className={`tw-text-sm mb-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
-                                sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
-                            }`}
-                        >
-                            Lists   
-                        </div> */}
-                        {/* <li>
+
+                        <li>
                             <NavLink
                                 href="/color"
-                                icon={cilColorFill}
+                                icon={cilUser}
                                 active={currentPage === "Color"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -241,7 +193,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/gsm"
-                                icon={cilNotes}
+                                icon={cilUser}
                                 active={currentPage === "Gsm"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -254,7 +206,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/unit"
-                                icon={cilLayers}
+                                icon={cilUser}
                                 active={currentPage === "Unit"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -267,7 +219,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/size"
-                                icon={cilResizeBoth}
+                                icon={cilUser}
                                 active={currentPage === "Size"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -280,7 +232,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/sewer"
-                                icon={cilRecycle}
+                                icon={cilUser}
                                 active={currentPage === "Sewer"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -303,7 +255,7 @@ const GlobalLayout = ({ children }) => {
                             >
                                 Raw-Material List
                             </NavLink>
-                        </li> */}
+                        </li>
 
                         
                          

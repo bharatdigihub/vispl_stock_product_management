@@ -10,7 +10,7 @@ import { useTheme } from "@/Contexts/ThemeContext";
 const SewerIndex = () => {
     const { sewers = [] } = usePage().props;
     const { theme } = useTheme();
-    console.log("sewers:", sewers);
+    console.log("sizes", sewers);
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}

@@ -66,13 +66,15 @@ class SewerController extends Controller
             'name' => 'required|string|max:255',
             'manpower' => 'required|numeric',
             'unitprice' => 'required|numeric',
+            'productionhouseid' => 'required|numeric',
+            'productionunitid' => 'required|numeric',
         ]);
 
         $sewer = Sewer::create([
             'name' => $validated['name'],
-            'unitid' => $request->unitid,
-            'productionhouseid' => $request->productionhouseid,
-            'productionunitid' => $request->productionunitid,
+            'unitid' => $validated['unitid'],
+            'productionhouseid' => $validated['productionhouseid'],
+            'productionunitid' => $validated['productionunitid'],
              'manpower' => $validated['manpower'],
             'unitprice' => $validated['unitprice'],
              'status' => 1,

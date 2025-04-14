@@ -24,7 +24,7 @@ export default forwardRef(function TextInput(
         return (
             <textarea
                 {...props}
-                className={baseClass + '' + className}
+                className={baseClass +''+ className}
                 ref={localRef}
             />
         );
@@ -34,7 +34,7 @@ export default forwardRef(function TextInput(
         <input
             {...props}
             type={type}
-            className={baseClass + '' + className}
+            className={baseClass +''+ className}
             ref={localRef}
         />
     );
