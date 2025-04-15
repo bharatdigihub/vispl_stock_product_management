@@ -138,16 +138,16 @@ const Header = ({ currentPage }) => {
                                 <Dropdown.Content align="right" width="64" className="message-dropdown py-0 tw-shadow-lg tw-rounded-lg">
                                     <div className="tw-px-4 tw-py-2 tw-bg-green-500 tw-font-bold tw-text-sm tw-text-white">Unread Messages</div>
                                     <ul className="tw-max-h-64 tw-min-w-[300px] tw-overflow-y-auto tw-bg-white">
-                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer">
-                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500" />
+                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer tw-flex tw-items-start">
+                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500 tw-mt-1" />
                                             <span className="tw-text-sm tw-text-gray-700">John Doe: "Hello, how are you?"</span>
                                         </li>
-                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer">
-                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500" />
+                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer tw-flex tw-items-start">
+                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500 tw-mt-1" />
                                             <span className="tw-text-sm tw-text-gray-700">Jane Smith: "Meeting at 3 PM."</span>
                                         </li>
-                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer">
-                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500" />
+                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer tw-flex tw-items-start">
+                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500 tw-mt-1" />
                                             <span className="tw-text-sm tw-text-gray-700">Mark Lee: "Please review the document."</span>
                                         </li>
                                     </ul>
@@ -174,48 +174,48 @@ const Header = ({ currentPage }) => {
                                 </Dropdown.Trigger>
                                 <Dropdown.Content align="right" width="48" className="user-dropdown py-0">
                                     <div className="tw-px-4 tw-py-2 tw-bg-gray-200 tw-font-bold tw-text-sm tw-text-gray-500">Account</div>
-                                    <Dropdown.Link href="/account">
+                                    <Dropdown.Link href="/account" className='tw-flex tw-items-center '>
                                         <FaUser className="tw-mr-2" /> Account
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/updates">
+                                    <Dropdown.Link href="/updates" className='tw-flex tw-items-center '>
                                         <FaBell className="tw-mr-2" /> Updates 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/messages">
+                                    <Dropdown.Link href="/messages" className='tw-flex tw-items-center '>
                                         <FaCommentAlt className="tw-mr-2" /> Messages 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/tasks">
+                                    <Dropdown.Link href="/tasks" className='tw-flex tw-items-center '>
                                         <FaTasks className="tw-mr-2" /> Tasks
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/comments">
+                                    <Dropdown.Link href="/comments" className='tw-flex tw-items-center '>
                                         <FaCommentAlt className="tw-mr-2" /> Comments 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     
                                     <div className="tw-px-4 tw-py-2 tw-font-bold tw-bg-gray-200 tw-text-sm tw-text-gray-500">Settings</div>
-                                    <Dropdown.Link href="/profile">
+                                    <Dropdown.Link href="/profile" className='tw-flex tw-items-center '>
                                         <FaUser className="tw-mr-2" /> Profile
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/settings">
+                                    <Dropdown.Link href="/settings" className='tw-flex tw-items-center '>
                                         <FaCog className="tw-mr-2" /> Settings
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/payments">
+                                    <Dropdown.Link href="/payments" className='tw-flex tw-items-center '>
                                         <FaCreditCard className="tw-mr-2" /> Payments 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/projects">
+                                    <Dropdown.Link href="/projects" className='tw-flex tw-items-center '>
                                         <FaList className="tw-mr-2" /> Projects 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
-                                    <Dropdown.Link href="/lock-account">
+                                    <Dropdown.Link href="/lock-account" className='tw-flex tw-items-center '>
                                         <FaLock className="tw-mr-2" /> Lock Account
                                     </Dropdown.Link>
                                     <Dropdown.Link
                                         as="button"
                                         onClick={handleLogout}
-                                        className="tw-text-red-600 tw-font-semibold hover:tw-bg-red-100"
+                                        className="tw-text-red-600 tw-font-semibold hover:tw-bg-red-100 tw-flex tw-items-center"
                                     >
                                         <FaSignOutAlt className="tw-mr-2" /> Logout
                                     </Dropdown.Link>
