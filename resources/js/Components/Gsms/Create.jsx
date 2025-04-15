@@ -1,12 +1,11 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
-import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import TextInput from "../TextInput"; // Import TextInput
 import InputLabel from "../InputLabel"; // Import InputLabel
 import InputError from "../InputError"; // Import InputError
 import PrimaryButton from "../PrimaryButton";
-
+import FormLayout from "../../Layouts/FormLayout";
 const CreateGsm = ({ roles, permissions, routes }) => { // Accept routes as a prop
     const { data, setData, post, errors } = useForm({
         name: "",
@@ -20,6 +19,7 @@ const CreateGsm = ({ roles, permissions, routes }) => { // Accept routes as a pr
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
+            <FormLayout>
             <form onSubmit={handleSubmit}>
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add New GSM</h1>
                 <div className="tw-mb-4">
@@ -44,6 +44,7 @@ const CreateGsm = ({ roles, permissions, routes }) => { // Accept routes as a pr
                     Save
                 </PrimaryButton>
             </form>
+            </FormLayout>
         </GlobalLayout>
     );
 };

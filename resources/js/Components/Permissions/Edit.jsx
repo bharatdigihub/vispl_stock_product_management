@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout";
 import PrimaryButton from "../PrimaryButton";
-import SelectDropdown from "../SelectDropdown";
+import SelectDropdown from "../SelectDropdown.jsx";
 import Checkbox from "../Checkbox";
 import InputLabel from "../InputLabel"; // Import InputLabel
 import InputError from "../InputError"; // Import InputError

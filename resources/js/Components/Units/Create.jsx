@@ -1,15 +1,13 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
-import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
 import TextInput from "../TextInput"; // Import TextInput
 import InputLabel from "../InputLabel"; // Import InputLabel
 import InputError from "../InputError"; // Import InputError
 import PrimaryButton from "../PrimaryButton";
-import { Select } from "@headlessui/react";
-
-
-const CreateUnit = ({ units,roles, permissions, routes }) => { 
+import SelectInput from "../SelectInput"; // Import SelectInput
+import FormLayout from "../../Layouts/FormLayout";
+const CreateUnit = ({ units, roles, permissions, routes }) => { 
     // const { units = [] } = usePage().props;// Accept routes as a prop
     const { data, setData, post, errors } = useForm({
         name: "",
@@ -25,6 +23,7 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
+            <FormLayout>
             <form onSubmit={handleSubmit}>
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Add New Unit</h1>
                 <div className="tw-mb-4">
@@ -40,17 +39,18 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
                 </div>
 
                 <div className="tw-mb-4">
-                <InputLabel value="Select base Unit" className="tw-mb-1" />
-                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("baseunitid", e.target.value)}>
-      <option value="0">Primary</option>
-      {units.map((unit) => (
-        <option key={unit.id} value={unit.id}>
-          {unit.unitname}
-        </option>
-      ))}
-
-    </Select>
-                    
+                    <InputLabel value="Select base Unit" className="tw-mb-1" />
+                    <SelectInput
+                        options={[
+                            { id: "0", unitname: "Primary" },
+                            ...units,
+                        ]}
+                        value={data.baseunitid}
+                        onChange={(e) => setData("baseunitid", e.target.value)}
+                        placeholder="Select base unit"
+                        labelKey="unitname"
+                        valueKey="id"
+                    />
                 </div>
                 <div className="tw-mb-4">
                     <InputLabel value="Rate" className="tw-mb-1" />
@@ -76,6 +76,7 @@ const CreateUnit = ({ units,roles, permissions, routes }) => {
                     Save
                 </PrimaryButton>
             </form>
+            </FormLayout>
         </GlobalLayout>
     );
 };

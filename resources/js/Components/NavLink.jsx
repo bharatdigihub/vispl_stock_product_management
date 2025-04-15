@@ -1,6 +1,5 @@
 import { Link } from '@inertiajs/react';
-import CIcon from '@coreui/icons-react';
-import { cilChevronBottom, cilChevronTop } from "@coreui/icons";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa"; // Import react-icons
 import { useState } from 'react';
 
 export default function NavLink({
@@ -24,7 +23,7 @@ export default function NavLink({
             }`}
             onClick={onClick}
         >
-            {icon && <CIcon icon={icon} className={` ${active ? "tw-text-gray-50" : "tw-text-gray-500" } ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`} />}
+            {icon && <span className={` ${active ? "tw-text-gray-50" : "tw-text-gray-500" } ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`}>{icon}</span>}
             {sidebarState === "full" && (
                 <span className="tw-text-[13px] tw-tracking-wider tw-font-medium">{children}</span>
             )}
@@ -50,14 +49,13 @@ export function DropdownMenu({
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
                 <div className="tw-flex tw-items-center">
-                    {icon && <CIcon icon={icon} className={`tw-text-gray-500 ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`} />}
+                    {icon && <span className={`tw-text-gray-500 ${sidebarState === "half" ? "tw-mr-0" : "tw-mr-2"} tw-text-lg`}>{icon}</span>}
                     {sidebarState === "full" && <span className="tw-text-[13px] tw-tracking-wider tw-font-medium">{label}</span>}
                 </div>
                 {sidebarState === "full" && (
-                    <CIcon
-                        icon={isDropdownOpen ? cilChevronTop : cilChevronBottom}
-                        className={`tw-text-lg ${isDropdownOpen ? "tw-text-gray-50" : "tw-text-gray-500"}`}
-                    />
+                    <span className={`tw-text-lg ${isDropdownOpen ? "tw-text-gray-50" : "tw-text-gray-500"}`}>
+                        {isDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+                    </span>
                 )}
             </div>
             {isDropdownOpen && sidebarState !== "half" && (

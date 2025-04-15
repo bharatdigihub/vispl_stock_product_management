@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import { CSidebar, CSidebarNav, CContainer, CCol } from "@coreui/react";
-import { cilSpeedometer, cilUser, cilSettings, cilLockLocked, cilUserFemale, cilWallet, cilChevronLeft, cilChevronRight, cilX } from "@coreui/icons"; // Add new icons
-import CIcon from "@coreui/icons-react";
+import { FaTachometerAlt, FaUser, FaCogs, FaIndustry, FaPalette, FaList, FaRuler, FaCut, FaBoxOpen, FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa"; // Import react-icons
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import NavLink, { DropdownMenu } from "../Components/NavLink";
 import { useSidebar } from '../Contexts/SidebarContext'; // Import SidebarContext
@@ -80,7 +79,7 @@ const GlobalLayout = ({ children }) => {
                                 onClick={() => setSidebarState("closed")}
                                 className={`tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-ml-2 tw-border ${theme.button} ${theme.border.sidebarInner}`}
                             >
-                                <CIcon icon={cilX} width={14} /> {/* Use CoreUI React icon */}
+                                <FaTimes size={14} />
                             </button>
                         )}
                     </div>
@@ -95,7 +94,7 @@ const GlobalLayout = ({ children }) => {
                         <li>
                             <NavLink
                                 href="/dashboard"
-                                icon={cilSpeedometer}
+                                icon={<FaTachometerAlt />}
                                 active={currentPage === "Dashboard"}
                                 sidebarState={sidebarState}
                                 theme={theme}
@@ -105,7 +104,7 @@ const GlobalLayout = ({ children }) => {
                                 Dashboard
                             </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <NavLink
                                 href="/users"
                                 icon={cilUser}
@@ -143,32 +142,60 @@ const GlobalLayout = ({ children }) => {
                             >
                                 Permissions
                             </NavLink>
-                        </li>
+                        </li> */}
                         <div
                             className={`tw-text-sm mt-2 tw-font-bold tw-uppercase tw-text-gray-400 tw-px-3 tw-py-2 ${
                                 sidebarState === "half" ? "tw-hidden" : "tw-transition-all tw-duration-300 tw-delay-150"
                             }`}
                         >
-                            User Settings
+                            Settings
                         </div>
                         <li>
                             <DropdownMenu
-                                label="Settings"
-                                icon={cilSettings}
+                                label="Master Settings"
+                                icon={<FaCogs />}
                                 items={[
                                     {
-                                        href: "/profile",
-                                        label: "Profile",
-                                        icon: cilUserFemale,
-                                        active: currentPage === "Profile",
-                                        onClick: (e) => e.preventDefault(), // Prevent redirection
+                                        href: "/color",
+                                        label: "Color",
+                                        icon: <FaPalette />,
+                                        active: currentPage === "Color",
+                                        onClick: () => handleMenuItemClick("Color"),
                                     },
                                     {
-                                        href: "/account",
-                                        label: "Account",
-                                        icon: cilWallet,
-                                        active: currentPage === "Account",
-                                        onClick: (e) => e.preventDefault(), // Prevent redirection
+                                        href: "/gsm",
+                                        label: "GSM List",
+                                        icon: <FaList />,
+                                        active: currentPage === "Gsm",
+                                        onClick: () => handleMenuItemClick("Gsm"),
+                                    },
+                                    {
+                                        href: "/unit",
+                                        label: "Unit List",
+                                        icon: <FaRuler />,
+                                        active: currentPage === "Unit",
+                                        onClick: () => handleMenuItemClick("Unit"),
+                                    },
+                                    {
+                                        href: "/size",
+                                        label: "Size List",
+                                        icon: <FaBoxOpen />,
+                                        active: currentPage === "Size",
+                                        onClick: () => handleMenuItemClick("Size"),
+                                    },
+                                    {
+                                        href: "/sewer",
+                                        label: "Sticher List",
+                                        icon: <FaCut />,
+                                        active: currentPage === "Sewer",
+                                        onClick: () => handleMenuItemClick("Sewer"),
+                                    },
+                                    {
+                                        href: "/material",
+                                        label: "Raw-Material List",
+                                        icon: <FaIndustry />,
+                                        active: currentPage === "Material",
+                                        onClick: () => handleMenuItemClick("Material"),
                                     },
                                 ]}
                                 sidebarState={sidebarState}
@@ -177,88 +204,9 @@ const GlobalLayout = ({ children }) => {
                             />
                         </li>
 
-                        <li>
-                            <NavLink
-                                href="/color"
-                                icon={cilUser}
-                                active={currentPage === "Color"}
-                                sidebarState={sidebarState}
-                                theme={theme}
-                                onClick={() => handleMenuItemClick("Color")}
-                                className="tw-transition-all tw-duration-300 tw-delay-150"
-                            >
-                                Color
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                href="/gsm"
-                                icon={cilUser}
-                                active={currentPage === "Gsm"}
-                                sidebarState={sidebarState}
-                                theme={theme}
-                                onClick={() => handleMenuItemClick("Gsm")}
-                                className="tw-transition-all tw-duration-300 tw-delay-150"
-                            >
-                                GSM List
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                href="/unit"
-                                icon={cilUser}
-                                active={currentPage === "Unit"}
-                                sidebarState={sidebarState}
-                                theme={theme}
-                                onClick={() => handleMenuItemClick("Unit")}
-                                className="tw-transition-all tw-duration-300 tw-delay-150"
-                            >
-                                Unit List
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                href="/size"
-                                icon={cilUser}
-                                active={currentPage === "Size"}
-                                sidebarState={sidebarState}
-                                theme={theme}
-                                onClick={() => handleMenuItemClick("Size")}
-                                className="tw-transition-all tw-duration-300 tw-delay-150"
-                            >
-                                Size List
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                href="/sewer"
-                                icon={cilUser}
-                                active={currentPage === "Sewer"}
-                                sidebarState={sidebarState}
-                                theme={theme}
-                                onClick={() => handleMenuItemClick("Sewer")}
-                                className="tw-transition-all tw-duration-300 tw-delay-150"
-                            >
-                                Sticher List
-                            </NavLink>
-                        </li>
+                   
 
-                        <li>
-                            <NavLink
-                                href="/material"
-                                icon={cilUser}
-                                active={currentPage === "Material"}
-                                sidebarState={sidebarState}
-                                theme={theme}
-                                onClick={() => handleMenuItemClick("Material")}
-                                className="tw-transition-all tw-duration-300 tw-delay-150"
-                            >
-                                Raw-Material List
-                            </NavLink>
-                        </li>
-
-                        
-                         
+                      
                       
                         
 
@@ -271,7 +219,7 @@ const GlobalLayout = ({ children }) => {
                                 onClick={toggleSidebarLock}
                             >
                                 
-                                <CIcon icon={sidebarState === 'half' ? cilChevronRight : cilChevronLeft} width={13} className={`tw-text-gray-400 group-hover:tw-text-gray-50 ${isSidebarLocked ? "tw-text-red-500" : ""}`} />
+                                <FaChevronLeft size={13} className={`tw-text-gray-400 group-hover:tw-text-gray-50 ${isSidebarLocked ? "tw-text-red-500" : ""}`} />
                             </button>
                         </div>
                 </CSidebar>

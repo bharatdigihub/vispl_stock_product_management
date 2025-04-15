@@ -145,3 +145,7 @@ input:-webkit-autofill:active {
 /* .user-dropdown{
     @apply tw-absolute
 } */
+
+input + select{
+    @apply tw-mt-5
+}

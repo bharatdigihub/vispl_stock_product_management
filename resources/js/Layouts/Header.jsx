@@ -4,8 +4,7 @@ import { Link, usePage } from "@inertiajs/react"; // Import usePage for dynamic 
 import { CButton, CBreadcrumb, CBreadcrumbItem } from "@coreui/react";
 import { useTheme } from '../Contexts/ThemeContext'; // Import ThemeContext
 import { useSidebar } from '../Contexts/SidebarContext'; // Import SidebarContext
-import { CIcon } from '@coreui/icons-react';
-import { cilMoon, cilSun, cilUser, cilAccountLogout, cilBell, cilCommentSquare, cilCreditCard, cilList, cilLockLocked, cilSettings, cilTask, cilHamburgerMenu, cilClearAll} from '@coreui/icons'; // Import user icon
+import { FaMoon, FaSun, FaUser, FaSignOutAlt, FaBell, FaCommentAlt, FaCreditCard, FaList, FaLock, FaCog, FaTasks, FaBars, FaTimes } from "react-icons/fa"; // Import react-icons
 import Dropdown from '../Components/Dropdown'; // Import Dropdown component
 
 const Header = ({ currentPage }) => {
@@ -16,7 +15,6 @@ const Header = ({ currentPage }) => {
     const breadcrumbPaths = url.split('/').filter(Boolean); // Split path into segments
 
     useEffect(() => {
-        //console.log("Sidebar State:", sidebarState); // Debug sidebarState
         fetchPermissions();
     }, [sidebarState]); // Add sidebarState as a dependency
 
@@ -25,7 +23,7 @@ const Header = ({ currentPage }) => {
             const response = await axios.get('/api/user/permissions');
             setPermissions(response.data); // Set permissions from API response
         } catch (error) {
-            //console.error('Failed to fetch permissions:', error);
+            console.error('Failed to fetch permissions:', error);
         }
     };
 
@@ -48,7 +46,7 @@ const Header = ({ currentPage }) => {
                             title="Toggle Sidebar" // Tooltip
                             className={`tw-rounded-sm tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center  p-1 ${theme.header} ${theme.menutext} ${theme.border}`}
                         >
-                            <CIcon width={30} icon={isMobileView && sidebarState === 'closed' ? cilClearAll : sidebarState === 'half' ? cilClearAll : cilHamburgerMenu} />
+                            {isMobileView && sidebarState === 'closed' ? <FaTimes /> : <FaBars />}
                         </CButton>
                         <h1 className="tw-text-md tw-font-bold tw-text-ellipsis tw-overflow-hidden">{currentPage || "Admin Panel"}</h1>
                     </div>
@@ -76,9 +74,9 @@ const Header = ({ currentPage }) => {
                                     theme.mode === "dark"
                                         ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                         : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
+                                } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`}
                             >
-                                <CIcon icon={theme.mode === "dark" ? cilSun : cilMoon} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
+                                {theme.mode === "dark" ? <FaSun /> : <FaMoon />}
                             </button>
                         </li>
                         <li className="tw-relative">
@@ -90,11 +88,11 @@ const Header = ({ currentPage }) => {
                                             theme.mode === "dark"
                                                 ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                                 : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
+                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`}
                                     >
-                                        <CIcon icon={cilBell} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
+                                        <FaBell />
                                         <span className="tw-absolute -tw-top-2 -tw-right-2 tw-bg-blue-500 tw-text-white tw-rounded-full tw-text-[10px] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-font-bold">
-                                            5 {/* Example count */}
+                                            5
                                         </span>
                                     </button>
                                 </Dropdown.Trigger>
@@ -129,27 +127,27 @@ const Header = ({ currentPage }) => {
                                             theme.mode === "dark"
                                                 ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                                 : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
+                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`}
                                     >
-                                        <CIcon icon={cilCommentSquare} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
+                                        <FaCommentAlt />
                                         <span className="tw-absolute -tw-top-2 -tw-right-2 tw-bg-green-500 tw-text-white tw-rounded-full tw-text-[10px] tw-w-5 tw-h-5 tw-flex tw-items-center tw-justify-center tw-font-bold">
-                                            3 {/* Example count */}
+                                            3
                                         </span>
                                     </button>
                                 </Dropdown.Trigger>
                                 <Dropdown.Content align="right" width="64" className="message-dropdown py-0 tw-shadow-lg tw-rounded-lg">
                                     <div className="tw-px-4 tw-py-2 tw-bg-green-500 tw-font-bold tw-text-sm tw-text-white">Unread Messages</div>
                                     <ul className="tw-max-h-64 tw-min-w-[300px] tw-overflow-y-auto tw-bg-white">
-                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer tw-flex tw-items-center">
-                                            <CIcon icon={cilCommentSquare} className="tw-mr-2 tw-text-green-500" />
+                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer">
+                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500" />
                                             <span className="tw-text-sm tw-text-gray-700">John Doe: "Hello, how are you?"</span>
                                         </li>
-                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer tw-flex tw-items-center">
-                                            <CIcon icon={cilCommentSquare} className="tw-mr-2 tw-text-green-500" />
+                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer">
+                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500" />
                                             <span className="tw-text-sm tw-text-gray-700">Jane Smith: "Meeting at 3 PM."</span>
                                         </li>
-                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer tw-flex tw-items-center">
-                                            <CIcon icon={cilCommentSquare} className="tw-mr-2 tw-text-green-500" />
+                                        <li className="tw-px-4 tw-py-2 hover:tw-bg-green-100 tw-cursor-pointer">
+                                            <FaCommentAlt className="tw-mr-2 tw-text-green-500" />
                                             <span className="tw-text-sm tw-text-gray-700">Mark Lee: "Please review the document."</span>
                                         </li>
                                     </ul>
@@ -161,7 +159,7 @@ const Header = ({ currentPage }) => {
                         </li>
                         <li className={`tw-border-l ${theme.border.sidebarOuter} tw-h-6 tw-mx-2`}></li> {/* Separator */}
                         <li>
-                            <Dropdown >
+                            <Dropdown>
                                 <Dropdown.Trigger>
                                     <button
                                         title="User Menu" // Tooltip
@@ -169,57 +167,57 @@ const Header = ({ currentPage }) => {
                                             theme.mode === "dark"
                                                 ? 'tw-bg-gray-950 tw-border-gray-700 tw-text-gray-400 hover:tw-text-gray-100'
                                                 : 'tw-bg-gray-200 tw-text-gray-800 hover:tw-bg-gray-300'
-                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`} // Larger size in desktop view
+                                        } tw-relative tw-w-8 tw-h-8 sm:tw-w-8 sm:tw-h-8`}
                                     >
-                                        <CIcon icon={cilUser} className="tw-w-4 tw-h-4 sm:tw-w-6 sm:tw-h-6" /> {/* Adjust icon size */}
+                                        <FaUser />
                                     </button>
                                 </Dropdown.Trigger>
                                 <Dropdown.Content align="right" width="48" className="user-dropdown py-0">
                                     <div className="tw-px-4 tw-py-2 tw-bg-gray-200 tw-font-bold tw-text-sm tw-text-gray-500">Account</div>
                                     <Dropdown.Link href="/account">
-                                        <CIcon icon={cilUser} className="tw-mr-2" /> Account
+                                        <FaUser className="tw-mr-2" /> Account
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/updates">
-                                        <CIcon icon={cilBell} className="tw-mr-2" /> Updates 
+                                        <FaBell className="tw-mr-2" /> Updates 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/messages">
-                                        <CIcon icon={cilCommentSquare} className="tw-mr-2" /> Messages 
+                                        <FaCommentAlt className="tw-mr-2" /> Messages 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/tasks">
-                                        <CIcon icon={cilTask} className="tw-mr-2" /> Tasks
+                                        <FaTasks className="tw-mr-2" /> Tasks
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/comments">
-                                        <CIcon icon={cilCommentSquare} className="tw-mr-2" /> Comments 
+                                        <FaCommentAlt className="tw-mr-2" /> Comments 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     
                                     <div className="tw-px-4 tw-py-2 tw-font-bold tw-bg-gray-200 tw-text-sm tw-text-gray-500">Settings</div>
                                     <Dropdown.Link href="/profile">
-                                        <CIcon icon={cilUser} className="tw-mr-2" /> Profile
+                                        <FaUser className="tw-mr-2" /> Profile
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/settings">
-                                        <CIcon icon={cilSettings} className="tw-mr-2" /> Settings
+                                        <FaCog className="tw-mr-2" /> Settings
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/payments">
-                                        <CIcon icon={cilCreditCard} className="tw-mr-2" /> Payments 
+                                        <FaCreditCard className="tw-mr-2" /> Payments 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/projects">
-                                        <CIcon icon={cilList} className="tw-mr-2" /> Projects 
+                                        <FaList className="tw-mr-2" /> Projects 
                                         <span className="tw-bg-indigo-400 tw-rounded-full tw-inline-flex tw-justify-center tw-items-center tw-text-white tw-min-w-[20px] tw-min-h-[18px] ms-1 tw-text-[11px]">42</span>
                                     </Dropdown.Link>
                                     <Dropdown.Link href="/lock-account">
-                                        <CIcon icon={cilLockLocked} className="tw-mr-2" /> Lock Account
+                                        <FaLock className="tw-mr-2" /> Lock Account
                                     </Dropdown.Link>
                                     <Dropdown.Link
                                         as="button"
                                         onClick={handleLogout}
                                         className="tw-text-red-600 tw-font-semibold hover:tw-bg-red-100"
                                     >
-                                        <CIcon icon={cilAccountLogout} className="tw-mr-2" /> Logout
+                                        <FaSignOutAlt className="tw-mr-2" /> Logout
                                     </Dropdown.Link>
                                 </Dropdown.Content>
                             </Dropdown>

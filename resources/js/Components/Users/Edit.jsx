@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 import GlobalLayout from "../../Layouts/GlobalLayout"; // Import GlobalLayout
-import SelectDropdown from "../SelectDropdown"; // Import SelectDropdown
+import SelectInput from "../SelectInput"; // Replace SelectDropdown with SelectInput
 import InputLabel from "../InputLabel"; // Import InputLabel
 import PrimaryButton from "../PrimaryButton";
 import TextInput from "../TextInput"; // Import TextInput
-
+import FormLayout from "../../Layouts/FormLayout";
 const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPermissions }) => { // Accept userRole and userPermissions
     const { data, setData, patch, errors } = useForm({
         name: user.name,
@@ -21,6 +21,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
 
     return (
         <GlobalLayout> {/* Wrap with GlobalLayout */}
+            <FormLayout>
             <form onSubmit={handleSubmit}>
                 <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit User</h1>
                 <div className="tw-mb-4">
@@ -47,17 +48,19 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                 </div>
                 <div className="tw-mb-4">
                     <InputLabel value="Role" className="tw-mb-1" />
-                    <SelectDropdown
+                    <SelectInput
                         options={roles}
                         value={data.role}
                         onChange={(e) => setData("role", e.target.value)}
                         placeholder="Select Role"
+                        labelKey="name" // Assuming roles have a 'name' key
+                        valueKey="id" // Assuming roles have an 'id' key
                     />
                     {errors.role && <div className="tw-text-red-500">{errors.role}</div>}
                 </div>
                 <div className="tw-mb-4">
                     <InputLabel value="Permissions" className="tw-mb-1" />
-                    <SelectDropdown
+                    <SelectInput
                         options={permissions}
                         value={data.permissions}
                         onChange={(e) =>
@@ -68,6 +71,8 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                         }
                         multiple
                         placeholder="Select Permissions"
+                        labelKey="name" // Assuming permissions have a 'name' key
+                        valueKey="id" // Assuming permissions have an 'id' key
                     />
                     {errors.permissions && <div className="tw-text-red-500">{errors.permissions}</div>}
                 </div>
@@ -79,6 +84,7 @@ const EditUser = ({ user, roles = [], permissions = [], routes, userRole, userPe
                     Update
                 </PrimaryButton>
             </form>
+            </FormLayout>
         </GlobalLayout>
     );
 };
