@@ -89,7 +89,7 @@ const CreateSewer = ({ productionhouses,productionunits,units,roles, permissions
                 /
                 
 
-                <Select className="ml-2"aria-label="Default select example"onChange={(e) => setData("unitid", e.target.value)}required>      
+                <Select required  className="ml-2"aria-label="Default select example"onChange={(e) => setData("unitid", e.target.value)}>      
                 {units.map((unit) => (
                          <option key={unit.id} value={unit.id}>
                              {unit.unitname}
